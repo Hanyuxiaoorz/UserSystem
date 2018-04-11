@@ -1,8 +1,9 @@
 /*
-SQLyog 企业版 - MySQL GUI v8.14 
+SQLyog 企业版 - MySQL GUI v8.14
 MySQL - 5.7.21-log : Database - user_message
 *********************************************************************
-*/
+*/
+
 
 /*!40101 SET NAMES utf8 */;
 
@@ -12,7 +13,12 @@ MySQL - 5.7.21-log : Database - user_message
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`user_message` /*!40100 DEFAULT CHARACTER SET utf8 */;
+
+-- 如果存在这个数据库那么就删除这个数据库
+drop database if exists user_message;
+
+
+CREATE DATABASE `user_message` default character set utf8 collate utf8_general_ci;
 
 USE `user_message`;
 
@@ -34,7 +40,9 @@ CREATE TABLE `user_mess` (
   `birth` date DEFAULT NULL COMMENT '用户出生日期',
   `habit` varchar(50) DEFAULT NULL COMMENT '用户爱好',
   `state` int(1) NOT NULL DEFAULT '0' COMMENT '用户目前功能状态',
-  PRIMARY KEY (`username`,`id`,`e-mail`,`phone_number`)
+  PRIMARY KEY (`username`,`id`,`e-mail`,`phone_number`),
+  index(username),
+  index(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `user_mess` */
