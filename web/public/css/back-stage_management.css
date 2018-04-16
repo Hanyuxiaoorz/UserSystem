@@ -1,0 +1,21 @@
+#infrTable{
+	position: relative;
+	left: 30em;
+	top: 10em;
+	width: 60%;
+}
+#leftbar{
+	position: fixed;
+	top: 4.7em;
+}
+#fileInput{
+	position: relative;
+	top: 9em;
+	left: 75%;
+}
+#upload{
+	position: relative;
+	top: 8em;
+	left: 70%;
+	display: none;
+}
