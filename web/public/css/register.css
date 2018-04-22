@@ -4,7 +4,7 @@
     position: relative;
     top: 50px;
 }
-#input{
+.input{
 	position: relative;
 	top: 70px;
 	width: 350px;
@@ -45,7 +45,7 @@
 	top: 605px;
 	left: 800px;
 }
-#divider{
+.divider{
 	border: 1px solid white;
 }
 #fangxiang{
@@ -65,7 +65,7 @@
 	width: 350px;
 	height: 30px;
 }
-#divider2{
+.divider2{
 	width: 350px;
 	margin-top: 35px;
 }
