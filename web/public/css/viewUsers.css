@@ -43,24 +43,13 @@
 	0%,40%,100%{-webkit-transform: scaleY(0.4);transform: scaleY(0.4)}
 	20%{-webkit-transform: scaleY(1);transform: scaleY(1)}
 }
-#inforTable{
+#infrTable{
 	position: relative;
-	left: 25em;
+	left: 30em;
 	top: 14em;
-	width: 80%;
+	width: 60%;
 }
 #leftbar{
 	position: fixed;
 	top: 4.7em;
-}
-#fileInput{
-	position: relative;
-	top: 13em;
-	left: 91%;
-}
-#upload{
-	position: relative;
-	top: 8em;
-	left: 70%;
-	display: none;
 }
