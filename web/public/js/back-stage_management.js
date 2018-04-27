@@ -1,4 +1,38 @@
 $(document).ready(function(){
+	//向表格中加入数据
+	$.ajax({
+				type:"GET",
+				url:"users.json",
+				dataType:"jsonp",
+				success:function(json){
+					var tbody = "";
+					$.each(json,function(index,person){
+						var megs = "<tr>";
+						//加入头衔
+						switch(person.state){
+							case 0:megs += "<td><div class='ui blue ribbon label'>成员</div></td>";break;
+							case 1:meg += "<td><div class='ui red ribbon label'>管理员</div></td>";break;
+							case 2:megs = "<td><div class='ui orange ribbon label'>超级管理员</div></td>";break;
+							default:break;
+						}
+						megs += "<td>"+ person.username+"</td>" ;
+						megs += "<td>"+ person.id+"</td>" ;
+						megs += "<td>"+ person.e_mail+"</td>" ;
+						megs += "<td>"+ person.sex+"</td>" ;
+						megs += "<td>"+ person.phone_number+"</td>" ;
+						megs += "<td>"+ person.major+"</td>" ;
+						megs += "<td>"+ person.class_number+"</td>" ;
+						megs += "<td>"+ person.study_direction+"</td>" ;
+						megs += "<td>"+ person.age+"</td>" ;
+						megs += "<td>"+ person.birth+"</td>" ;
+						megs += "<td>"+ person.habit+"</td>" ;
+						megs += "<td><button class='tiny ui button rechangePassword'  data-tooltip='更改为默认密码' data-position='right center' ><img class='ui mini image' src='../public/img/rePassword.png' onclick='rechangePassword()'></button></td>";
+						megs += "</tr>";
+					tbody += megs;
+				});
+				$("#inforTable").children("tbody").append(tbody);
+			}
+		});
 	//获取所有的表格页
 	var tablePages = $('.tbodys');
 	//只显示第一页
@@ -48,41 +82,7 @@ $(document).ready(function(){
 			$('#tablePage').children('a').eq(tablePageNum).addClass('active');
 			tablePages.eq(tablePageNum).show();
 		}
-	});	
-	//向表格中加入数据
-	if (document.readyState == "complete") {
-	$.ajax({
-				type:"GET",
-				url:"http://rap2api.taobao.org/app/mock/6975//example/1524644606037",
-				dataType:"jsonp",
-				success:function(person){
-					var tbody = "";
-						var megs = "<tr>";
-						//加入头衔
-						switch(person.state){
-							case 0:megs += "<td><div class='ui blue ribbon label'>成员</div></td>";break;
-							case 1:meg += "<td><div class='ui red ribbon label'>管理员</div></td>";break;
-							case 2:megs = "<td><div class='ui orange ribbon label'>超级管理员</div></td>";break;
-							default:break;
-						}
-						megs += "<td>"+ person.username+"</td>" ;
-						megs += "<td>"+ person.id+"</td>" ;
-						megs += "<td>"+ person.e_mail+"</td>" ;
-						megs += "<td>"+ person.sex+"</td>" ;
-						megs += "<td>"+ person.phone_number+"</td>" ;
-						megs += "<td>"+ person.major+"</td>" ;
-						megs += "<td>"+ person.class_number+"</td>" ;
-						megs += "<td>"+ person.study_direction+"</td>" ;
-						megs += "<td>"+ person.age+"</td>" ;
-						megs += "<td>"+ person.birth+"</td>" ;
-						megs += "<td>"+ person.habit+"</td>" ;
-						megs += "<td><button class='tiny ui button rechangePassword'  data-tooltip='更改为默认密码' data-position='right center' ><img class='ui mini image' src='../public/img/rePassword.png' onclick='rechangePassword()'></button></td>";
-						megs += "</tr>";
-					tbody += megs;
-				$("#inforTable").children("tbody").append(tbody);
-				}
-			});
-	}
+	});		
 });
 //点击修改密码
     var rechangePassword = function(){
