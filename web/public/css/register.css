@@ -8,47 +8,48 @@
 	position: relative;
 	top: 70px;
 	width: 350px;
+	margin-top: 15px;
 }
-#checkanwseryh{
+.hr{
+	border: 1px solid white;	
+}
+#checkanwserusername{
 	color: #c7c7cb;
 	position: absolute;
-	top: 170px;
-	left: 800px;
+	top: 183px;
+	left: 900px;
 }
-#checkanwseryx{
+#checkanwseremail{
 	color: #c7c7cb;
 	position: absolute;
-	top: 235px;
-	left: 800px;
+	top: 250px;
+	left: 900px;
 }
 #checkanwserID{
 	color: #c7c7cb;
 	position: absolute;
-	top: 305px;
-	left: 800px;
+	top: 320px;
+	left: 900px;
 }
 #checkanwsercode{
 	color: #c7c7cb;
 	position: absolute;
-	top: 370px;
-	left: 800px;
+	top: 390px;
+	left: 900px;
 }
 #checkanwserrecode{
 	color: #c7c7cb;
 	position: absolute;
-	top: 440px;
-	left: 800px;         
+	top: 455px;
+	left: 900px;         
 }
-#checkanwserzc{
+#checkanwserregister{
 	color:#4184ca;
 	position: absolute;
-	top: 605px;
-	left: 800px;
+	top: 615px;
+	left: 900px;
 }
-.divider{
-	border: 1px solid white;
-}
-#fangxiang{
+#direction{
 	color:#c7c7cb;
 }
 #dropdown{
@@ -58,16 +59,14 @@
 	position: relative;;
 	top: 100px;
 	width: 350px;
+	left: 1.5px;
 }
 #menu{
 	position: relative;
 	top: 70px;
 	width: 350px;
 	height: 30px;
-}
-.divider2{
-	width: 350px;
-	margin-top: 35px;
+	margin-top: 15px;
 }
 #modal{
 	width: 400px;

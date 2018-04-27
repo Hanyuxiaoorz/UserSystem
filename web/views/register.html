@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 	<title>注册</title>
@@ -13,43 +14,43 @@
 	<center>
 	<h1 id="title_1">Mis</h1>
 	<div class="ui input" class="input">
-		<input type="text" id= "yonghu" placeholder="用户名" onblur="checkyonghu()">
+		<input type="text" id= "username" placeholder="用户名" onblur="checkusername()">
 	</div>
-	<span id="checkanwseryh"></span>
-	<div class="ui divider" class="divider"></div>
+	<span id="checkanwserusername"></span>
+	<hr class="hr">
 
 
 	<div class="ui input" class="input">
-		<input type="txet" id="youxiang" placeholder="邮箱" onblur="checkyouxiang()">
+		<input type="txet" id="email" placeholder="邮箱" onblur="checkemail()">
 	</div>
-	<span id="checkanwseryx"></span>
-	<div class="ui divider" class="divider"></div>
+	<span id="checkanwseremail"></span>
+	<hr class="hr">
 
 
 	<div class="ui input" class="input">
 		<input type="text" id="ID" maxlength="10"  placeholder="学号(10位)" onblur="checkID()">
 	</div>
 	<span id="checkanwserID"></span>
-	<div class="ui divider" class="divider"></div>
+	<hr class="hr">
 
 
 	<div class="ui input" class="input">
 		<input type="password"  id="code" maxlength="6" placeholder="密码(6位)" onblur="checkcode()">
 	</div>
 	<span id="checkanwsercode"></span>
-	<div class="ui divider" class="divider"></div>
+	<hr class="hr">
 
 
 	<div class="ui input" class="input">
 		<input type="password" id="recode" maxlength="6"  placeholder="确认密码" onblur="checkrecode()">
 	</div>
 	<span id="checkanwserrecode"></span>
-	<div class="ui divider" class="divider"></div>
+	<hr class="hr">
 
 
 	<div class="ui compact menu" id="menu">
 	  <div class="ui simple dropdown item">
-	  	<span id="fangxiang">方向</span>
+	  	<span id="direction">方向</span>
 	    <i class="dropdown icon" id="dropdown"></i>
 	    <div class="menu">
 	      <div class="item" onclick="qianduan()">前端</div>
@@ -58,11 +59,11 @@
 	    </div>
 	  </div>
 	</div>
-	<div class="ui divider" class="divider"></div>
+	<hr class="hr">
 
 
-	<div class=" blue ui button" id="button" onclick="zhuce()">注册</div>
-	<!-- <span id="checkanwserzc"></span> -->
+	<div class=" blue ui button" id="button" onclick="register()">注册</div>
+	<span id="checkanwserregister"></span>
 	<div class="ui basic modal" id="modal">
 	  <i class="close icon"></i>
 	  <div class="header">
@@ -90,9 +91,6 @@
 	    </div>
 	  </div>
 	</div>
-	<div class="ui divider" class="divider2"></div>
-
-
 	</center>
 </body>
 </html>
