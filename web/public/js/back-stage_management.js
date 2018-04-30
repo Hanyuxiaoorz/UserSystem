@@ -1,21 +1,36 @@
 $(document).ready(function(){
 	//向表格中加入数据
 	$.ajax({
-				type:"GET",
-				url:"users.json",
+				type:"POST",
+				url:"http://rap2api.taobao.org/app/mock/6975//example/1524813975278",
+				async:false,
 				dataType:"jsonp",
+    			// xhr: function () {
+       //  			var xhr = new window.XMLHttpRequest();
+       //  			//Download progress
+       //  			xhr.addEventListener("progress", function (evt) {
+       //      			if (evt.lengthComputable) {
+       //      			    var percentComplete = evt.loaded / evt.total;
+       //      			    progressElem.html(Math.round(percentComplete * 100) + "%");
+       //      			}
+       //  			}, false);
+       //  			return xhr;
+    			// },
+    			
 				success:function(json){
 					var tbody = "";
-					$.each(json,function(index,person){
+					//遍历对象
+					$.each(json.USERSHOWINFO,function(index,person){
+						var userName = person.userName;
 						var megs = "<tr>";
 						//加入头衔
 						switch(person.state){
 							case 0:megs += "<td><div class='ui blue ribbon label'>成员</div></td>";break;
-							case 1:meg += "<td><div class='ui red ribbon label'>管理员</div></td>";break;
-							case 2:megs = "<td><div class='ui orange ribbon label'>超级管理员</div></td>";break;
+							case 1:megs += "<td><div class='ui red ribbon label'>管理员</div></td>";break;
+							case 2:megs += "<td><div class='ui orange ribbon label'>超级管理员</div></td>";break;
 							default:break;
 						}
-						megs += "<td>"+ person.username+"</td>" ;
+						megs += "<td>"+ person.userName+"</td>" ;
 						megs += "<td>"+ person.id+"</td>" ;
 						megs += "<td>"+ person.e_mail+"</td>" ;
 						megs += "<td>"+ person.sex+"</td>" ;
@@ -26,12 +41,15 @@ $(document).ready(function(){
 						megs += "<td>"+ person.age+"</td>" ;
 						megs += "<td>"+ person.birth+"</td>" ;
 						megs += "<td>"+ person.habit+"</td>" ;
-						megs += "<td><button class='tiny ui button rechangePassword'  data-tooltip='更改为默认密码' data-position='right center' ><img class='ui mini image' src='../public/img/rePassword.png' onclick='rechangePassword()'></button></td>";
 						megs += "</tr>";
 					tbody += megs;
 				});
 				$("#inforTable").children("tbody").append(tbody);
-			}
+			},
+			error: function (xhr, ajaxOptions, thrownError) {
+        			alert(xhr.responseText);
+       	 			alert(thrownError);
+    		}
 		});
 	//获取所有的表格页
 	var tablePages = $('.tbodys');
@@ -39,9 +57,7 @@ $(document).ready(function(){
 	$('.tbodys:gt(0)').hide();
 	//获取当前页码的索引值
 	//加载窗口实时消失
-	if (document.readyState == "complete") {
 		$('.loading').fadeOut();
-	}
 	//实现点击按钮上传
 	$("#fileInput").click(function(){
 		$("#upload").click();
@@ -82,20 +98,5 @@ $(document).ready(function(){
 			$('#tablePage').children('a').eq(tablePageNum).addClass('active');
 			tablePages.eq(tablePageNum).show();
 		}
-	});		
+	});	
 });
-//点击修改密码
-    var rechangePassword = function(){
-			$.ajax({
-				type:"GET",
-				url:"",
-				dataType:"jsonp",
-				success:function(json){
-					alert(json.word);
-				},
-				error:function(jqXHR){
-					alert("ERROR!");
-				}
-			});
-}
-
