@@ -1,53 +1,36 @@
+.main{
+	position: relative;
+	width: 1000px;
+	height: 800px;
+	left: 40%;
+	background: red;
+}
 #title_1{
+	position: relative;
     font-size: 60px;
     font-weight: bolder;
-    position: relative;
-    top: 50px;
+    margin-top: 30px;
+    margin-left: 120px;
 }
 .input{
-	position: relative;
-	top: 70px;
+	position: absolute;
 	width: 350px;
-	margin-top: 15px;
+	margin-top: 30px;
 }
 .hr{
-	border: 1px solid white;	
+	color: white;
 }
-#checkanwserusername{
-	color: #c7c7cb;
+#checkanwserusername,#checkanwseremail,#checkanwserID,#checkanwsercode,#checkanwserrecode{
 	position: absolute;
-	top: 183px;
-	left: 900px;
-}
-#checkanwseremail{
 	color: #c7c7cb;
-	position: absolute;
-	top: 250px;
-	left: 900px;
-}
-#checkanwserID{
-	color: #c7c7cb;
-	position: absolute;
-	top: 320px;
-	left: 900px;
-}
-#checkanwsercode{
-	color: #c7c7cb;
-	position: absolute;
-	top: 390px;
-	left: 900px;
-}
-#checkanwserrecode{
-	color: #c7c7cb;
-	position: absolute;
-	top: 455px;
-	left: 900px;         
+	margin-top: 35px;
+	margin-left: 10px;
 }
 #checkanwserregister{
-	color:#4184ca;
 	position: absolute;
-	top: 615px;
-	left: 900px;
+	color:#4184ca;
+	margin-top: 125px;
+	margin-left: 370px;
 }
 #direction{
 	color:#c7c7cb;
@@ -56,17 +39,16 @@
 	margin-left: 282px;
 }
 #button{
-	position: relative;;
-	top: 100px;
+	position: absolute;
+	margin-top: 115px;
 	width: 350px;
 	left: 1.5px;
 }
 #menu{
-	position: relative;
-	top: 70px;
+	position: absolute;
 	width: 350px;
 	height: 30px;
-	margin-top: 15px;
+	margin-top: 30px;
 }
 #modal{
 	width: 400px;

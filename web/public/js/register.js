@@ -21,8 +21,6 @@ function checkusername(){
 	}
 	var username = document.getElementById("username").value;
 	xmlhttp.onreadystatechange=function(){
-		 	xmlhttp.open("GET","http://localhost:8080/regist/userNameVerify?userName="+username,true);
-	 		xmlhttp.send();
 	//当接受到响应时回调该方法
 	        if (xmlhttp.readyState==4 && (xmlhttp.status==200||xmlhttp.status==0))
 	        {
@@ -39,6 +37,8 @@ function checkusername(){
 	            }
 	        } 
 	}
+			xmlhttp.open("GET","http://localhost:8080/regist/userNameVerify?userName="+username,true);
+	 		xmlhttp.send();
 }
 	
 	 
@@ -68,8 +68,6 @@ function checkemail(){
 	}
 	var email = document.getElementById("email").value;
 	xmlhttp.onreadystatechange=function(){
-		 	xmlhttp.open("GET","http://localhost:8080/regist/userEmailVerify?e_mail="+email,true);
-	 		xmlhttp.send();
 	//当接受到响应时回调该方法
 	        if (xmlhttp.readyState==4 && (xmlhttp.status==200||xmlhttp.status==0))
 	        {
@@ -85,7 +83,9 @@ function checkemail(){
 	            	tip.innerHTML = "此邮箱已经注册";
 	            }
 	        } 
-	}	 
+	}
+			xmlhttp.open("GET","http://localhost:8080/regist/userEmailVerify?e_mail="+email,true);
+	 		xmlhttp.send();	 
 }
 
 
@@ -111,8 +111,6 @@ function checkID(){
 	}
 	var email = document.getElementById("ID").value;
 	xmlhttp.onreadystatechange=function(){
-		 	xmlhttp.open("GET","http://localhost:8080/regist/userIdVerify?id="+ID,true);
-	 		xmlhttp.send();
 	//当接受到响应时回调该方法
 	        if (xmlhttp.readyState==4 && (xmlhttp.status==200||xmlhttp.status==0))
 	        {
@@ -129,6 +127,8 @@ function checkID(){
 	            }
 	        } 
 	}	 
+			xmlhttp.open("GET","http://localhost:8080/regist/userIdVerify?id="+ID,true);
+	 		xmlhttp.send();
 }
 
 
