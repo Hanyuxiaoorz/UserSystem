@@ -5,6 +5,12 @@ $(document).ready(function(){
 });
 
 
+//定义当前用户名，用于修改密码使用
+var ByUser = {
+	"userName":"",
+	"state":0
+};
+
 //查询用户
 function searchUsers(){
 	//获取输入框中的值
@@ -23,7 +29,8 @@ function searchUsers(){
 
 		},
 		success:function(person){
-			
+			ByUser.userName = person.userName;
+			ByUser.state = person.state;
 			//添加标签
 			var tag = "<div class='ui teal huge top right attached label'>";
 			switch(person.state){
@@ -58,22 +65,53 @@ function searchUsers(){
 		}
 	});
 }
-/*
-//点击修改密码
 
-	function rechangePassword(byname){
-			console.log(byname.userName);
+//点击修改密码
+function reSetPassword(){
+	//判断二者的权限值
+	//if (cookie.state <= ByUser.state) { alert("你没有此权限！");return;}
+		if (ByUser.userName.length == 0) {alert("当前无用户！");return;}
 			$.ajax({
-				type:"GET",
+				type:"POST",
 				url:"http://rap2api.taobao.org/app/mock/6975//example/1520500796072",
+				contentType:"application/json",
+				data:{
+					//hostUserName:cookie.userName,
+					byUserName:ByUser.userName
+				},
 				dataType:"jsonp",
 				success:function(json){
-					alert(hostUserName);
-					alert(json.word);
+					alert("已成功初始化" + ByUser.userName + "的密码!");
 				},
 				error:function(jqXHR){
 					alert("ERROR!");
 				}
 			});
-	}
-*/
+}
+//删除用户
+function deleteUser(){
+	if (ByUser.userName.length == 0) {alert("当前无用户！");return;}
+		$.ajax({
+				type:"POST",
+				url:"http://rap2api.taobao.org/app/mock/6975//example/1520500796072",
+				contentType:"application/json",
+				data:{
+					//hostUserName:cookie.userName,
+					byUserName:ByUser.userName
+				},
+				dataType:"jsonp",
+				success:function(json){
+					alert("已成功删除" + ByUser.userName);
+					//清空原有数据
+					$(".list").children('.item').children('.content').empty();
+					$("#userInforShowArea").children(".teal").fadeOut();
+					ByUser = {
+						"userName":"",
+						"state":0
+						};
+					},
+				error:function(jqXHR){
+					alert("ERROR!");
+				}
+			});
+}

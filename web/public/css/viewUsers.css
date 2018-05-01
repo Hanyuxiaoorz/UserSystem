@@ -93,7 +93,12 @@
 	height: 2.3em;
 }
 #reSetPassword{
-	position: relative;
-	left: 75%;
-	top: 14.3em;
+	position: absolute;
+	left: 102em;
+	top: 14.4em;
+}
+#deleteUser{
+	position: absolute;
+	left: 94em;
+	top: 14.4em;
 }
