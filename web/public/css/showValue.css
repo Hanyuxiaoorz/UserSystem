@@ -43,24 +43,25 @@
 	0%,40%,100%{-webkit-transform: scaleY(0.4);transform: scaleY(0.4)}
 	20%{-webkit-transform: scaleY(1);transform: scaleY(1)}
 }
-#inforTable{
-	position: relative;
-	left: 25em;
-	top: 17em;
-	width: 75%;
-}
 #leftbar{
 	position: fixed;
 	top: 4.7em;
 }
-#fileInput{
+#Statis{
 	position: relative;
-	top: 15.5em;
-	left: 86%;
+	width: 30%;
+	top: 10em;
+	left: 30em;
+	border: 2px solid gray;
+	border-radius: 2px;
+	box-shadow: 5px 5px 2px #888888;
+	-moz-box-shadow: 5px 5px 2px #888888;
 }
-#upload{
+#StuDir{
 	position: relative;
-	top: 8em;
-	left: 70%;
-	display: none;
+	left: 65%;
+}
+#showStuDir{
+	position: relative;
+	left: 15em;
 }
