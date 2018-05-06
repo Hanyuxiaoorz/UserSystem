@@ -1,6 +1,8 @@
 $(document).ready(function(){
 	//在这里展示写入立即加载内容
 	$(".loading").fadeOut();
+	//无用户信息时显示遮盖层
+	$('#userInforShowArea').dimmer('show');
 	//在这里写入非立即加载内容
 });
 
@@ -17,18 +19,23 @@ function searchUsers(){
 	var inputValue = $("#searchInputs").val();
 	//清空原有数据
 	$(".list").children('.item').children('.content').empty();
+	$("#userInforShowArea").children(".teal").fadeOut();
 	$.ajax({
 		type:"POST",
 		url:"http://rap2api.taobao.org/app/mock/6975//example/1525008436528",
-		contentType: "application/json",
+		contentType:"application/json",
 		data:{
 			"searchValue": inputValue
 		},
-		dataType:"jsonp",
+		dataType:"json",
 		beforeSend:function(XMLHttpRequest){
+			alert(inputValue);
 
 		},
 		success:function(person){
+			if (person == 0) {alert("没有此用户！");return}
+			//除去遮盖层
+			$('#userInforShowArea').dimmer('hide');
 			ByUser.userName = person.userName;
 			ByUser.state = person.state;
 			//添加标签
@@ -77,9 +84,9 @@ function reSetPassword(){
 				contentType:"application/json",
 				data:{
 					//hostUserName:cookie.userName,
-					byUserName:ByUser.userName
+					"byUserName":ByUser.userName
 				},
-				dataType:"jsonp",
+				dataType:"json",
 				success:function(json){
 					alert("已成功初始化" + ByUser.userName + "的密码!");
 				},
@@ -97,9 +104,9 @@ function deleteUser(){
 				contentType:"application/json",
 				data:{
 					//hostUserName:cookie.userName,
-					byUserName:ByUser.userName
+					"byUserName":ByUser.userName
 				},
-				dataType:"jsonp",
+				dataType:"json",
 				success:function(json){
 					alert("已成功删除" + ByUser.userName);
 					//清空原有数据
@@ -109,9 +116,35 @@ function deleteUser(){
 						"userName":"",
 						"state":0
 						};
+					//删除用户后显示遮盖层
+					$('#userInforShowArea').dimmer('show');
 					},
 				error:function(jqXHR){
 					alert("ERROR!");
 				}
 			});
+}
+function showUpLevelModal(){
+		if (ByUser.userName.length == 0) {alert("当前无用户！");return;}
+		$("#changeStateModal").modal("show");
+}
+function upLevelUser(Chosenstate){
+	$("#changeStateModal").modal("hide");
+	$.ajax({
+		type:"POST",
+		url:"/backstageManagement/userState",
+		contentType:"application/json",
+		data:{
+			//hostUserName:cookie.userName,
+			"byUserName":ByUser.userName,
+			"state":Chosenstate
+		},
+		dataType:"json",
+		success:function(json){
+			alert(json.userState);
+		},
+		error:function(jqXHR){
+			alert("修改失败!");
+		}
+	});
 }
