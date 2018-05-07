@@ -109,7 +109,7 @@ function checkID(){
 	else{// IE6, IE5
 	       xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 	}
-	var email = document.getElementById("ID").value;
+	var ID = document.getElementById("ID").value;
 	xmlhttp.onreadystatechange=function(){
 	//当接受到响应时回调该方法
 	        if (xmlhttp.readyState==4 && (xmlhttp.status==200||xmlhttp.status==0))
@@ -162,21 +162,45 @@ function checkrecode(){
 
 function register(){
 	var regyh = /^[0-9a-zA-Z]+$/;
-	var yh = document.getElementById("username");
+	var username = document.getElementById("username").value;
 	var regyx=  /^[a-zA-Z0-9_-\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
-	var yx = document.getElementById("email");
-	var id = document.getElementById("ID");
-	var code = document.getElementById("code");
-	var recode = document.getElementById("recode");
-	var fx = document.getElementById("direction");
-	if(regyh.test(yh.value)){
-		if(regyx.test(yx.value)){
-			if(id.value.length == 10){
-				if(code.value.length == 6){
-					if(code.value == recode.value){
-						if(fx.innerHTML != "方向"){
+	var email = document.getElementById("email").value;
+	var id = document.getElementById("ID").value;
+	var code = document.getElementById("code").value;
+	var recode = document.getElementById("recode").value;
+	var direction = document.getElementById("direction");
+	if(regyh.test(username)){
+		if(regyx.test(email)){
+			if(id.length == 10){
+				if(code.length == 6){
+					if(code == recode){
+						if(direction.innerHTML != "方向"){
 							// document.getElementById("checkanwserzc").innerHTML="注册成功";
-							$('.ui.basic.modal').modal('show');
+								var xmlhttp;
+								if (window.XMLHttpRequest){//IE7+, Firefox, Chrome, Opera, Safari
+								       xmlhttp=new XMLHttpRequest();
+								}
+								else{// IE6, IE5
+								       xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+								}
+								
+								xmlhttp.onreadystatechange=function(){
+								//当接受到响应时回调该方法
+								        if (xmlhttp.readyState==4 && (xmlhttp.status==200||xmlhttp.status==0))
+								        {
+								            
+								            var text = xmlhttp.responseText;
+								            var resultJson = eval("("+text+")");
+								            var regist= resultJson.REGIST_SUCCESS;
+								            if (regist.value =="注册成功！"){
+								            	$('.ui.basic.modal').modal('show');
+								            }
+								        } 
+								}	 
+								xmlhttp.open("POST","http://localhost:8080/regist"+content,true);
+								xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+								var content = 'username='+username+'e_mail='+email+'id='+id+'password='+code+'studu_direcition'+direction;
+						 		xmlhttp.send(content);
 						}
 						else document.getElementById("checkanwserregister").innerHTML="注册失败,请选择方向";
 					}
