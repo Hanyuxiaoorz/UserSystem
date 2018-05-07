@@ -3,7 +3,6 @@
 	width: 1000px;
 	height: 800px;
 	left: 40%;
-	background: red;
 }
 #title_1{
 	position: relative;
@@ -18,7 +17,7 @@
 	margin-top: 30px;
 }
 .hr{
-	color: white;
+	border: 1px solid white;
 }
 #checkanwserusername,#checkanwseremail,#checkanwserID,#checkanwsercode,#checkanwserrecode{
 	position: absolute;
