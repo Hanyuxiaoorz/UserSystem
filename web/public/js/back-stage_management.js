@@ -2,7 +2,7 @@ $(document).ready(function(){
 	//向表格中加入数据
 	$.ajax({
 				type:"POST",
-				url:"http://rap2api.taobao.org/app/mock/6975//example/1524813975278",
+				url:"http://localhost:8080/backstageManagement/userInfo",
 				async:false,
 				dataType:"jsonp",
     			// xhr: function () {
@@ -22,7 +22,7 @@ $(document).ready(function(){
 					//遍历对象
 					$.each(json.USERSHOWINFO,function(index,person){
 						var userName = person.userName;
-						var megs = "<tr>";
+						var megs = "<tr class = 'userTr' onclick=herfView("+ person.id +")>";
 						//加入头衔
 						switch(person.state){
 							case 0:megs += "<td><div class='ui blue ribbon label'>成员</div></td>";break;
@@ -47,8 +47,8 @@ $(document).ready(function(){
 				$("#inforTable").children("tbody").append(tbody);
 			},
 			error: function (xhr, ajaxOptions, thrownError) {
-        			alert(xhr.responseText);
-       	 			alert(thrownError);
+        			console.log(xhr.responseText);
+					console.log(thrownError);
     		}
 		});
 	//获取所有的表格页
@@ -100,3 +100,7 @@ $(document).ready(function(){
 		}
 	});	
 });
+//跳转至单个用户信息界面
+function herfView(id){
+	window.location.href="viewUsers.html?id=" + id;
+}

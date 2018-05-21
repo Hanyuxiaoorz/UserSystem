@@ -35,8 +35,9 @@
         				<button class="ui  button">注册</button>
         		</div>
     			</div>
-  		</div>
-</header>
+      </div>
+    </div>
+  </header>
 	<section>
 		<div class="ui left  huge visible fixed vertical inverted  uncover menu sidebar" id="leftbar">
     		<a class="item" href="back-stage_management.html">用户信息管理<i class="ui unlock icon"></i><i class="ui large users icon"></i></a>
@@ -51,7 +52,7 @@
       <div class="container" id="searchUsers">
               <div class="ui action left icon input">
                 <i class="search icon"></i>
-                <input type="text" id="searchInputs" placeholder="搜索用户/学号/邮箱">
+                <input type="text" id="searchInputs" placeholder="搜索用户/学号/邮箱"  onkeydown="if (event.keyCode == 13) {searchUsers()}">
                 <button class="ui blue button"   onclick="searchUsers()">搜索</button>
               </div>
       </div>

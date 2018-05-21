@@ -1,9 +1,17 @@
 $(document).ready(function(){
 	//在这里展示写入立即加载内容
 	$(".loading").fadeOut();
-	//无用户信息时显示遮盖层
-	$('#userInforShowArea').dimmer('show');
 	//在这里写入非立即加载内容
+	//无用户信息时显示遮盖层
+	$("#searchInputs").focus();
+	$('#userInforShowArea').dimmer('show');
+	//判断是否为外界跳转
+	var url = location.search;
+	if(url.indexOf("?") !=-1) {
+		var url_param = url.split("?")[1];
+		var url_param_arr = url_param.split("=");
+		showUser(url_param_arr[1]);
+	}
 });
 
 
@@ -17,12 +25,14 @@ var ByUser = {
 function searchUsers(){
 	//获取输入框中的值
 	var inputValue = $("#searchInputs").val();
+	//检测输入框是否为空
+	if(inputValue == ""){alert("输入框为空");return}
 	//清空原有数据
 	$(".list").children('.item').children('.content').empty();
 	$("#userInforShowArea").children(".teal").fadeOut();
 	$.ajax({
 		type:"POST",
-		url:"http://rap2api.taobao.org/app/mock/6975//example/1525008436528",
+		url:"http://localhost:8080/backstageManagement/selectUserInfo",
 		contentType:"application/json",
 		data:{
 			"searchValue": inputValue
@@ -30,7 +40,6 @@ function searchUsers(){
 		dataType:"json",
 		beforeSend:function(XMLHttpRequest){
 			alert(inputValue);
-
 		},
 		success:function(person){
 			if (person == 0) {alert("没有此用户！");return}
@@ -80,7 +89,7 @@ function reSetPassword(){
 		if (ByUser.userName.length == 0) {alert("当前无用户！");return;}
 			$.ajax({
 				type:"POST",
-				url:"http://rap2api.taobao.org/app/mock/6975//example/1520500796072",
+				url:"http://localhost:8080/backstageManagement/updatePassword",
 				contentType:"application/json",
 				data:{
 					//hostUserName:cookie.userName,
@@ -100,7 +109,7 @@ function deleteUser(){
 	if (ByUser.userName.length == 0) {alert("当前无用户！");return;}
 		$.ajax({
 				type:"POST",
-				url:"http://rap2api.taobao.org/app/mock/6975//example/1520500796072",
+				url:"http://localhost:8080/backstageManagement/deleteUser",
 				contentType:"application/json",
 				data:{
 					//hostUserName:cookie.userName,
@@ -132,7 +141,7 @@ function upLevelUser(Chosenstate){
 	$("#changeStateModal").modal("hide");
 	$.ajax({
 		type:"POST",
-		url:"/backstageManagement/userState",
+		url:"http://localhost:8080/backstageManagement/userState",
 		contentType:"application/json",
 		data:{
 			//hostUserName:cookie.userName,
@@ -145,6 +154,58 @@ function upLevelUser(Chosenstate){
 		},
 		error:function(jqXHR){
 			alert("修改失败!");
+		}
+	});
+}
+//外界跳转时执行的ajax
+function showUser(searchId){
+	$.ajax({
+		type:"POST",
+		url:"http://localhost:8080/backstageManagement/selectUserInfo",
+		contentType:"application/json",
+		data:{
+			"searchValue":searchId
+		},
+		dataType:"jsonp",
+		beforeSend:function(XMLHttpRequest){
+		},
+		success:function(person){
+			if (person == 0) {alert("没有此用户！");return}
+			//除去遮盖层
+			$('#userInforShowArea').dimmer('hide');
+			ByUser.userName = person.userName;
+			ByUser.state = person.state;
+			//添加标签
+			var tag = "<div class='ui teal huge top right attached label'>";
+			switch(person.state){
+				case 0:tag += "普通用户</div>";break;
+				case 1:tag += "管理员</div>";break;
+				case 2:tag += "超级管理员</div>";break;
+				default:break;
+			}
+			$("#userInforShowArea").append(tag);
+			//添加用户信息
+			$("#userNameShow").append("用户名：" + person.userName);
+			$("#userIdShow").append("学号：" + person.id);
+			$("#userE-mailShow").append("E-mail：" + person.e_mail);
+			$("#userGenderShow").append("性别：" + person.sex);
+			$("#userPhoneShow").append("电话：" + person.phone_number);
+			$("#userMajorShow").append("专业：" + person.major);
+			$("#userClassShow").append("班级：" + person.class_number);
+			$("#userDirShow").append("方向：" + person.study_direction);
+			$("#userBirthShow").append("年龄：" + person.birth);
+			$("#userHabitShow").append("生日：" + person.habit);
+			$("#userAgeShow").append("爱好：" + person.age);
+		},
+		complete:function(XMLHttpRequest,textStatus){  
+            if(textStatus=='timeout'){  
+                var xmlhttp = window.XMLHttpRequest ? new window.XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");  
+                xmlhttp.abort();
+            }
+    　　},
+		error:function(XMLHttpRequest,textStatus){
+			console.log(XMLHttpRequest.responseText);
+			console.log(textStatus);
 		}
 	});
 }
