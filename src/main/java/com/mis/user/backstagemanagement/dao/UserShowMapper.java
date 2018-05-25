@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.HashMap;
 import java.util.List;
 
-//@Repository(value = "userShowMapper")
+@Repository(value = "userShowMapper")
 public interface UserShowMapper {
 
     /*
