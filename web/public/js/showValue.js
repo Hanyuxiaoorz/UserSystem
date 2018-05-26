@@ -1,9 +1,10 @@
 $(document).ready(function(){
-	$(".loading").hide();
-	showStuDir();
+    getMainData();
+	getData();
 
 });
-function showStuDir(){
+
+function showStuDir(DirNum){
 
 	//画布大小
     var width = 500+100;  
@@ -14,10 +15,7 @@ function showStuDir(){
 	.attr("id","showStuDir")
 	.attr("width",width)
 	.attr("height",height);
-    
-
-          
-        var dataset=[["前端",10],["后台",10],["测试",8],["安卓",2],["Python",1]];  
+        var dataset=[["前端",DirNum[0]],["后台",DirNum[1]],["算法",DirNum[2]],["安卓",DirNum[3]],["Python",DirNum[4]]];  
           
         var outerRadius = 150; //外半径  
             var innerRadius = 0; //内半径，为0则中间没有空白  
@@ -197,4 +195,42 @@ function showStuDir(){
                     };  
                 };  
              }  
+}
+function getData(){ 
+    //定义一个存放数据的数组
+    var DirNum = Array(5);
+    $.ajax({
+        type:"GET",
+        url:"http://localhost:8080/backstageManagement/study_directionAmout",
+        dataType:"json",
+        beforeSend:function(xhr){
+        },
+        success:function(json){
+            DirNum[0] = json.frontNum;
+            DirNum[1] = json.bgNum;
+            DirNum[2] = json.algNum;
+            DirNum[3] = json.androidNum;
+            DirNum[4] = json.PyNum; 
+            showStuDir(DirNum);
+        }
+    });
+}
+
+function getMainData(){
+    $.ajax({
+        type:"GET",
+        url:"http://localhost:8080/backstageManagement//backstageManagement/userAmount",
+        dataType:"json",
+        beforeSend:function(xhr){
+        },
+        success:function(json){
+            $("#todayAccess").html(json.todayAccess);
+            $("#totalAccess").html(json.totalAccess);
+            $("#members").html(json.userAmount);
+            $("#admin").html(json.adminAmount);
+        },
+        complete:function(json){
+            $(".loading").hide();
+        }
+    });
 }

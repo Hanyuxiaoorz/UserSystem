@@ -29,7 +29,7 @@ function searchUsers(){
 	if(inputValue == ""){alert("输入框为空");return}
 	//清空原有数据
 	$(".list").children('.item').children('.content').empty();
-	$("#userInforShowArea").children(".teal").fadeOut();
+	$("#userInforShowArea").children(".teal").hide();
 	$.ajax({
 		type:"POST",
 		url:"http://localhost:8080/backstageManagement/selectUserInfo",
