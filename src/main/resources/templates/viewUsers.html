@@ -2,7 +2,6 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1.0" />
 	<link rel="icon" href="/public/management.ico" type="image/x-icon">
 	<link rel="stylesheet" type="text/css" href="/public/semantic/dist/semantic.min.css">
 	<link rel="stylesheet" type="text/css" href="/public/css/viewUsers.css">
@@ -36,9 +35,9 @@
         				<button class="ui  button">注册</button>
         		</div>
     			</div>
-  		</div>
-        </div>
-</header>
+      </div>
+    </div>
+  </header>
 	<section>
 		<div class="ui left  huge visible fixed vertical inverted  uncover menu sidebar" id="leftbar">
     		<a class="item" href="back-stage_management.html">用户信息管理<i class="ui unlock icon"></i><i class="ui large users icon"></i></a>
@@ -53,17 +52,23 @@
       <div class="container" id="searchUsers">
               <div class="ui action left icon input">
                 <i class="search icon"></i>
-                <input type="text" id="searchInputs" placeholder="搜索用户/学号/邮箱">
+                <input type="text" id="searchInputs" placeholder="搜索用户/学号/邮箱"  onkeydown="if (event.keyCode == 13) {searchUsers()}">
                 <button class="ui blue button"   onclick="searchUsers()">搜索</button>
               </div>
       </div>
+      <button class="ui violet button" id="upLevel" onclick="showUpLevelModal()">更改该用户权限</button>
       <button class="ui green button" id="reSetPassword" data-tooltip="改为默认值" data-position="top center" data-inverted="" onclick="reSetPassword()">回滚该用户密码</button>
       <button class="ui red button" id="deleteUser" onclick="deleteUser()">删除用户</button>
       <div class="container" id="userInforShowArea">
-        <div id="userPic">
+        <div class="ui dimmer">
+          <div class="content">
+            <div class="center">
+              <h2>当前无用户信息</h2>
+            </div>
+          </div>
         </div>
-        <div class="container" id="InfoShow">
-          <div class="ui list" >
+        <img src="https://upload-images.jianshu.io/upload_images/6840624-86b012390cdf585e?imageMogr2/auto-orient/strip%7CimageView2/2/w/420" id="userPic">
+        <div class="ui list" id="InfoShow">
           <div class="item">
             <i class=" ui user icon"></i>
             <div class="content" id="userNameShow">
@@ -121,7 +126,14 @@
           </div>
           </div>
         </div>
-      </div>
+        <div class="ui modal" id="changeStateModal">
+          <div class="header">请选择你要更改为哪种权限</div>
+          <div class="content">
+            <div class="ui blue button" onclick="upLevelUser(0)">普通成员</div>
+            <div class="ui red button" onclick="upLevelUser(1)">管理员</div>
+            <div class="ui orange button" onclick="upLevelUser(2)">超级管理员</div>
+          </div>
+        </div>
   </section>
   <footer>    
   </footer>

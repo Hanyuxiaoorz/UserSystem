@@ -21,8 +21,8 @@
     <!-- 注册验证及注册 -->
     <insert id="insertUser" parameterType="com.mis.user.regist.model.UserRegistInfo">
         INSERT
-        INTO user_mess (userName,password,id,e_mail,phone_number,study_direction)
-        values (#{userName}, #{password},#{id},#{e_mail},#{phone_number},#{study_direction})
+        INTO user_mess (userName,password,id,e_mail,study_direction)
+        values (#{userName}, #{password},#{id},#{e_mail},#{study_direction})
     </insert>
 
     <!-- 验证用户名是否已经被注册 -->

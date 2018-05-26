@@ -59,9 +59,11 @@ public class UserLoginServiceIml implements UserLoginService {
     @Override
     public String userNameLogin(UserLoginInfo userLoginInfo, String vcode, HttpSession httpSession) {
         if (userLoginMapper.loginUserByUserName(userLoginInfo) != null) {
-            String token = UUID.randomUUID().toString();
-            System.out.println(token);
+            System.out.println(userLoginInfo.getUserName());
+            String token = userLoginInfo.getUserName();
+            /*String token = UUID.randomUUID().toString();*/
             httpSession.setAttribute("token",token);
+            httpSession.setMaxInactiveInterval(3600);
             return Canstants.SUCCESS;
         }
         else{
@@ -75,6 +77,7 @@ public class UserLoginServiceIml implements UserLoginService {
     public String idLogin(UserLoginInfo userLoginInfo, String vcode, HttpSession httpSession) {
         if (userLoginMapper.loginUserById(userLoginInfo) != null) {
             httpSession.setAttribute("user",userLoginInfo);
+            httpSession.setMaxInactiveInterval(3600);
             return Canstants.SUCCESS;
         } else {
             return Canstants.FAIL;
@@ -86,6 +89,7 @@ public class UserLoginServiceIml implements UserLoginService {
     public String eMailLogin(UserLoginInfo userLoginInfo, String vcode ,HttpSession httpSession) {
         if (userLoginMapper.loginUserByEmail(userLoginInfo) != null) {
             httpSession.setAttribute("user",userLoginInfo);
+            httpSession.setMaxInactiveInterval(3600);
             return Canstants.SUCCESS;
         } else {
             return Canstants.FAIL;
@@ -104,6 +108,8 @@ public class UserLoginServiceIml implements UserLoginService {
         if(userLoginInfo.getState() > 0){
             //用户名密码是否匹配的判断
             if(userLoginMapper.loginUserByUserName(userLoginInfo) != null){
+                httpSession.setAttribute("user",userLoginInfo);
+                httpSession.setMaxInactiveInterval(3600);
                 return Canstants.SUCCESS;
             }
             else {
@@ -123,8 +129,9 @@ public class UserLoginServiceIml implements UserLoginService {
         if(userLoginInfo.getState() > 0){
             //用户名密码是否匹配的判断
             if(userLoginMapper.loginUserById(userLoginInfo) != null){
-                String token = UUID.randomUUID().toString();
+                String token = userLoginInfo.getUserName();
                 httpSession.setAttribute("token",token);
+                httpSession.setMaxInactiveInterval(3600);
                 return Canstants.SUCCESS;
             }
             else {
@@ -144,6 +151,7 @@ public class UserLoginServiceIml implements UserLoginService {
         if(userLoginInfo.getState() > 0){
             //用户名密码是否匹配的判断
             if(userLoginMapper.loginUserByEmail(userLoginInfo) != null){
+                httpSession.setMaxInactiveInterval(3600);
                 return Canstants.SUCCESS;
             }
             else {

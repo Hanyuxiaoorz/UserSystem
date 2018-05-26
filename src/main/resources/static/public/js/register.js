@@ -197,7 +197,7 @@ function register(){
 								        } 
 								}
 								alert(1111);
-                                var content = 'userName='+username+'&e_mail='+email+'&id='+id+'&password='+code+'&study_direcition='+direction;
+                                var content = 'userName='+username+'&e_mail='+email+'&id='+id+'&password='+code+'&study_direction='+direction;
 								xmlhttp.open("POST","http://localhost:8080/regist"+content,true);
 								xmlhttp.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 						 		xmlhttp.send(content);

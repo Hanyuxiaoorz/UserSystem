@@ -45,23 +45,27 @@
 }
 #leftbar{
 	position: fixed;
-	top: 4.7em;
+	width: 250px;
+	top: 80px;
 }
 #Statis{
 	position: relative;
-	width: 30%;
-	top: 10em;
-	left: 30em;
-	border: 2px solid gray;
-	border-radius: 2px;
-	box-shadow: 5px 5px 2px #888888;
-	-moz-box-shadow: 5px 5px 2px #888888;
+    width: 500px;
+    top: 150px;
+    left: 300px;
+    border: 2px solid gray;
+    border-radius: 2px;
+    box-shadow: 5px 5px 2px #888888;
+    -moz-box-shadow: 5px 5px 2px #888888;
 }
 #StuDir{
 	position: relative;
-	left: 65%;
+    left: 1050px;
+    width: 510px;
+    height: 350px;
 }
 #showStuDir{
 	position: relative;
-	left: 15em;
+    left: 150px;
+    top: -50px;
 }

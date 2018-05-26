@@ -29,7 +29,13 @@ public interface UserShowMapper {
     * 查询用户记录总数
     * @return
     * */
-    int selectCount();
+    int userAmount();
+
+    /*
+    * 查询管理员数量
+    * @return
+    * */
+    int managerAmount();
 
     /*
     *根据主键删除一条用户数据
@@ -59,5 +65,15 @@ public interface UserShowMapper {
     * @param userName,state
     * */
     int updateStateByUserName(@Param("userName") String byUserName,@Param("state") int state);
+
+    /*
+    * select study_direction
+    *
+    * */
+    int androidNum();
+    int bgNum();
+    int frontNum();
+    int PyNum();
+    int algNum();
 
 }

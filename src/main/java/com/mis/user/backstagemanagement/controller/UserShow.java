@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.mis.user.backstagemanagement.service.iml.UserShowServiceIml;
 import com.mis.user.canstants.Canstants;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -48,4 +49,30 @@ public class UserShow {
             return JSON.toJSON(map);
         }
     }
+
+    /*
+    * the amount of user and admin
+    *
+    * */
+    @GetMapping(value = "/backstageManagement/mainInfo")
+    private Object userAmount(){
+        map.put("userAmount",userShowServiceIml.userAmount());
+        map.put("adminAmount",userShowServiceIml.managerAmount());
+        return JSON.toJSON(map);
+    }
+
+    /*
+    *the amount of every direction
+    *
+    * */
+    @GetMapping(value = "/backstageManagement/study_directionAmount")
+    private Object study_direction(){
+        map.put("androidNum",userShowServiceIml.androidNum());
+        map.put("bgNum",userShowServiceIml.bgNum());
+        map.put("frontNum",userShowServiceIml.frontNum());
+        map.put("PyNum",userShowServiceIml.PyNum());
+        map.put("algNum",userShowServiceIml.algNum());
+        return JSON.toJSON(map);
+    }
+
 }

@@ -61,26 +61,17 @@ public class UserRegistServiceImpl implements UserRegistService {
         try {
             //注册合理性验证
             //验证是否输入是否完整
-            System.out.println("用户名"+userRegistInfo.getUserName());
-            System.out.println("密码"+userRegistInfo.getPassword());
-            System.out.println("邮箱"+userRegistInfo.getE_mail());
-            System.out.println("学习方向"+userRegistInfo.getStudy_direction());
-            System.out.println("id"+userRegistInfo.getId());
             if (userRegistInfo.getUserName() == null || userRegistInfo.getPassword() == null || userRegistInfo.getE_mail() == null
                     || userRegistInfo.getStudy_direction() == null || userRegistInfo.getId() == null) {
                 return Canstants.REGIST_NULL;
                 //验证用户名是否已经存在
-            } else {
-                if (userRegistMapper.registUserByUserName(userRegistInfo.getUserName()) != null || userRegistMapper.registUserByUserId(userRegistInfo.getId()) != null
+            } else if(userRegistMapper.registUserByUserName(userRegistInfo.getUserName()) != null || userRegistMapper.registUserByUserId(userRegistInfo.getId()) != null
                         || userRegistMapper.registUserByUserEmail(userRegistInfo.getE_mail()) != null) {
                     return Canstants.REGIST_EXIST;
-                } else {
-                    if (this.userRegistMapper.insertUser(userRegistInfo) == -1) {
+            } else if (this.userRegistMapper.insertUser(userRegistInfo) == -1) {
                         return Canstants.FAIL;
-                    } else {
-                        return Canstants.SUCCESS;
-                    }
-                }
+            } else {
+                return Canstants.SUCCESS;
             }
         }
         catch (Exception e){

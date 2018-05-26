@@ -30,7 +30,7 @@ public class UserRegist {
     @PostMapping(value = "/regist{userRegistInfo}")
     private Object regist(UserRegistInfo userRegistInfo){
         Map map = new HashMap<String,String>();
-        map.put("/regist",this.userRegistServiceimpl.regist(userRegistInfo));
+        map.put("regist",this.userRegistServiceimpl.regist(userRegistInfo));
         //以JSON形式返回给前端
         return JSON.toJSON(map);
     }

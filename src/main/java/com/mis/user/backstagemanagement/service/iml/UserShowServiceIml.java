@@ -55,7 +55,7 @@ public class UserShowServiceIml implements UserShowService {
         pageBean.setPageSize(pageSize);
 
         //封装总记录数
-        int totalCount = userShowMapper.selectCount();
+        int totalCount = userShowMapper.userAmount();
         pageBean.setTotalCount(totalCount);
 
         //封装总页数
@@ -74,21 +74,57 @@ public class UserShowServiceIml implements UserShowService {
 
     //查询用户总数
     @Override
-    public int selectCount() {
-        return userShowMapper.selectCount();
+    public int userAmount() {
+        return userShowMapper.userAmount();
+    }
+
+    //查询管理员的数量
+    @Override
+    public int managerAmount(){
+        return userShowMapper.managerAmount();
+    }
+
+    //查询学习方向
+    //安卓
+    @Override
+    public int androidNum(){
+        return userShowMapper.androidNum();
+    }
+
+    //后台
+    @Override
+    public int bgNum(){
+        return userShowMapper.bgNum();
+    }
+
+    //前端
+    @Override
+    public int frontNum(){
+        return userShowMapper.frontNum();
+    }
+
+    //Python
+    @Override
+    public int PyNum(){
+        return userShowMapper.PyNum();
+    }
+
+    //算法
+    public int algNum(){
+        return userShowMapper.algNum();
     }
 
     //查询数据通过用户的输入
     @Override
-    public UserShowInfo selectUserByInput(String input) {
-        if(userShowMapper.selectByUserName(input) != null){
-            return userShowMapper.selectByUserName(input);
+    public UserShowInfo selectUserByInput(String searchValue) {
+        if(userShowMapper.selectByUserName(searchValue) != null){
+            return userShowMapper.selectByUserName(searchValue);
         }
-        else if(userShowMapper.selectByUserId(input) != null){
-            return userShowMapper.selectByUserId(input);
+        else if(userShowMapper.selectByUserId(searchValue) != null){
+            return userShowMapper.selectByUserId(searchValue);
         }
-        else if(userShowMapper.selectByUserEmail(input) != null){
-            return userShowMapper.selectByUserEmail(input);
+        else if(userShowMapper.selectByUserEmail(searchValue) != null){
+            return userShowMapper.selectByUserEmail(searchValue);
         }
         else{
             return null;

@@ -41,8 +41,46 @@
     </select>
 
     <!-- 查询用户记录总数 -->
-    <select id="selectCount" resultType="int">
+    <select id="userAmount" resultType="int">
         select count(*) from user_mess
+    </select>
+
+    <!-- 查找管理员数量 -->
+    <select id="managerAmount" resultType="int">
+        SELECT count(state)
+        FROM user_mess
+        WHERE state > 0
+    </select>
+
+    <!-- 查询学习方向 -->
+    <select id="androidNum" resultType="int">
+        SELECT count(study_direction)
+        FROM user_mess
+        WHERE study_direction = "安卓"
+    </select>
+
+    <select id="bgNum" resultType="int">
+        SELECT count(study_direction)
+        FROM user_mess
+        WHERE study_direction = "后台"
+    </select>
+
+    <select id="frontNum" resultType="int">
+        SELECT count(study_direction)
+        FROM user_mess
+        WHERE study_direction = "前端"
+    </select>
+
+    <select id="PyNum" resultType="int">
+        SELECT count(study_direction)
+        FROM user_mess
+        WHERE study_direction = "Python"
+    </select>
+
+    <select id="algNum" resultType="int">
+        SELECT count(study_direction)
+        FROM user_mess
+        WHERE study_direction = "算法"
     </select>
 
     <!-- 通过主键来查询用户详细资料 -->

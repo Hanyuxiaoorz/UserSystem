@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.thymeleaf.util.StringUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
@@ -46,7 +47,9 @@ public class UserLogin {
         }
         else{
             //存在全局会话
-            return "";
+            //取出令牌信息，重定向到redirectURL
+            model.addAttribute("token",token);
+            return "redirect:"+redirectUrl;
         }
     }
 
@@ -57,29 +60,20 @@ public class UserLogin {
     @PostMapping(value = "/login{input,password,vcode,httpSession}")
     public Object loginVerify(String input, String password, String vcode, HttpSession httpSession) {
         //判断当前是否存有会话session
-        System.out.println(input);
-        System.out.println(password);
-       /* if (httpSession.getAttribute("user") != null) {
-            map.put("loginVerify", Canstants.SUCCESS);
-            return JSON.toJSON(map);
+        userLoginInfo.setPassword(password);
+        if (userLoginServiceIml.judgeUserName(input) != null) {
+            userLoginInfo.setUserName(input);
+            map.put("login", userLoginServiceIml.userNameLogin(userLoginInfo,vcode,httpSession));
+        } else if (userLoginServiceIml.judgeId(input) != null) {
+            userLoginInfo.setId(input);
+            map.put("login", userLoginServiceIml.idLogin(userLoginInfo, vcode, httpSession));
+        } else if (userLoginServiceIml.judgeEmail(input) != null) {
+            userLoginInfo.setE_mail(input);
+            map.put("login", userLoginServiceIml.eMailLogin(userLoginInfo, vcode, httpSession));
+        }else {
+            map.put("login",Canstants.LOGIN_INFO_NULL);
         }
-        else {*/
-            userLoginInfo.setPassword(password);
-            if (userLoginServiceIml.judgeUserName(input) != null) {
-                userLoginInfo.setUserName(input);
-                map.put("login", userLoginServiceIml.userNameLogin(userLoginInfo,vcode,httpSession));
-                System.out.println(userLoginServiceIml.userNameLogin(userLoginInfo,vcode,httpSession));
-            } else if (userLoginServiceIml.judgeId(input) != null) {
-                userLoginInfo.setId(input);
-                map.put("login", userLoginServiceIml.idLogin(userLoginInfo, vcode, httpSession));
-            } else if (userLoginServiceIml.judgeEmail(input) != null) {
-                userLoginInfo.setE_mail(input);
-                map.put("login", userLoginServiceIml.eMailLogin(userLoginInfo, vcode, httpSession));
-            }else {
-                map.put("Login",Canstants.LOGIN_INFO_NULL);
-            }
-            return JSON.toJSON(map);
-        /*}*/
+        return JSON.toJSON(map);
     }
 
     /*
@@ -110,5 +104,15 @@ public class UserLogin {
             }
             return JSON.toJSON(map);
         }
+    }
+
+    /*
+    * 退出登录
+    *
+    * */
+    @PostMapping(value = "/loginOut")
+    public Object loginOut(HttpServletRequest httpServletRequest){
+        httpServletRequest.getSession().invalidate();
+        return Canstants.SUCCESS;
     }
 }
