@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mis.user.commom.dao.UserTokenMapper">
+    <select id="selsectUserToken" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT token
+        FROM token_mess
+        WHERE token = #{token}
+    </select>
+
+    <insert id="insertUserToken" parameterType="java.lang.String">
+        INSERT
+        INTO token_mess(token)
+        VALUE #{token}
+    </insert>
+
+</mapper>

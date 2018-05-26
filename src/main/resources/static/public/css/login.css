@@ -1,0 +1,33 @@
+#title_1{
+    font-size: 60px;
+    font-weight: bolder;
+    position: relative;
+    top: 50px;
+}
+.input{
+	position: relative;
+	top: 70px;
+	width: 350px;
+	margin-top: 15px;
+}
+.hr{
+	border: 1px solid white;	
+}
+#checkanwseruser{
+	color: #c7c7cb;
+	position: absolute;
+	top: 183px;
+	left: 900px;
+}
+#checkanwsercode{
+	color: #c7c7cb;
+	position: absolute;
+	top: 250px;
+	left: 900px;
+}
+#button{
+	position: relative;;
+	top: 100px;
+	width: 350px;
+	left: 1.5px;
+}
