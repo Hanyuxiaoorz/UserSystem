@@ -1,3 +1,4 @@
+alert(document.cookie);
 function login(){
 	var username = $("#user").val();
 	var npassword = $("#code").val();
