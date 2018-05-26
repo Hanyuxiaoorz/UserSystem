@@ -186,7 +186,7 @@ function register(){
 								//当接受到响应时回调该方法
 								        if (xmlhttp.readyState==4 && (xmlhttp.status==200||xmlhttp.status==0))
 								        {
-								            
+								            alert(direction);
 								            var text = xmlhttp.responseText;
 								            var resultJson = eval("("+text+")");
 								            var regist= resultJson.regist;
@@ -197,7 +197,7 @@ function register(){
 								        } 
 								}
 								alert(1111);
-                                var content = 'userName='+username+'&e_mail='+email+'&id='+id+'&password='+code+'&study_direcition='+direction;
+                                var content = 'userName='+username+'&e_mail='+email+'&id='+id+'&password='+code+'&study_direction='+direction;
 								xmlhttp.open("POST","http://localhost:8080/regist"+content,true);
 								xmlhttp.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 						 		xmlhttp.send(content);

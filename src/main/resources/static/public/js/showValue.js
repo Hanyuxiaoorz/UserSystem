@@ -15,7 +15,11 @@ function showStuDir(DirNum){
 	.attr("id","showStuDir")
 	.attr("width",width)
 	.attr("height",height);
-        var dataset=[["前端",DirNum[0]],["后台",DirNum[1]],["算法",DirNum[2]],["安卓",DirNum[3]],["Python",DirNum[4]]];  
+        var dataset=[["前端",DirNum[0]],["后台",DirNum[1]],["算法",DirNum[2]],["安卓",DirNum[3]],["Python",DirNum[4]]];
+        var newdata = dataset.filter(function(item){
+            return item[1] !=0
+        });
+        dataset = newdata;
           
         var outerRadius = 150; //外半径  
             var innerRadius = 0; //内半径，为0则中间没有空白  
@@ -201,7 +205,7 @@ function getData(){
     var DirNum = Array(5);
     $.ajax({
         type:"GET",
-        url:"http://localhost:8080/backstageManagement/study_directionAmout",
+        url:"http://localhost:8080/backstageManagement/study_directionAmount",
         dataType:"json",
         beforeSend:function(xhr){
         },
@@ -219,7 +223,7 @@ function getData(){
 function getMainData(){
     $.ajax({
         type:"GET",
-        url:"http://localhost:8080/backstageManagement//backstageManagement/userAmount",
+        url:"http://localhost:8080/backstageManagement/backstageManagement/mainAmount",
         dataType:"json",
         beforeSend:function(xhr){
         },
