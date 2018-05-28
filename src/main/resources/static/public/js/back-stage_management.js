@@ -1,10 +1,11 @@
 $(document).ready(function(){
+	redirect();
 	//向表格中加入数据
 	$.ajax({
 				type:"POST",
 				url:"http://localhost:8080/backstageManagement/userInfo",
 				async:false,
-				dataType:"jsonp",
+				dataType:"json",
     			// xhr: function () {
        //  			var xhr = new window.XMLHttpRequest();
        //  			//Download progress
@@ -30,17 +31,17 @@ $(document).ready(function(){
 							case 2:megs += "<td><div class='ui orange ribbon label'>超级管理员</div></td>";break;
 							default:break;
 						}
-						megs += "<td>"+ person.userName+"</td>" ;
-						megs += "<td>"+ person.id+"</td>" ;
-						megs += "<td>"+ person.e_mail+"</td>" ;
-						megs += "<td>"+ person.sex+"</td>" ;
-						megs += "<td>"+ person.phone_number+"</td>" ;
-						megs += "<td>"+ person.major+"</td>" ;
-						megs += "<td>"+ person.class_number+"</td>" ;
-						megs += "<td>"+ person.study_direction+"</td>" ;
-						megs += "<td>"+ person.age+"</td>" ;
-						megs += "<td>"+ person.birth+"</td>" ;
-						megs += "<td>"+ person.habit+"</td>" ;
+						megs += "<td>"+ checkIsNull(person.userName)+"</td>" ;
+						megs += "<td>"+ checkIsNull(person.id)+"</td>" ;
+						megs += "<td>"+ checkIsNull(person.e_mail)+"</td>" ;
+						megs += "<td>"+ checkIsNull(person.sex)+"</td>" ;
+						megs += "<td>"+ checkIsNull(person.phone_number)+"</td>" ;
+						megs += "<td>"+ checkIsNull(person.major)+"</td>" ;
+						megs += "<td>"+ checkIsNull(person.class_number)+"</td>" ;
+						megs += "<td>"+ checkIsNull(person.study_direction)+"</td>" ;
+						megs += "<td>"+ checkIsNull(person.age)+"</td>" ;
+						megs += "<td>"+ checkIsNull(person.birth)+"</td>" ;
+						megs += "<td>"+ checkIsNull(person.habit)+"</td>" ;
 						megs += "</tr>";
 					tbody += megs;
 				});
@@ -103,4 +104,34 @@ $(document).ready(function(){
 //跳转至单个用户信息界面
 function herfView(id){
 	window.location.href="viewUsers.html?id=" + id;
+}
+//拦截传输访问地址
+function redirect(){
+	var redirectURL = window.location.pathname;
+	var sessionID = sessionStorage.getItem("JSESSIONID");
+	$.ajax({
+		type:"GET",
+		url:"/back-stage_management.html",
+		contentType:"application/x-www-form-urlencoded",
+		data:{
+			"redirectUrl":redirectURL,
+			"token":sessionID
+		},
+		dataType:"application/json",
+		beforeSend:function(){
+			console.log(redirectURL);
+		},
+		success:function(){
+			alert("ajax成功执行");
+		}
+	});
+}
+//检查传入数据是否为空
+function checkIsNull(content){
+	if(content){
+		return content;
+	}
+	else{
+		return "无";
+	}
 }

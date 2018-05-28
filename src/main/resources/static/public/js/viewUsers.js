@@ -33,7 +33,7 @@ function searchUsers(){
 	$.ajax({
 		type:"POST",
 		url:"http://localhost:8080/backstageManagement/selectUserInfo",
-		contentType:"application/json",
+		contentType:"application/x-www-form-urlencoded",
 		data:{
 			"searchValue": inputValue
 		},
@@ -57,17 +57,17 @@ function searchUsers(){
 			}
 			$("#userInforShowArea").append(tag);
 			//添加用户信息
-			$("#userNameShow").append("用户名：" + person.userName);
-			$("#userIdShow").append("学号：" + person.id);
-			$("#userE-mailShow").append("E-mail：" + person.e_mail);
-			$("#userGenderShow").append("性别：" + person.sex);
-			$("#userPhoneShow").append("电话：" + person.phone_number);
-			$("#userMajorShow").append("专业：" + person.major);
-			$("#userClassShow").append("班级：" + person.class_number);
-			$("#userDirShow").append("方向：" + person.study_direction);
-			$("#userBirthShow").append("年龄：" + person.birth);
-			$("#userHabitShow").append("生日：" + person.habit);
-			$("#userAgeShow").append("爱好：" + person.age);
+			$("#userNameShow").append("用户名：" + checkIsNull(person.userName));
+			$("#userIdShow").append("学号：" + checkIsNull(person.id));
+			$("#userE-mailShow").append("E-mail：" + checkIsNull(person.e_mail));
+			$("#userGenderShow").append("性别：" + checkIsNull(person.sex));
+			$("#userPhoneShow").append("电话：" + checkIsNull(person.phone_number));
+			$("#userMajorShow").append("专业：" + checkIsNull(person.major));
+			$("#userClassShow").append("班级：" + checkIsNull(person.class_number));
+			$("#userDirShow").append("方向：" + checkIsNull(person.study_direction));
+			$("#userBirthShow").append("年龄：" + checkIsNull(person.birth));
+			$("#userHabitShow").append("生日：" + checkIsNull(person.habit));
+			$("#userAgeShow").append("爱好：" + checkIsNull(person.age));
 		},
 		complete:function(XMLHttpRequest,textStatus){  
             if(textStatus=='timeout'){  
@@ -166,7 +166,7 @@ function showUser(searchId){
 		data:{
 			"searchValue":searchId
 		},
-		dataType:"jsonp",
+		dataType:"json",
 		beforeSend:function(XMLHttpRequest){
 		},
 		success:function(person){
@@ -185,17 +185,17 @@ function showUser(searchId){
 			}
 			$("#userInforShowArea").append(tag);
 			//添加用户信息
-			$("#userNameShow").append("用户名：" + person.userName);
-			$("#userIdShow").append("学号：" + person.id);
-			$("#userE-mailShow").append("E-mail：" + person.e_mail);
-			$("#userGenderShow").append("性别：" + person.sex);
-			$("#userPhoneShow").append("电话：" + person.phone_number);
-			$("#userMajorShow").append("专业：" + person.major);
-			$("#userClassShow").append("班级：" + person.class_number);
-			$("#userDirShow").append("方向：" + person.study_direction);
-			$("#userBirthShow").append("年龄：" + person.birth);
-			$("#userHabitShow").append("生日：" + person.habit);
-			$("#userAgeShow").append("爱好：" + person.age);
+			$("#userNameShow").append("用户名：" + checkIsNull(person.userName));
+			$("#userIdShow").append("学号：" + checkIsNull(person.id));
+			$("#userE-mailShow").append("E-mail：" + checkIsNull(person.e_mail));
+			$("#userGenderShow").append("性别：" + checkIsNull(person.sex));
+			$("#userPhoneShow").append("电话：" + checkIsNull(person.phone_number));
+			$("#userMajorShow").append("专业：" + checkIsNull(person.major));
+			$("#userClassShow").append("班级：" + checkIsNull(person.class_number));
+			$("#userDirShow").append("方向：" + checkIsNull(person.study_direction));
+			$("#userBirthShow").append("年龄：" + checkIsNull(person.birth));
+			$("#userHabitShow").append("生日：" + checkIsNull(person.habit));
+			$("#userAgeShow").append("爱好：" + checkIsNull(person.age));
 		},
 		complete:function(XMLHttpRequest,textStatus){  
             if(textStatus=='timeout'){  
@@ -208,4 +208,13 @@ function showUser(searchId){
 			console.log(textStatus);
 		}
 	});
+}
+//检查传入数据是否为空
+function checkIsNull(content){
+	if(content){
+		return content;
+	}
+	else{
+		return "无";
+	}
 }
