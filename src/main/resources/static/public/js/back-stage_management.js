@@ -6,19 +6,11 @@ $(document).ready(function(){
 				type:"POST",
 				url:"http://localhost:8080/backstageManagement/userInfo",
 				async:false,
+				xhrFields: {
+					withCredentials: true
+				},
+				crossDomain: true,
 				dataType:"json",
-    			// xhr: function () {
-       //  			var xhr = new window.XMLHttpRequest();
-       //  			//Download progress
-       //  			xhr.addEventListener("progress", function (evt) {
-       //      			if (evt.lengthComputable) {
-       //      			    var percentComplete = evt.loaded / evt.total;
-       //      			    progressElem.html(Math.round(percentComplete * 100) + "%");
-       //      			}
-       //  			}, false);
-       //  			return xhr;
-    			// },
-    			
 				success:function(json){
 					var tbody = "";
 					//遍历对象

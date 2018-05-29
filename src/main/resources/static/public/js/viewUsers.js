@@ -2,6 +2,7 @@ $(document).ready(function(){
 	//在这里展示写入立即加载内容
 	//显示用户名
 	$("#userName").text(CookieUtil.get("user"));
+
 	$(".loading").fadeOut();
 	//在这里写入非立即加载内容
 	//无用户信息时显示遮盖层
@@ -17,7 +18,7 @@ $(document).ready(function(){
 });
 
 
-//定义当前用户名，用于修改密码使用
+//定义当前用户
 var ByUser = {
 	"userName":"",
 	"state":0
@@ -39,6 +40,10 @@ function searchUsers(){
 		data:{
 			"searchValue": inputValue
 		},
+		xhrFields: {
+            withCredentials: true
+		},
+		crossDomain: true,
 		dataType:"json",
 		beforeSend:function(XMLHttpRequest){
 			alert(inputValue);
@@ -86,20 +91,28 @@ function searchUsers(){
 
 //点击修改密码
 function reSetPassword(){
-	//判断二者的权限值
-	//if (cookie.state <= ByUser.state) { alert("你没有此权限！");return;}
+	
 		if (ByUser.userName.length == 0) {alert("当前无用户！");return;}
 			$.ajax({
 				type:"POST",
 				url:"http://localhost:8080/backstageManagement/updatePassword",
 				contentType:"application/json",
 				data:{
-					//hostUserName:cookie.userName,
 					"byUserName":ByUser.userName
 				},
+				xhrFields: {
+					withCredentials: true
+				},
+				crossDomain: true,
 				dataType:"json",
 				success:function(json){
+					var result = parseInt(json.updatePassword);
+					if(result){
 					alert("已成功初始化" + ByUser.userName + "的密码!");
+					}
+					else{
+						alert("你没有此权限！");
+					}
 				},
 				error:function(jqXHR){
 					alert("ERROR!");
@@ -114,24 +127,34 @@ function deleteUser(){
 				url:"http://localhost:8080/backstageManagement/deleteUser",
 				contentType:"application/json",
 				data:{
-					//hostUserName:cookie.userName,
 					"byUserName":ByUser.userName
 				},
-				dataType:"json",
+				xhrFields: {
+					withCredentials: true
+				},
+				crossDomain: true,
+				dataType:"text",
 				success:function(json){
-					alert("已成功删除" + ByUser.userName);
-					//清空原有数据
-					$(".list").children('.item').children('.content').empty();
-					$("#userInforShowArea").children(".teal").fadeOut();
-					ByUser = {
-						"userName":"",
-						"state":0
-						};
-					//删除用户后显示遮盖层
-					$('#userInforShowArea').dimmer('show');
+					var result = parseInt(json.deleteUser);
+					if(result){
+						alert("已成功删除" + ByUser.userName);
+						//清空原有数据
+						$(".list").children('.item').children('.content').empty();
+						$("#userInforShowArea").children(".teal").fadeOut();
+						ByUser = {
+							"userName":"",
+							"state":0
+							};
+						//删除用户后显示遮盖层
+						$('#userInforShowArea').dimmer('show');
+					}
+					else{
+						alert("你没有此权限！");
+					}
 					},
-				error:function(jqXHR){
-					alert("ERROR!");
+				error: function (xhr, ajaxOptions, thrownError) {
+						console.log(xhr.responseText);
+						console.log(thrownError);
 				}
 			});
 }
@@ -146,17 +169,27 @@ function upLevelUser(Chosenstate){
 		url:"http://localhost:8080/backstageManagement/userState",
 		contentType:"application/json",
 		data:{
-			//hostUserName:cookie.userName,
 			"byUserName":ByUser.userName,
 			"state":Chosenstate
 		},
+		xhrFields: {
+            withCredentials: true
+		},
+		crossDomain: true,
 		dataType:"json",
 		success:function(json){
-			alert(json.userState);
+			var result = parseInt(json.userState);
+			if(result){
+				alert("已更改改用户权限");
+			}
+			else{
+				alert("你没有此权限!");
+			}
 		},
-		error:function(jqXHR){
-			alert("修改失败!");
-		}
+		error: function (xhr, ajaxOptions, thrownError) {
+			console.log(xhr.responseText);
+			console.log(thrownError);
+	}
 	});
 }
 //外界跳转时执行的ajax
@@ -168,6 +201,10 @@ function showUser(searchId){
 		data:{
 			"searchValue":searchId
 		},
+		xhrFields: {
+            withCredentials: true
+		},
+		crossDomain: true,
 		dataType:"json",
 		beforeSend:function(XMLHttpRequest){
 		},

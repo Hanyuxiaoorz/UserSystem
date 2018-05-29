@@ -10,6 +10,7 @@ function login(){
 		xhrFields: {
 			withCredentials: true
 	   },
+	   crossDomain: true,
 		data:{
 			"input": username,
 			"password":npassword
