@@ -1,6 +1,10 @@
 $(document).ready(function(){
+    //显示用户名
+	$("#userName").text(CookieUtil.get("user"));
     getMainData();
-	getData();
+    getData();
+    //加载窗口实时消失
+	$('.loading').fadeOut();
 
 });
 

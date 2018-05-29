@@ -1,5 +1,6 @@
 $(document).ready(function(){
-	redirect();
+	//显示用户名
+	$("#userName").text(CookieUtil.get("user"));
 	//向表格中加入数据
 	$.ajax({
 				type:"POST",
@@ -104,27 +105,6 @@ $(document).ready(function(){
 //跳转至单个用户信息界面
 function herfView(id){
 	window.location.href="viewUsers.html?id=" + id;
-}
-//拦截传输访问地址
-function redirect(){
-	var redirectURL = window.location.pathname;
-	var sessionID = sessionStorage.getItem("JSESSIONID");
-	$.ajax({
-		type:"GET",
-		url:"/back-stage_management.html",
-		contentType:"application/x-www-form-urlencoded",
-		data:{
-			"redirectUrl":redirectURL,
-			"token":sessionID
-		},
-		dataType:"application/json",
-		beforeSend:function(){
-			console.log(redirectURL);
-		},
-		success:function(){
-			alert("ajax成功执行");
-		}
-	});
 }
 //检查传入数据是否为空
 function checkIsNull(content){

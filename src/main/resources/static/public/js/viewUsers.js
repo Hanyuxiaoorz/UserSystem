@@ -1,5 +1,7 @@
 $(document).ready(function(){
 	//在这里展示写入立即加载内容
+	//显示用户名
+	$("#userName").text(CookieUtil.get("user"));
 	$(".loading").fadeOut();
 	//在这里写入非立即加载内容
 	//无用户信息时显示遮盖层

@@ -6,7 +6,8 @@
 	<link rel="stylesheet" type="text/css" href="../static/public/semantic/dist/semantic.min.css">
 	<link rel="stylesheet" type="text/css" href="../static/public/css/viewUsers.css">
 	<script src="../static/public/js/jquery-3.3.1.min.js"></script>
-	<script src="../static/public/semantic/dist/semantic.min.js"></script>
+  <script src="../static/public/semantic/dist/semantic.min.js"></script>
+  <script src="../static/public/js/EasyCookie.js"></script>
 	<script type="text/javascript" src="../static/public/js/viewUsers.js"></script>
 	<title>后台信息管理</title>
 </head>
@@ -27,15 +28,12 @@
 			</a>
   			<a class="item">Mis Lab</a>
   			<a class="active item">后台管理</a>
-  	  <div class="right menu">
-    			<div class="item">
-    				<div class="ui buttons">
-        				<button class="ui positive button">登录</button>
-        				<div class="or"></div>
-        				<button class="ui  button">注册</button>
-        		</div>
-    			</div>
-      </div>
+        <div class="right menu">
+            <div class="item">
+              <img class="ui mini rounded image" src="../static/public/img/normalHeadPic.png">
+            </div>
+              <a class="item" id="userName"></a>
+        </div>
     </div>
   </header>
 	<section>
@@ -67,7 +65,7 @@
             </div>
           </div>
         </div>
-        <img src="https://upload-images.jianshu.io/upload_images/6840624-86b012390cdf585e?imageMogr2/auto-orient/strip%7CimageView2/2/w/420" id="userPic">
+        <img src="../static/public/img/normalHeadPic.png" id="userPic">
         <div class="ui list" id="InfoShow">
           <div class="item">
             <i class=" ui user icon"></i>
