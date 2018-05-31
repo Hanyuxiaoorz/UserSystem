@@ -1,6 +1,10 @@
 $(document).ready(function(){
+    //显示用户名
+	$("#userName").text(CookieUtil.get("user"));
     getMainData();
-	getData();
+    getData();
+    //加载窗口实时消失
+	$('.loading').fadeOut();
 
 });
 
@@ -223,7 +227,7 @@ function getData(){
 function getMainData(){
     $.ajax({
         type:"GET",
-        url:"http://localhost:8080/backstageManagement/backstageManagement/mainAmount",
+        url:"http://localhost:8080/backstageManagement/mainAmount",
         dataType:"json",
         beforeSend:function(xhr){
         },

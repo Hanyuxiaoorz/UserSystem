@@ -13,6 +13,7 @@ import org.thymeleaf.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -22,7 +23,7 @@ import java.util.UUID;
 * this is class for login and logout
 *
 * */
-@Controller
+@RestController
 public class UserLogin {
 
     @Autowired
@@ -35,8 +36,7 @@ public class UserLogin {
     *
     * 验证是否已经登陆
     * */
-    @ResponseBody
-    @GetMapping(value = "/checkLogin")
+/*    @GetMapping(value = "/checkLogin")
     public String checkLogin(String redirectUrl , HttpSession session , Model model){
         //判断是否存在全局会话
         String token = (String) session.getAttribute("token");
@@ -51,27 +51,32 @@ public class UserLogin {
             model.addAttribute("token",token);
             return "redirect:"+redirectUrl;
         }
-    }
+    }*/
 
     /*
     *
     * 普通成员登陆
     * */
-    @PostMapping(value = "/login{input,password,vcode,httpSession}")
-    public Object loginVerify(String input, String password, String vcode, HttpSession httpSession) {
+    @PostMapping(value = "/login{input,password,vcode}")
+    public Object loginVerify(String input, String password, String vcode, HttpSession session,Model model){
         //判断当前是否存有会话session
-        userLoginInfo.setPassword(password);
-        if (userLoginServiceIml.judgeUserName(input) != null) {
-            userLoginInfo.setUserName(input);
-            map.put("login", userLoginServiceIml.userNameLogin(userLoginInfo,vcode,httpSession));
-        } else if (userLoginServiceIml.judgeId(input) != null) {
-            userLoginInfo.setId(input);
-            map.put("login", userLoginServiceIml.idLogin(userLoginInfo, vcode, httpSession));
-        } else if (userLoginServiceIml.judgeEmail(input) != null) {
-            userLoginInfo.setE_mail(input);
-            map.put("login", userLoginServiceIml.eMailLogin(userLoginInfo, vcode, httpSession));
-        }else {
-            map.put("login",Canstants.LOGIN_INFO_NULL);
+        if(session.getAttribute("token")!= null){
+            map.put("login",Canstants.SUCCESS);
+        }
+        else {
+            userLoginInfo.setPassword(password);
+            if (userLoginServiceIml.judgeUserName(input) != null) {
+                userLoginInfo.setUserName(input);
+                map.put("login",userLoginServiceIml.userNameLogin(userLoginInfo,session));
+            } else if (userLoginServiceIml.judgeId(input) != null) {
+                userLoginInfo.setId(input);
+                map.put("login", userLoginServiceIml.userNameLogin(userLoginInfo,session));
+            } else if (userLoginServiceIml.judgeEmail(input) != null) {
+                userLoginInfo.setE_mail(input);
+                map.put("login", userLoginServiceIml.userNameLogin(userLoginInfo,session));
+            }else {
+                map.put("login",Canstants.LOGIN_INFO_NULL);
+            }
         }
         return JSON.toJSON(map);
     }
@@ -80,30 +85,28 @@ public class UserLogin {
     *
     * 管理员登陆
     * */
-    @ResponseBody
     @PostMapping(value = "/managerLogin{input,password,vcode,httpSession}")
-    public Object manageLoginVerify(String input, String password, String vcode, HttpSession httpSession){
+    public Object manageLoginVerify(String input, String password, String vcode, HttpSession session){
         //判断是否存在会话session
-        if(httpSession.getAttribute("user")!= null){
+        if(session.getAttribute("token")!= null){
             map.put("VIPLogin",Canstants.SUCCESS);
-            return JSON.toJSON(map);
         }
         else {
             userLoginInfo.setPassword(password);
             if (userLoginServiceIml.judgeUserName(input) != null) {
                 userLoginInfo.setUserName(input);
-                map.put("VIPLoginVerify", userLoginServiceIml.VIPUserNameLogin(userLoginInfo, vcode, httpSession));
+                map.put("VIPLoginVerify", userLoginServiceIml.VIPUserNameLogin(userLoginInfo,session));
             } else if (userLoginServiceIml.judgeId(input) != null) {
                 userLoginInfo.setId(input);
-                map.put("VIPLoginVerify", userLoginServiceIml.VIPIdLogin(userLoginInfo, vcode, httpSession));
+                map.put("VIPLoginVerify", userLoginServiceIml.VIPIdLogin(userLoginInfo,session));
             } else if (userLoginServiceIml.judgeEmail(input) != null) {
                 userLoginInfo.setE_mail(input);
-                map.put("VIPLoginVerify", userLoginServiceIml.VIPEmailLogin(userLoginInfo, vcode, httpSession));
+                map.put("VIPLoginVerify", userLoginServiceIml.VIPEmailLogin(userLoginInfo,session));
             }else {
                 map.put("VIPLoginVerify",Canstants.LOGIN_INFO_NULL);
             }
-            return JSON.toJSON(map);
         }
+        return JSON.toJSON(map);
     }
 
     /*
@@ -111,8 +114,9 @@ public class UserLogin {
     *
     * */
     @PostMapping(value = "/loginOut")
-    public Object loginOut(HttpServletRequest httpServletRequest){
-        httpServletRequest.getSession().invalidate();
-        return Canstants.SUCCESS;
+    public Object loginOut(HttpSession session){
+        session.invalidate();
+        map.put("loginOut",Canstants.SUCCESS);
+        return JSON.toJSON(map);
     }
 }

@@ -13,23 +13,23 @@ public interface UserLoginService {
     *
     * */
 
-    String judgeUserName(String userName);
-    String judgeId(String id);
-    String judgeEmail(String e_mail);
+    Object judgeUserName(String userName);
+    Object judgeId(String id);
+    Object judgeEmail(String e_mail);
 
     /*
     * 登陆验证
     * */
-    String userNameLogin(UserLoginInfo userLoginInfo, String vcode, HttpSession httpSession);
+    int userNameLogin(UserLoginInfo userLoginInfo,HttpSession session);
 
-    String idLogin(UserLoginInfo userLoginInfo, String vcode, HttpSession httpSession);
+    /*String idLogin(UserLoginInfo userLoginInfo,HttpSession session);
 
-    String eMailLogin(UserLoginInfo userLoginInfo, String vcode, HttpSession httpSession);
+    String eMailLogin(UserLoginInfo userLoginInfo,HttpSession session);*/
 
     //管理员登陆
-    String VIPUserNameLogin(UserLoginInfo userLoginInfo, String vcode, HttpSession httpSession);
+    int VIPUserNameLogin(UserLoginInfo userLoginInfo,HttpSession session);
 
-    String VIPIdLogin(UserLoginInfo userLoginInfo , String vcode, HttpSession httpSession);
+    int VIPIdLogin(UserLoginInfo userLoginInfo,HttpSession session);
 
-    String VIPEmailLogin(UserLoginInfo userLoginInfo , String vcode, HttpSession httpSession);
+    int VIPEmailLogin(UserLoginInfo userLoginInfo,HttpSession session);
 }

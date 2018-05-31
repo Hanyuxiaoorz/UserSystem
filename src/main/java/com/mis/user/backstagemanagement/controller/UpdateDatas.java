@@ -3,7 +3,7 @@ package com.mis.user.backstagemanagement.controller;
 import com.mis.user.backstagemanagement.service.iml.UpdateDatasServiceIml;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,10 +13,13 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
 @RestController
+@RequestMapping(value = "/backstageManagement")
 public class UpdateDatas {
 
-    @PostMapping("/backstageManagement/updateUserInfo")
+    @RequestMapping(value = "/updateUserInfo",method = POST)
     public String upload(@RequestParam(value = "file", required = false)
                                      MultipartFile file, HttpServletRequest request, ModelMap model, Model mod) throws Exception {
         String path = request.getSession().getServletContext().getRealPath("upload");

@@ -26,7 +26,6 @@ public class UserRegist {
     UserRegistServiceImpl userRegistServiceimpl;
 
     //使用POST方法获取前端请求
-    @ResponseBody
     @PostMapping(value = "/regist{userRegistInfo}")
     private Object regist(UserRegistInfo userRegistInfo){
         Map map = new HashMap<String,String>();

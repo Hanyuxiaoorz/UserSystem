@@ -115,10 +115,22 @@
         WHERE userName = #{userName,jdbcType=VARCHAR}
     </select>
     <!-- 查询该用户权限值 -->
-    <select id="selectStateByUserName" parameterType="java.lang.String" resultType="java.lang.Integer">
+    <select id="selectStateByUserName" parameterType="java.lang.String" resultType="int">
         SELECT state
         FROM user_mess
         WHERE userName = #{userName,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectStateById" parameterType="java.lang.String" resultType="int">
+        SELECT state
+        FROM user_mess
+        WHERE id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectStateByE_mail" parameterType="java.lang.String" resultType="int">
+        SELECT state
+        FROM user_mess
+        WHERE e_mail = #{e_mail,jdbcType=VARCHAR}
     </select>
     <!-- 更改密码完成 -->
 

@@ -18,7 +18,7 @@ public class UserRegistServiceImpl implements UserRegistService {
     private UserService userService;
     //验证账号是否已经存在
     @Override
-    public String userNameVerify(String userName) {
+    public int userNameVerify(String userName) {
         try {
             if (userRegistMapper.registUserByUserName(userName) != null) {
                 return Canstants.REGIST_EXIST;
@@ -31,7 +31,7 @@ public class UserRegistServiceImpl implements UserRegistService {
 
     //验证邮箱是否已经注册
     @Override
-    public String userEmailVerify(String eMail){
+    public int userEmailVerify(String eMail){
         try {
             if ((userRegistMapper.registUserByUserEmail(eMail) != null)) {
                 return Canstants.REGIST_EXIST;
@@ -44,7 +44,7 @@ public class UserRegistServiceImpl implements UserRegistService {
 
     //验证学生学号是否已经被注册
     @Override
-    public String userIdVerify(String id) {
+    public int userIdVerify(String id) {
         try {
             if ((userRegistMapper.registUserByUserId(id) != null)) {
                 return Canstants.REGIST_EXIST;
@@ -57,7 +57,7 @@ public class UserRegistServiceImpl implements UserRegistService {
 
     //注册用户
     @Override
-    public String regist(UserRegistInfo userRegistInfo) {
+    public int regist(UserRegistInfo userRegistInfo) {
         try {
             //注册合理性验证
             //验证是否输入是否完整

@@ -27,10 +27,10 @@
     <!--配置数据源-->
     <context:property-placeholder location="classpath*:application.properties" ignore-unresolvable="true"/>
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
-        <property name="driverClassName" value="org.h2.Driver"/>
-        <property name="url" value="jdbc:h2:mem:user_mess"/>
+        <property name="driverClassName" value="${spring.datasource.driver-class-name}"/>
+        <property name="url" value="${spring.datasource.url}"/>
         <property name="username" value="${spring.datasource.username}"/>
-        <property name="password" value=""/>
+        <property name="password" value="${spring.datasource.password}"/>
         <!-- 连接池初始连接数 -->
         <property name="initialSize" value="3"/>
         <!-- 允许的最大同时使用中(在被业务线程持有，还没有归还给druid) 的连接数 -->

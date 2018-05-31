@@ -1,5 +1,8 @@
 $(document).ready(function(){
 	//在这里展示写入立即加载内容
+	//显示用户名
+	$("#userName").text(CookieUtil.get("user"));
+
 	$(".loading").fadeOut();
 	//在这里写入非立即加载内容
 	//无用户信息时显示遮盖层
@@ -15,7 +18,7 @@ $(document).ready(function(){
 });
 
 
-//定义当前用户名，用于修改密码使用
+//定义当前用户
 var ByUser = {
 	"userName":"",
 	"state":0
@@ -41,7 +44,7 @@ function searchUsers(){
 		beforeSend:function(XMLHttpRequest){
 		},
 		success:function(person){
-			if (person.selectUserInfo == 0) {alert("没有此用户！");return}
+			if (person == 0) {alert("没有此用户！");return}
 			//除去遮盖层
 			$('#userInforShowArea').dimmer('hide');
 			ByUser.userName = person.userName;
@@ -56,21 +59,21 @@ function searchUsers(){
 			}
 			$("#userInforShowArea").append(tag);
 			//添加用户信息
-			$("#userNameShow").append("用户名：" + person.userName);
-			$("#userIdShow").append("学号：" + person.id);
-			$("#userE-mailShow").append("E-mail：" + person.e_mail);
-			$("#userGenderShow").append("性别：" + person.sex);
-			$("#userPhoneShow").append("电话：" + person.phone_number);
-			$("#userMajorShow").append("专业：" + person.major);
-			$("#userClassShow").append("班级：" + person.class_number);
-			$("#userDirShow").append("方向：" + person.study_direction);
-			$("#userBirthShow").append("年龄：" + person.birth);
-			$("#userHabitShow").append("生日：" + person.habit);
-			$("#userAgeShow").append("爱好：" + person.age);
+			$("#userNameShow").append("用户名：" + checkIsNull(person.userName));
+			$("#userIdShow").append("学号：" + checkIsNull(person.id));
+			$("#userE-mailShow").append("E-mail：" + checkIsNull(person.e_mail));
+			$("#userGenderShow").append("性别：" + checkIsNull(person.sex));
+			$("#userPhoneShow").append("电话：" + checkIsNull(person.phone_number));
+			$("#userMajorShow").append("专业：" + checkIsNull(person.major));
+			$("#userClassShow").append("班级：" + checkIsNull(person.class_number));
+			$("#userDirShow").append("方向：" + checkIsNull(person.study_direction));
+			$("#userBirthShow").append("年龄：" + checkIsNull(person.birth));
+			$("#userHabitShow").append("生日：" + checkIsNull(person.habit));
+			$("#userAgeShow").append("爱好：" + checkIsNull(person.age));
 		},
-		complete:function(XMLHttpRequest,textStatus){  
-            if(textStatus=='timeout'){  
-                var xmlhttp = window.XMLHttpRequest ? new window.XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");  
+		complete:function(XMLHttpRequest,textStatus){
+            if(textStatus=='timeout'){
+                var xmlhttp = window.XMLHttpRequest ? new window.XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
                 xmlhttp.abort();
             }
     　　},
@@ -83,20 +86,25 @@ function searchUsers(){
 
 //点击修改密码
 function reSetPassword(){
-	//判断二者的权限值
-	//if (cookie.state <= ByUser.state) { alert("你没有此权限！");return;}
+
 		if (ByUser.userName.length == 0) {alert("当前无用户！");return;}
 			$.ajax({
 				type:"POST",
 				url:"http://localhost:8080/backstageManagement/updatePassword",
 				contentType:"application/json",
 				data:{
-					//hostUserName:cookie.userName,
 					"byUserName":ByUser.userName
 				},
 				dataType:"json",
 				success:function(json){
+					var result = parseInt(json.updatePassword);
+					alert(result);
+					if(result == 1){
 					alert("已成功初始化" + ByUser.userName + "的密码!");
+					}
+					else{
+						alert("你没有此权限！");
+					}
 				},
 				error:function(jqXHR){
 					alert("ERROR!");
@@ -111,24 +119,30 @@ function deleteUser(){
 				url:"http://localhost:8080/backstageManagement/deleteUser",
 				contentType:"application/json",
 				data:{
-					//hostUserName:cookie.userName,
 					"byUserName":ByUser.userName
 				},
 				dataType:"json",
 				success:function(json){
-					alert("已成功删除" + ByUser.userName);
-					//清空原有数据
-					$(".list").children('.item').children('.content').empty();
-					$("#userInforShowArea").children(".teal").fadeOut();
-					ByUser = {
-						"userName":"",
-						"state":0
-						};
-					//删除用户后显示遮盖层
-					$('#userInforShowArea').dimmer('show');
+					var result = parseInt(json.deleteUser);
+					if(result == 1){
+						alert("已成功删除" + ByUser.userName);
+						//清空原有数据
+						$(".list").children('.item').children('.content').empty();
+						$("#userInforShowArea").children(".teal").fadeOut();
+						ByUser = {
+							"userName":"",
+							"state":0
+							};
+						//删除用户后显示遮盖层
+						$('#userInforShowArea').dimmer('show');
+					}
+					else{
+						alert("你没有此权限！");
+					}
 					},
-				error:function(jqXHR){
-					alert("ERROR!");
+				error: function (xhr, ajaxOptions, thrownError) {
+						console.log(xhr.responseText);
+						console.log(thrownError);
 				}
 			});
 }
@@ -143,17 +157,23 @@ function upLevelUser(Chosenstate){
 		url:"http://localhost:8080/backstageManagement/userState",
 		contentType:"application/json",
 		data:{
-			//hostUserName:cookie.userName,
 			"byUserName":ByUser.userName,
 			"state":Chosenstate
 		},
 		dataType:"json",
 		success:function(json){
-			alert(json.userState);
+			var result = parseInt(json.userState);
+			if(result == 1){
+				alert("已更改改用户权限");
+			}
+			else{
+				alert("你没有此权限!");
+			}
 		},
-		error:function(jqXHR){
-			alert("修改失败!");
-		}
+		error: function (xhr, ajaxOptions, thrownError) {
+			console.log(xhr.responseText);
+			console.log(thrownError);
+	}
 	});
 }
 //外界跳转时执行的ajax
@@ -184,21 +204,21 @@ function showUser(searchId){
 			}
 			$("#userInforShowArea").append(tag);
 			//添加用户信息
-			$("#userNameShow").append("用户名：" + person.userName);
-			$("#userIdShow").append("学号：" + person.id);
-			$("#userE-mailShow").append("E-mail：" + person.e_mail);
-			$("#userGenderShow").append("性别：" + person.sex);
-			$("#userPhoneShow").append("电话：" + person.phone_number);
-			$("#userMajorShow").append("专业：" + person.major);
-			$("#userClassShow").append("班级：" + person.class_number);
-			$("#userDirShow").append("方向：" + person.study_direction);
-			$("#userBirthShow").append("年龄：" + person.birth);
-			$("#userHabitShow").append("生日：" + person.habit);
-			$("#userAgeShow").append("爱好：" + person.age);
+			$("#userNameShow").append("用户名：" + checkIsNull(person.userName));
+			$("#userIdShow").append("学号：" + checkIsNull(person.id));
+			$("#userE-mailShow").append("E-mail：" + checkIsNull(person.e_mail));
+			$("#userGenderShow").append("性别：" + checkIsNull(person.sex));
+			$("#userPhoneShow").append("电话：" + checkIsNull(person.phone_number));
+			$("#userMajorShow").append("专业：" + checkIsNull(person.major));
+			$("#userClassShow").append("班级：" + checkIsNull(person.class_number));
+			$("#userDirShow").append("方向：" + checkIsNull(person.study_direction));
+			$("#userBirthShow").append("年龄：" + checkIsNull(person.birth));
+			$("#userHabitShow").append("生日：" + checkIsNull(person.habit));
+			$("#userAgeShow").append("爱好：" + checkIsNull(person.age));
 		},
-		complete:function(XMLHttpRequest,textStatus){  
-            if(textStatus=='timeout'){  
-                var xmlhttp = window.XMLHttpRequest ? new window.XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");  
+		complete:function(XMLHttpRequest,textStatus){
+            if(textStatus=='timeout'){
+                var xmlhttp = window.XMLHttpRequest ? new window.XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
                 xmlhttp.abort();
             }
     　　},
@@ -207,4 +227,13 @@ function showUser(searchId){
 			console.log(textStatus);
 		}
 	});
+}
+//检查传入数据是否为空
+function checkIsNull(content){
+	if(content){
+		return content;
+	}
+	else{
+		return "无";
+	}
 }

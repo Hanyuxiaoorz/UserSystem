@@ -59,6 +59,8 @@ public interface UserShowMapper {
     int changePasswordByUserName(@Param("userName") String byUserName);
     String selectPassword(@Param("userName") String byUserName);
     int selectStateByUserName(@Param("userName") String userName);
+    int selectStateById(@Param("id") String id);
+    int selectStateByE_mail(@Param("e_mail") String e_mail);
 
     /*
     * update user`s level
