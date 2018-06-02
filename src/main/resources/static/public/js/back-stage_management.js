@@ -1,15 +1,13 @@
 $(document).ready(function(){
-	//显示用户名
-	$("#userName").text(CookieUtil.get("user"));
 	//向表格中加入数据
 	$.ajax({
 				type:"POST",
 				url:"http://localhost:8080/backstageManagement/userInfo",
-				async:false,
 				xhrFields: {
 					withCredentials: true
 				},
 				crossDomain: true,
+				contentType: "application/json",
 				dataType:"json",
 				success:function(json){
 					var tbody = "";
@@ -55,6 +53,7 @@ $(document).ready(function(){
 	//实现点击按钮上传
 	$("#fileInput").click(function(){
 		$("#upload").click();
+		$("upExcel").submit();
 	});
 	var tablePageNum = $("#tablePage").children(".active.item").index();
 	//实现点击换页

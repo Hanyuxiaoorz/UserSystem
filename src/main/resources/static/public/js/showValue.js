@@ -215,6 +215,7 @@ function getData(){
             withCredentials: true
         },
         crossDomain: true,
+        contentType: "application/json",
         beforeSend:function(xhr){
         },
         success:function(json){
@@ -231,12 +232,13 @@ function getData(){
 function getMainData(){
     $.ajax({
         type:"GET",
-        url:"http://localhost:8080/backstageManagement/backstageManagement/mainAmount",
+        url:"http://localhost:8080/backstageManagement/mainAmount",
         dataType:"json",
         xhrFields: {
             withCredentials: true
         },
         crossDomain: true,
+        contentType: "application/json",
         beforeSend:function(xhr){
         },
         success:function(json){

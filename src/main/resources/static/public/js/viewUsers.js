@@ -44,7 +44,7 @@ function searchUsers(){
             withCredentials: true
 		},
 		crossDomain: true,
-		dataType:"json",
+		dataType:"jsonp",
 		beforeSend:function(XMLHttpRequest){
 			alert(inputValue);
 		},
@@ -54,6 +54,8 @@ function searchUsers(){
 			$('#userInforShowArea').dimmer('hide');
 			ByUser.userName = person.userName;
 			ByUser.state = person.state;
+			//获取头像
+			$('#userPic').attr('src',person.userPhoto);
 			//添加标签
 			var tag = "<div class='ui teal huge top right attached label'>";
 			switch(person.state){
@@ -139,6 +141,7 @@ function deleteUser(){
 					if(result){
 						alert("已成功删除" + ByUser.userName);
 						//清空原有数据
+						$('#userPic').attr("src","../static/public/img/normalHeadPic.png");
 						$(".list").children('.item').children('.content').empty();
 						$("#userInforShowArea").children(".teal").fadeOut();
 						ByUser = {
@@ -197,7 +200,7 @@ function showUser(searchId){
 	$.ajax({
 		type:"POST",
 		url:"http://localhost:8080/backstageManagement/selectUserInfo",
-		contentType:"application/json",
+		contentType:"application/x-www-form-urlencoded",
 		data:{
 			"searchValue":searchId
 		},
@@ -214,6 +217,8 @@ function showUser(searchId){
 			$('#userInforShowArea').dimmer('hide');
 			ByUser.userName = person.userName;
 			ByUser.state = person.state;
+			//获取头像
+			$('#userPic').attr('src',person.userPhoto);
 			//添加标签
 			var tag = "<div class='ui teal huge top right attached label'>";
 			switch(person.state){
