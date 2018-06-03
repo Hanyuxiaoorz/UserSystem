@@ -1,0 +1,52 @@
+/**
+ * @author Hakim El Hattab
+ */
+
+
+/*********************************************
+ * GLOBAL STYLES
+ *********************************************/
+
+html, body {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	
+	background: #eee;
+	color: #eee;
+	
+	font-family: 'Molengo', Arial, Helvetica, sans-serif;
+}
+
+
+/*********************************************
+ * EXPERIMENTS HEADER
+ *********************************************/
+
+#showMsg {
+	position: relative;
+	top: 70%;
+	margin: 0 auto;
+	z-index: 999;
+	color:purple;
+	font-size: 60px;
+	width: 400px;
+	height: 60px;
+	
+}
+
+
+
+/*********************************************
+ * CONTENTS
+ *********************************************/
+
+#fof {
+	margin-top: 40px;
+	text-align: center;
+}
+
+
+
+
+
