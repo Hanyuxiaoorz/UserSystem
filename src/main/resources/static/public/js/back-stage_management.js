@@ -12,7 +12,7 @@ $(document).ready(function(){
 				success:function(json){
 					var tbody = "";
 					//遍历对象
-					$.each(json.USERSHOWINFO,function(index,person){
+					$.each(json.userInfo,function(index,person){
 						var userName = person.userName;
 						var megs = "<tr class = 'userTr' onclick=herfView("+ person.id +")>";
 						//加入头衔
@@ -53,7 +53,6 @@ $(document).ready(function(){
 	//实现点击按钮上传
 	$("#fileInput").click(function(){
 		$("#upload").click();
-		$("upExcel").submit();
 	});
 	var tablePageNum = $("#tablePage").children(".active.item").index();
 	//实现点击换页
@@ -105,4 +104,25 @@ function checkIsNull(content){
 	else{
 		return "无";
 	}
+}
+//上传excel
+function upLoadExcel(){
+	$.ajax({
+		type:"POST",
+		url:"http:localhost:8080/backstageManagement/excelUserInfo",
+		xhrFields: {
+			withCredentials: true
+		},
+		crossDomain: true,
+		contentType: "application/json",
+		data:$("#formExcel").serialize(),
+		dataType:"json",
+		success:function(json){
+			alert(json.excelUserInfo);
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+			console.log(xhr.responseText);
+			console.log(thrownError);
+		}
+	});
 }

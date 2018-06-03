@@ -51,8 +51,8 @@
   		</div>
   		<div class="pusher">
 		</div>
-		<form name="upExcel" action="http://localhost:8080/backstageManagement/excelUserInfo" method="POST">
-			  <input type="file" name="uploadExcel" multiple class="ui input" id="upload" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+		<form id="formExcel" name="upExcel" action="/backstageManagement/excelUserInfo" method="POST">
+			  <input type="file" name="uploadExcel" multiple class="ui input" id="upload" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" onchange ="upLoadExcel()">
 		</form>
 		<div class="ui large blue button" id="fileInput"  data-tooltip="注意为Excel" data-position="top left" data-inverted=""><font>导入表格</font><i class="ui  right file icon"></i></div>
   		<table class="ui  table" id="inforTable">
