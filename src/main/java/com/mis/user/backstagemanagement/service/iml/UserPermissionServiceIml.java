@@ -18,8 +18,6 @@ public class UserPermissionServiceIml implements UserPermissionService{
 
     @Autowired
     UserShowMapper userShowMapper;
-    UserRegistMapper userRegistMapper;
-    UserShowInfo userShowInfo;
 
     /*
     *
@@ -30,24 +28,18 @@ public class UserPermissionServiceIml implements UserPermissionService{
         try{
             //若是有权限更改用户密码
             if(userShowMapper.selectStateByUserName(hostUserName) > userShowMapper.selectStateByUserName(byUserName)){
-              userShowMapper.changePasswordByUserName(byUserName);
+                userShowMapper.changePasswordByUserName(byUserName);
               String rePassword = "111111";
               if(userShowMapper.selectPassword(byUserName).equals(rePassword)){
                   return Canstants.SUCCESS;
+              } else{
+                  return Canstants.FAIL;//若密码更改失败
               }
-              //若密码更改失败
-              else{
-                  return Canstants.FAIL;
-              }
-            }
-            //若无权限更改用户密码
-            else{
-                return Canstants.BACK_PERMISSION_FAIL;
+            } else{
+                return Canstants.BACK_PERMISSION_FAIL; //若无权限更改用户密码
           }
-        }
-        //未查询到权限值，抛出空指针异常处理
-        catch (Exception e){
-              return Canstants.BACK_PERMISSION_NULL;
+        } catch (Exception e){
+              return Canstants.BACK_PERMISSION_NULL;//未查询到权限值，抛出空指针异常处理
         }
     }
 
@@ -65,19 +57,15 @@ public class UserPermissionServiceIml implements UserPermissionService{
                 if (userShowMapper.selectByUserName(byUserName).getState() == state) {
                     return Canstants.SUCCESS;
                 }
-                //修改失败
                 else {
-                    return Canstants.FAIL;
+                    return Canstants.FAIL;//修改失败
                 }
-            }
-            //权限不允许更改
-            else {
-                return Canstants.BACK_PERMISSION_FAIL;
+            } else {
+                return Canstants.BACK_PERMISSION_FAIL;//权限不允许更改
             }
         }
-        //未查询到权限值，抛出空指针异常处理
         catch (Exception e){
-            return Canstants.BACK_PERMISSION_NULL;
+            return Canstants.BACK_PERMISSION_NULL;//未查询到权限值，抛出空指针异常处理
         }
     }
 
@@ -93,24 +81,18 @@ public class UserPermissionServiceIml implements UserPermissionService{
                 userShowMapper.deleteUserByUserName(byUserName);
                 //删除成功
                 if (userShowMapper.selectByUserName(byUserName) == null) {
-                    System.out.println("1111");
                     return Canstants.SUCCESS;
                 }
-                //删除失败
                 else {
-                    System.out.println("000");
-                    return Canstants.FAIL;
+                    return Canstants.FAIL;//删除失败
                 }
             }
-            //若无权限删除密码
             else {
-                System.out.println("222");
-                return Canstants.BACK_PERMISSION_FAIL;
+                return Canstants.BACK_PERMISSION_FAIL;//若无权限删除密码
             }
         }
-        //未查询到权限值，抛出空指针异常处理
         catch (Exception e){
-            return Canstants.BACK_PERMISSION_NULL;
+            return Canstants.BACK_PERMISSION_NULL;//未查询到权限值，抛出空指针异常处理
         }
     }
 

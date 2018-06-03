@@ -2,10 +2,10 @@
 package com.mis.user.regist.service.impl;
 
 import com.mis.user.canstants.Canstants;
+import com.mis.user.regist.controller.UserRegist;
 import com.mis.user.regist.dao.UserRegistMapper;
 import com.mis.user.regist.model.UserRegistInfo;
 import com.mis.user.regist.service.UserRegistService;
-import com.mis.user.ticket.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +15,7 @@ public class UserRegistServiceImpl implements UserRegistService {
 
     @Autowired
     private UserRegistMapper userRegistMapper;
-    private UserService userService;
+    private UserRegistService userService;
     //验证账号是否已经存在
     @Override
     public int userNameVerify(String userName) {

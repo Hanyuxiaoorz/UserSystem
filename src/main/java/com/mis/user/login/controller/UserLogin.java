@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.*;
 import org.thymeleaf.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.net.HttpCookie;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -58,7 +60,8 @@ public class UserLogin {
     * 普通成员登陆
     * */
     @PostMapping(value = "/login{input,password,vcode}")
-    public Object loginVerify(String input, String password, String vcode, HttpSession session,Model model){
+    public Object loginVerify(String input, String password, String vcode, HttpSession session, HttpServletResponse response){
+        map.clear();
         //判断当前是否存有会话session
         if(session.getAttribute("token")!= null){
             map.put("login",Canstants.SUCCESS);
@@ -67,13 +70,13 @@ public class UserLogin {
             userLoginInfo.setPassword(password);
             if (userLoginServiceIml.judgeUserName(input) != null) {
                 userLoginInfo.setUserName(input);
-                map.put("login",userLoginServiceIml.userNameLogin(userLoginInfo,session));
+                map.put("login",userLoginServiceIml.userNameLogin(userLoginInfo,session,response));
             } else if (userLoginServiceIml.judgeId(input) != null) {
                 userLoginInfo.setId(input);
-                map.put("login", userLoginServiceIml.userNameLogin(userLoginInfo,session));
+                map.put("login", userLoginServiceIml.userNameLogin(userLoginInfo,session,response));
             } else if (userLoginServiceIml.judgeEmail(input) != null) {
                 userLoginInfo.setE_mail(input);
-                map.put("login", userLoginServiceIml.userNameLogin(userLoginInfo,session));
+                map.put("login", userLoginServiceIml.userNameLogin(userLoginInfo,session,response));
             }else {
                 map.put("login",Canstants.LOGIN_INFO_NULL);
             }
@@ -85,7 +88,7 @@ public class UserLogin {
     *
     * 管理员登陆
     * */
-    @PostMapping(value = "/managerLogin{input,password,vcode,httpSession}")
+    /*@PostMapping(value = "/managerLogin{input,password,vcode,httpSession}")
     public Object manageLoginVerify(String input, String password, String vcode, HttpSession session){
         //判断是否存在会话session
         if(session.getAttribute("token")!= null){
@@ -107,7 +110,7 @@ public class UserLogin {
             }
         }
         return JSON.toJSON(map);
-    }
+    }*/
 
     /*
     * 退出登录
@@ -115,6 +118,7 @@ public class UserLogin {
     * */
     @PostMapping(value = "/loginOut")
     public Object loginOut(HttpSession session){
+        map.clear();
         session.invalidate();
         map.put("loginOut",Canstants.SUCCESS);
         return JSON.toJSON(map);

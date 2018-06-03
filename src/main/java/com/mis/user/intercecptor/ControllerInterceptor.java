@@ -90,7 +90,7 @@ public class ControllerInterceptor {
                 result = pjp.proceed();
             }
         }catch (Throwable e){
-            logger.info("excepction:",e);
+            logger.info("exception:",e);
             result = new JsonResult(ResultCode.EXCEPTION,"发生异常："+ e.getMessage());
         }
 

@@ -211,6 +211,11 @@ function getData(){
         type:"GET",
         url:"http://localhost:8080/backstageManagement/study_directionAmount",
         dataType:"json",
+        xhrFields: {
+            withCredentials: true
+        },
+        crossDomain: true,
+        contentType: "application/json",
         beforeSend:function(xhr){
         },
         success:function(json){
@@ -229,6 +234,11 @@ function getMainData(){
         type:"GET",
         url:"http://localhost:8080/backstageManagement/mainAmount",
         dataType:"json",
+        xhrFields: {
+            withCredentials: true
+        },
+        crossDomain: true,
+        contentType: "application/json",
         beforeSend:function(xhr){
         },
         success:function(json){

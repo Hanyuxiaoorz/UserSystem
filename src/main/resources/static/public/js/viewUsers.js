@@ -40,8 +40,13 @@ function searchUsers(){
 		data:{
 			"searchValue": inputValue
 		},
+		xhrFields: {
+            withCredentials: true
+		},
+		crossDomain: true,
 		dataType:"json",
 		beforeSend:function(XMLHttpRequest){
+			alert(inputValue);
 		},
 		success:function(person){
 			if (person == 0) {alert("没有此用户！");return}
@@ -49,6 +54,8 @@ function searchUsers(){
 			$('#userInforShowArea').dimmer('hide');
 			ByUser.userName = person.userName;
 			ByUser.state = person.state;
+			//获取头像
+			$('#userPic').attr('src',person.userPhoto);
 			//添加标签
 			var tag = "<div class='ui teal huge top right attached label'>";
 			switch(person.state){
@@ -71,9 +78,9 @@ function searchUsers(){
 			$("#userHabitShow").append("生日：" + checkIsNull(person.habit));
 			$("#userAgeShow").append("爱好：" + checkIsNull(person.age));
 		},
-		complete:function(XMLHttpRequest,textStatus){
-            if(textStatus=='timeout'){
-                var xmlhttp = window.XMLHttpRequest ? new window.XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
+		complete:function(XMLHttpRequest,textStatus){  
+            if(textStatus=='timeout'){  
+                var xmlhttp = window.XMLHttpRequest ? new window.XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");  
                 xmlhttp.abort();
             }
     　　},
@@ -86,7 +93,7 @@ function searchUsers(){
 
 //点击修改密码
 function reSetPassword(){
-
+	
 		if (ByUser.userName.length == 0) {alert("当前无用户！");return;}
 			$.ajax({
 				type:"POST",
@@ -95,11 +102,15 @@ function reSetPassword(){
 				data:{
 					"byUserName":ByUser.userName
 				},
+				xhrFields: {
+					withCredentials: true
+				},
+				crossDomain: true,
 				dataType:"json",
 				success:function(json){
 					var result = parseInt(json.updatePassword);
 					alert(result);
-					if(result == 1){
+					if(result){
 					alert("已成功初始化" + ByUser.userName + "的密码!");
 					}
 					else{
@@ -121,12 +132,17 @@ function deleteUser(){
 				data:{
 					"byUserName":ByUser.userName
 				},
-				dataType:"json",
+				xhrFields: {
+					withCredentials: true
+				},
+				crossDomain: true,
+				dataType:"text",
 				success:function(json){
 					var result = parseInt(json.deleteUser);
-					if(result == 1){
+					if(result){
 						alert("已成功删除" + ByUser.userName);
 						//清空原有数据
+						$('#userPic').attr("src","../static/public/img/normalHeadPic.png");
 						$(".list").children('.item').children('.content').empty();
 						$("#userInforShowArea").children(".teal").fadeOut();
 						ByUser = {
@@ -160,10 +176,14 @@ function upLevelUser(Chosenstate){
 			"byUserName":ByUser.userName,
 			"state":Chosenstate
 		},
+		xhrFields: {
+            withCredentials: true
+		},
+		crossDomain: true,
 		dataType:"json",
 		success:function(json){
 			var result = parseInt(json.userState);
-			if(result == 1){
+			if(result){
 				alert("已更改改用户权限");
 			}
 			else{
@@ -181,10 +201,14 @@ function showUser(searchId){
 	$.ajax({
 		type:"POST",
 		url:"http://localhost:8080/backstageManagement/selectUserInfo",
-		contentType:"application/json",
+		contentType:"application/x-www-form-urlencoded",
 		data:{
 			"searchValue":searchId
 		},
+		xhrFields: {
+            withCredentials: true
+		},
+		crossDomain: true,
 		dataType:"json",
 		beforeSend:function(XMLHttpRequest){
 		},
@@ -194,6 +218,8 @@ function showUser(searchId){
 			$('#userInforShowArea').dimmer('hide');
 			ByUser.userName = person.userName;
 			ByUser.state = person.state;
+			//获取头像
+			$('#userPic').attr('src',person.userPhoto);
 			//添加标签
 			var tag = "<div class='ui teal huge top right attached label'>";
 			switch(person.state){
@@ -216,9 +242,9 @@ function showUser(searchId){
 			$("#userHabitShow").append("生日：" + checkIsNull(person.habit));
 			$("#userAgeShow").append("爱好：" + checkIsNull(person.age));
 		},
-		complete:function(XMLHttpRequest,textStatus){
-            if(textStatus=='timeout'){
-                var xmlhttp = window.XMLHttpRequest ? new window.XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
+		complete:function(XMLHttpRequest,textStatus){  
+            if(textStatus=='timeout'){  
+                var xmlhttp = window.XMLHttpRequest ? new window.XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");  
                 xmlhttp.abort();
             }
     　　},

@@ -20,8 +20,8 @@ public class ViewDefault {
 
     @GetMapping("/back-stage_management.html")
     private String backStageManagement(String redirectUrl , HttpSession session , Model model){
-        String token = (String) session.getAttribute("token");
-        if(StringUtils.isEmpty(token)){
+        String user = (String) session.getAttribute("user");
+        if(StringUtils.isEmpty(user)){
             //表示不存在全局会话，跳转至登陆界面
             model.addAttribute("redirectUrl",redirectUrl);
             return "login";
@@ -30,7 +30,6 @@ public class ViewDefault {
             //存在全局会话
             String hostUserName = (String) session.getAttribute("user");
             if(userPermissionService.selectState(hostUserName) > 0){
-                System.out.println(session.getAttribute("user"));
                 return "back-stage_management";
             }
             else {
@@ -43,8 +42,8 @@ public class ViewDefault {
     @GetMapping("/viewUsers.html")
     private String viewUsers(String redirectUrl , HttpSession session , Model model){
         //判断是否存在全局会话
-        String token = (String) session.getAttribute("token");
-        if(StringUtils.isEmpty(token)){
+        String user = (String) session.getAttribute("user");
+        if(StringUtils.isEmpty(user)){
             //表示不存在全局会话，跳转至登陆界面
             model.addAttribute("redirectUrl",redirectUrl);
             return "login";
@@ -66,6 +65,11 @@ public class ViewDefault {
         return "login";
     }
 
+    @GetMapping("/404.html")
+    private String white(){
+        return "404";
+    }
+
     @GetMapping("/register.html")
     private String register(){
         return "register";
@@ -75,8 +79,8 @@ public class ViewDefault {
     private String showValue(String redirectUrl , HttpSession session , Model model) {
         //判断是否存在全局会话
         redirectUrl = "/showValue.html";
-        String token = (String) session.getAttribute("token");
-        if (StringUtils.isEmpty(token)) {
+        String user = (String) session.getAttribute("user");
+        if (StringUtils.isEmpty(user)) {
             //表示不存在全局会话，跳转至登陆界面
             model.addAttribute("redirectUrl", redirectUrl);
             return "login";

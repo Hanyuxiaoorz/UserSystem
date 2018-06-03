@@ -81,5 +81,4 @@ public class UserShow {
         map.put("algNum",userShowServiceIml.algNum());
         return JSON.toJSON(map);
     }
-
 }

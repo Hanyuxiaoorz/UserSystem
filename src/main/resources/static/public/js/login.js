@@ -1,12 +1,16 @@
-
 function login(){
 	var username = $("#user").val();
 	var npassword = $("#code").val();
 	$.ajax({
 		type:"POST",
 		url:"http://localhost:8080/login",
+		async:false,
 		dataType:"json",
-        contentType:"application/x-www-form-urlencoded",
+		contentType:"application/x-www-form-urlencoded",
+		xhrFields: {
+			withCredentials: true
+	   },
+	   crossDomain: true,
 		data:{
 			"input": username,
 			"password":npassword
@@ -23,8 +27,26 @@ function login(){
 			}
 		},
 		error:function(){
-			alert("ERROR!");
+			alert(stateNum.login);
 		}
-
+	});
+}
+//查看权限
+function checkRight(){
+	var UrlLink = window.location.pathname;
+	$.ajax({
+		type:"GET",
+		url:"http://localhost:8080"+UrlLink,
+		xhrFields: {
+			withCredentials: true
+	   },
+	   data:"json",
+	   success:function(){
+			window.location.reload();
+	   },
+	   error:function(XMLHttpRequest,textStatus,errorThrown){
+		   console.log(textStatus);
+		   console.log(errorThrown);
+	   }
 	});
 }
