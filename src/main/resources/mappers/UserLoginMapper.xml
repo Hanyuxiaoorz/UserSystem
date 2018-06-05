@@ -34,25 +34,23 @@
     <!-- 登陆验证 -->
     <!-- 通过用户名登陆的验证 -->
     <select id="loginUserByUserName" parameterType="com.mis.user.login.model.UserLoginInfo" resultMap="BaseResultMap">
-    SELECT *
-    FROM user_mess
-    WHERE userName = #{userName}
-    AND password = #{password}
+      SELECT *
+      FROM user_mess
+      WHERE userName = #{userName} AND password = #{password}
     </select>
 
         <!-- 通过用户学号登陆的验证 -->
     <select id="loginUserById" parameterType="com.mis.user.login.model.UserLoginInfo" resultMap="BaseResultMap">
-    SELECT *
-    FROM user_mess
-    WHERE id = #{id}
-    AND password = #{password}
+      SELECT *
+      FROM user_mess
+      WHERE id = #{id} AND password = #{password}
     </select>
 
         <!-- 通过用户邮箱登陆的验证 -->
     <select id="loginUserByEmail" parameterType="com.mis.user.login.model.UserLoginInfo" resultMap="BaseResultMap">
-    SELECT *
-    FROM user_mess
-    WHERE e_mail = #{e_mail} AND password = #{password}
+      SELECT *
+      FROM user_mess
+      WHERE e_mail = #{e_mail} AND password = #{password}
     </select>
 
     <select id="stateVerifyByUserName" parameterType="java.lang.String" resultType="java.lang.Integer">

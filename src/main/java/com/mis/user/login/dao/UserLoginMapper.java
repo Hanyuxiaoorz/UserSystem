@@ -14,7 +14,4 @@ public interface UserLoginMapper {
     UserLoginInfo judgeId(String id);
     UserLoginInfo judgeEmail(String e_mail);
 
-    Integer stateVerifyByUserName(String userName);
-    Integer stateVerifyById(String id);
-    Integer stateVerifyByEmail(String e_mail);
 }

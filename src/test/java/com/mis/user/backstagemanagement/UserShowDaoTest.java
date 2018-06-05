@@ -1,14 +1,13 @@
-package com.mis.user.backstagemanagement.dao;
+package com.mis.user.backstagemanagement;
 
+import com.mis.user.backstagemanagement.dao.UserShowMapper;
 import com.mis.user.backstagemanagement.model.UserShowInfo;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 import static org.junit.Assert.*;
@@ -56,21 +55,27 @@ public class UserShowDaoTest {
 
     @Test
     public void deleteUserByUserName(){
-        int rows = userShowMapper.deleteUserByUserName("lbw");
-        Assert.assertTrue(1 == rows);
+        boolean rows = userShowMapper.deleteUserByUserName("lbw");
+        Assert.assertTrue(true == rows);
     }
 
     @Test
     public void changePasswordByUserName(){
-        int result = userShowMapper.changePasswordByUserName("hyx");
-        Assert.assertTrue(1 == result);
+        boolean result = userShowMapper.changePasswordByUserName("hyx");
+        assertTrue(true == result);
     }
 
     @Test
     public void updateStateByUserName(){
-        int result = userShowMapper.updateStateByUserName("hyx",1);
-        int result1 = userShowMapper.updateStateByUserName("lbw",0);
-        Assert.assertTrue(1 == result);
-        Assert.assertTrue(1 == result1);
+        boolean result = userShowMapper.updateStateByUserName("hyx",1);
+        boolean result1 = userShowMapper.updateStateByUserName("lbw",0);
+        Assert.assertTrue(true == result);
+        Assert.assertTrue(true == result1);
+    }
+
+    @Test
+    public void androidNum(){
+        int result = userShowMapper.androidNum();
+        Assert.assertTrue( 1 == result);
     }
 }

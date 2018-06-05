@@ -19,6 +19,7 @@ public class ValiCode {
         Object[] objs = ImageUtil.createImage();
         //将验证码存入Session
         session.setAttribute("imageCode", objs[0]);
+        System.out.println(session.getAttribute("imageCode"));
         //将图片输出给浏览器
         BufferedImage image = (BufferedImage) objs[1];
         response.setContentType("image/png");

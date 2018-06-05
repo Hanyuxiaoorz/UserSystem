@@ -1,10 +1,8 @@
 package com.mis.user.backstagemanagement.service.iml;
 
 import com.mis.user.backstagemanagement.dao.UserShowMapper;
-import com.mis.user.backstagemanagement.model.UserShowInfo;
 import com.mis.user.backstagemanagement.service.UserPermissionService;
 import com.mis.user.canstants.Canstants;
-import com.mis.user.regist.dao.UserRegistMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,9 +26,8 @@ public class UserPermissionServiceIml implements UserPermissionService{
         try{
             //若是有权限更改用户密码
             if(userShowMapper.selectStateByUserName(hostUserName) > userShowMapper.selectStateByUserName(byUserName)){
-                userShowMapper.changePasswordByUserName(byUserName);
-              String rePassword = "111111";
-              if(userShowMapper.selectPassword(byUserName).equals(rePassword)){
+                //若更改成功，则返回true
+                if(userShowMapper.changePasswordByUserName(byUserName)){
                   return Canstants.SUCCESS;
               } else{
                   return Canstants.FAIL;//若密码更改失败
@@ -52,9 +49,8 @@ public class UserPermissionServiceIml implements UserPermissionService{
         try {
             //若权限允许更改
             if (userShowMapper.selectStateByUserName(hostUserName) > userShowMapper.selectStateByUserName(byUserName)) {
-                userShowMapper.updateStateByUserName(byUserName, state);
                 //修改成功
-                if (userShowMapper.selectByUserName(byUserName).getState() == state) {
+                if (userShowMapper.updateStateByUserName(byUserName, state)) {
                     return Canstants.SUCCESS;
                 }
                 else {

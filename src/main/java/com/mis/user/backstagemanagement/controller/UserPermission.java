@@ -49,7 +49,7 @@ public class UserPermission {
     *
     * */
     @RequestMapping(value = "/deleteUser{byUserName}",method = POST)
-    public Object deleteUser(String byUserName, HttpSession session, HttpServletResponse response){
+    public Object deleteUser(String byUserName, HttpSession session){
         String hostUserName = (String) session.getAttribute("user");
         map.clear();
         map.put("deleteUser",userPermissionService.deleteUserByUserName(hostUserName,byUserName));
@@ -61,8 +61,8 @@ public class UserPermission {
     *
     * */
     @RequestMapping(value = "/userState{byUserName,state}",method = POST)
-    public Object updateUserStage(String byUserName, int state, HttpCookie cookie){
-        String hostUserName = cookie.getValue();
+    public Object updateUserStage(String byUserName, int state,HttpSession session){
+        String hostUserName = (String) session.getAttribute("user");
         System.out.println(hostUserName);
         map.clear();
         map.put("userState",userPermissionService.updateUserStageByuserName(hostUserName,byUserName,state));

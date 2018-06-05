@@ -46,16 +46,15 @@ function searchUsers(){
 		crossDomain: true,
 		dataType:"json",
 		beforeSend:function(XMLHttpRequest){
-			alert(inputValue);
 		},
 		success:function(person){
 			if (person == 0) {alert("没有此用户！");return}
 			//除去遮盖层
 			$('#userInforShowArea').dimmer('hide');
+			//获取头像
+			getHeadPic(person.userName);
 			ByUser.userName = person.userName;
 			ByUser.state = person.state;
-			//获取头像
-			$('#userPic').attr('src',person.userPhoto);
 			//添加标签
 			var tag = "<div class='ui teal huge top right attached label'>";
 			switch(person.state){
@@ -109,7 +108,6 @@ function reSetPassword(){
 				dataType:"json",
 				success:function(json){
 					var result = parseInt(json.updatePassword);
-					alert(result);
 					if(result){
 					alert("已成功初始化" + ByUser.userName + "的密码!");
 					}
@@ -216,10 +214,10 @@ function showUser(searchId){
 			if (person == 0) {alert("没有此用户！");return}
 			//除去遮盖层
 			$('#userInforShowArea').dimmer('hide');
+			//获取头像
+			getHeadPic(person.userName);
 			ByUser.userName = person.userName;
 			ByUser.state = person.state;
-			//获取头像
-			$('#userPic').attr('src',person.userPhoto);
 			//添加标签
 			var tag = "<div class='ui teal huge top right attached label'>";
 			switch(person.state){
@@ -262,4 +260,24 @@ function checkIsNull(content){
 	else{
 		return "无";
 	}
+}
+//获取被查询者的头像
+function getHeadPic(searchName){
+	$.ajax({
+		type:"POST",
+		url:"https://localhost:8080/userPhoto",
+		contentType:"application/x-www-form-urlencoded",
+		data:{
+			"userName":searchName
+		},
+		dataType:"json",
+		success:function(json){
+			//获取头像
+			$('#userPic').attr('src',json.userPhoto);
+		},
+		error:function(XMLHttpRequest,textStatus){
+			console.log(XMLHttpRequest.responseText);
+			console.log(textStatus);
+		}
+	});
 }

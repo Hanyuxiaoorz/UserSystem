@@ -11,17 +11,17 @@
 -- 如果存在这个数据库那么就删除这个数据库
 /*Table structure for table `user_mess` */
 
-DROP TABLE IF EXISTS `user_mess`;
+DROP TABLE IF EXISTS `USER_MESS`;
 
-CREATE TABLE `user_mess` (
+CREATE TABLE `USER_MESS` (
 	`userName` varchar(50) NOT NULL COMMENT '用户姓名',
 	`password` varchar(6) NOT NULL COMMENT '用户密码',
 	`id` int(10) NOT NULL COMMENT '用户学号',
 	`e_mail` varchar(50) NOT NULL COMMENT '邮箱地址',
 	`sex` char(1) DEFAULT NULL COMMENT '用户性别',
-	`phone_number` int(11) NOT NULL COMMENT '用户手机号',
+	`phone_number` varchar (11) DEFAULT NULL COMMENT '用户手机号',
 	`major` varchar(50) NOT NULL COMMENT '用户专业',
-	`class_number` int(8) DEFAULT NULL COMMENT '用户班级代号',
+	`class_number` varchar(8) DEFAULT NULL COMMENT '用户班级代号',
 	`study_direction` varchar(50) DEFAULT NULL COMMENT '用户学习方向',
 	`age` int(3) DEFAULT NULL COMMENT '用户年龄',
 	`birth` date DEFAULT NULL COMMENT '用户出生日期',
@@ -30,7 +30,6 @@ CREATE TABLE `user_mess` (
 	 UNIQUE (`id`),
 	 UNIQUE (`e_mail`),
 	 UNIQUE (`userName`),
-	 UNIQUE (`phone_number`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `user_mess` */

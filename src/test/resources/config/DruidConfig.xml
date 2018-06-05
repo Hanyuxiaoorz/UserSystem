@@ -22,15 +22,15 @@
     <!--静态配置替换-->
     <jdbc:initialize-database data-source="dataSource">
         <jdbc:script location="classpath:H2/schema.sql" encoding="UTF-8"/>
-        <jdbc:script location="classpath:H2/data-prepare-*.sql" encoding="UTF-8"/>
+        <jdbc:script location="classpath:H2/data-prepare-user.sql" encoding="UTF-8"/>
     </jdbc:initialize-database>
     <!--配置数据源-->
     <context:property-placeholder location="classpath*:application.properties" ignore-unresolvable="true"/>
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
-        <property name="driverClassName" value="${spring.datasource.driver-class-name}"/>
-        <property name="url" value="${spring.datasource.url}"/>
-        <property name="username" value="${spring.datasource.username}"/>
-        <property name="password" value="${spring.datasource.password}"/>
+        <property name="driverClassName" value="${spring.datasource.driver-class-name1}"/>
+        <property name="url" value="${spring.datasource.url1}"/>
+        <property name="username" value="${spring.datasource.username1}"/>
+        <property name="password" value="${spring.datasource.password1}"/>
         <!-- 连接池初始连接数 -->
         <property name="initialSize" value="3"/>
         <!-- 允许的最大同时使用中(在被业务线程持有，还没有归还给druid) 的连接数 -->

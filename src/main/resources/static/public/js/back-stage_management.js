@@ -105,3 +105,24 @@ function checkIsNull(content){
 		return "无";
 	}
 }
+//上传excel
+function upLoadExcel(){
+	$.ajax({
+		type:"POST",
+		url:"http:localhost:8080/backstageManagement/excelUserInfo",
+		xhrFields: {
+			withCredentials: true
+		},
+		crossDomain: true,
+		contentType: "application/json",
+		data:$("#formExcel").serialize(),
+		dataType:"json",
+		success:function(json){
+			alert(json.excelUserInfo);
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+			console.log(xhr.responseText);
+			console.log(thrownError);
+		}
+	});
+}
