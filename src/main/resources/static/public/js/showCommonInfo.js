@@ -1,6 +1,6 @@
 $(document).ready(function(){
     //显示用户名
-	$("#userName").text(CookieUtil.get("user"));
+	
 });
 
 //获取用户头像
@@ -31,7 +31,25 @@ function getImg(){
         }
     });
 }
-
+function getUserName(){
+    $.ajax({
+        type:"POST",
+        url:"https://localhost:8080/clientUserName",
+        xhrFields: {
+            withCredentials: true
+        },
+        crossDomain: true,
+        contentType: "application/json",
+        dataType:"json",
+        success:function(json){
+            $("#userName").text(json.clientUserName);
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            console.log(xhr.responseText);
+            console.log(thrownError);
+        }
+    })
+}
 
 //注销登录
 function logOut(){
