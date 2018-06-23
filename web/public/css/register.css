@@ -2,7 +2,7 @@
 	position: relative;
 	width: 1000px;
 	height: 800px;
-	left: 40%;
+	left: 38%;
 }
 #title_1{
 	position: relative;
@@ -11,7 +11,7 @@
     margin-top: 30px;
     margin-left: 120px;
 }
-.input{
+.box{
 	position: absolute;
 	width: 350px;
 	margin-top: 30px;
@@ -37,11 +37,11 @@
 #dropdown{
 	margin-left: 282px;
 }
-#button{
+.login{
 	position: absolute;
-	margin-top: 115px;
+	top: 635px;
 	width: 350px;
-	left: 1.5px;
+	height: 38px;
 }
 #menu{
 	position: absolute;

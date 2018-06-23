@@ -4,7 +4,7 @@ function checkusername(){
 	if(!reg.test(str.value)){
 		document.getElementById("checkanwserusername").innerHTML="您输入的字符不是数字或者字母";
 	}
-	if(str.value==""){
+	if(str.value == ""){
 		document.getElementById("checkanwserusername").innerHTML="用户名不能为空";
 	}
 	if(reg.test(str.value)){
@@ -27,8 +27,7 @@ function checkusername(){
 	            var tip = document.getElementById("checkanwserusername");
 	            var text = xmlhttp.responseText;
 	            var resultJson = eval("("+text+")");
-	            var regNameFail	= resultJson.REGIST_NAME_FAIL;
-	            var reVerify = resultJson.REGIST_VERIFY_SUCCESS;
+	            var reVerify = resultJson.userNameVerify;
 	            if (reVerify==1){
 	            	tip.innerHTML = "此用户名可用";
 	            }
@@ -46,7 +45,7 @@ function checkusername(){
 
 
 function checkemail(){
-	var reg=  /^[a-zA-Z0-9_-\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+    var reg=  /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$ /;
 	var str = document.getElementById("email");
 	if(!reg.test(str.value)){
 		document.getElementById("checkanwseremail").innerHTML="您输入的邮箱格式有误，请检查";
@@ -74,17 +73,16 @@ function checkemail(){
 	            var tip = document.getElementById("checkanwseremail");
 	            var text = xmlhttp.responseText;
 	            var resultJson = eval("("+text+")");
-	            var regEmailFail = resultJson.REGIST_EMAIL_FAIL;
-	            var reVerify = resultJson.REGIST_VERIFY_SUCCESS;
+	            var reVerify = resultJson.userEmailVerify;
 	            if (reVerify==1){
 	            	tip.innerHTML = "此邮箱可用";
 	            }
 	            else{
 	            	tip.innerHTML = "此邮箱已经注册";
 	            }
-	        } 
+	        }
 	}
-			xmlhttp.open("GET","http://localhost:8080/regist/userEmailVerify?e_mail="+email,true);
+			xmlhttp.open("GET","http://localhost:8080/regist/userEmailVerify?eMail="+email,true);
 	 		xmlhttp.send();	 
 }
 
@@ -109,7 +107,7 @@ function checkID(){
 	else{// IE6, IE5
 	       xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 	}
-	var ID = document.getElementById("ID").value;
+	var id = document.getElementById("ID").value;
 	xmlhttp.onreadystatechange=function(){
 	//当接受到响应时回调该方法
 	        if (xmlhttp.readyState==4 && (xmlhttp.status==200||xmlhttp.status==0))
@@ -117,8 +115,7 @@ function checkID(){
 	            var tip = document.getElementById("checkanwserID");
 	            var text = xmlhttp.responseText;
 	            var resultJson = eval("("+text+")");
-	            var regIdFail = resultJson.REGIST_ID_FAIL;
-	            var reVerify = resultJson.REGIST_VERIFY_SUCCESS;
+	            var reVerify = resultJson.userIdVerify;
 	            if (reVerify==1){
 	            	tip.innerHTML = "此学号可用";
 	            }
@@ -127,7 +124,7 @@ function checkID(){
 	            }
 	        } 
 	}	 
-			xmlhttp.open("GET","http://localhost:8080/regist/userIdVerify?id="+ID,true);
+			xmlhttp.open("GET","http://localhost:8080/regist/userIdVerify?id="+id,true);
 	 		xmlhttp.send();
 }
 
@@ -168,7 +165,7 @@ function register(){
 	var id = document.getElementById("ID").value;
 	var code = document.getElementById("code").value;
 	var recode = document.getElementById("recode").value;
-	var direction = document.getElementById("direction");
+	var direction = document.getElementById("direction").innerHTML;
 	if(regyh.test(username)){
 		if(regyx.test(email)){
 			if(id.length == 10){
@@ -183,23 +180,22 @@ function register(){
 								else{// IE6, IE5
 								       xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 								}
-								
+						
 								xmlhttp.onreadystatechange=function(){
 								//当接受到响应时回调该方法
 								        if (xmlhttp.readyState==4 && (xmlhttp.status==200||xmlhttp.status==0))
 								        {
-								            
 								            var text = xmlhttp.responseText;
 								            var resultJson = eval("("+text+")");
-								            var regist= resultJson.REGIST_SUCCESS;
-								            if (regist.value =="注册成功！"){
+								            var regist= resultJson.regist;
+								            if (regist == 1){
 								            	$('.ui.basic.modal').modal('show');
 								            }
 								        } 
-								}	 
+								}
+                                var content = 'userName='+username+'&eMail='+email+'&id='+id+'&password='+code+'&study_direction='+direction;
 								xmlhttp.open("POST","http://localhost:8080/regist"+content,true);
-								xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-								var content = 'username='+username+'e_mail='+email+'id='+id+'password='+code+'studu_direcition'+direction;
+								xmlhttp.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 						 		xmlhttp.send(content);
 						}
 						else document.getElementById("checkanwserregister").innerHTML="注册失败,请选择方向";
@@ -214,6 +210,8 @@ function register(){
 	}
 	else document.getElementById("checkanwserregister").innerHTML="注册失败，用户名只能为字母或数字";
 }
+
+
 
 
 
