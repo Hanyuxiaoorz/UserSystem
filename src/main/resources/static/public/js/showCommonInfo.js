@@ -1,13 +1,12 @@
 $(document).ready(function(){
-    //显示用户名
-	$("#userName").text(CookieUtil.get("user"));
+    getImg();
 });
 
 //获取用户头像
 function getImg(){
     $.ajax({
         type:"POST",
-        url:"https://localhost:8080/userPhoto",
+        url:"http://172.33.17.49:8080/userPhoto",
         xhrFields: {
             withCredentials: true
         },
@@ -15,6 +14,7 @@ function getImg(){
         contentType: "application/json",
         dataType:"json",
         success:function(json){
+            console.log(json);
             if(json.userPhoto == 0){
                 console.log("头像获取失败");
             }
@@ -31,13 +31,32 @@ function getImg(){
         }
     });
 }
-
+function getUserName(){
+    $.ajax({
+        type:"POST",
+        url:"http://172.33.17.49:8080/clientUserName",
+        xhrFields: {
+            withCredentials: true
+        },
+        crossDomain: true,
+        contentType: "application/json",
+        dataType:"json",
+        success:function(json){
+            alert(json.clientUserName);
+            $("#userName").text(json.clientUserName);
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+/*            console.log(xhr.responseText);
+            console.log(thrownError);*/
+        }
+    })
+}
 
 //注销登录
 function logOut(){
     $.ajax({
         type:"POST",
-        url:"http://localhost:8080/loginOut",
+        url:"http://172.33.17.49:8080/loginOut",
         xhrFields: {
             withCredentials: true
         },
@@ -45,7 +64,7 @@ function logOut(){
         contentType: "application/json",
         success:function(){
             alert("已成功注销！");
-            window.location.href="http://localhost:8080/login.html"
+            window.location.href="http://172.33.17.49:8080/login.html"
         },
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.responseText);

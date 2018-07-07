@@ -1,8 +1,7 @@
 $(document).ready(function(){
 	//在这里展示写入立即加载内容
-	//显示用户名
-	$("#userName").text(CookieUtil.get("user"));
-
+    //显示用户名
+    getUserName();
 	$(".loading").fadeOut();
 	//在这里写入非立即加载内容
 	//无用户信息时显示遮盖层
@@ -35,7 +34,7 @@ function searchUsers(){
 	$("#userInforShowArea").children(".teal").hide();
 	$.ajax({
 		type:"POST",
-		url:"http://localhost:8080/backstageManagement/selectUserInfo",
+		url:"http://172.33.17.49:8080/backstageManagement/selectUserInfo",
 		contentType:"application/x-www-form-urlencoded",
 		data:{
 			"searchValue": inputValue
@@ -92,11 +91,10 @@ function searchUsers(){
 
 //点击修改密码
 function reSetPassword(){
-	
 		if (ByUser.userName.length == 0) {alert("当前无用户！");return;}
 			$.ajax({
 				type:"POST",
-				url:"http://localhost:8080/backstageManagement/updatePassword",
+				url:"http://172.33.17.49:8080/backstageManagement/updatePassword",
 				contentType:"application/json",
 				data:{
 					"byUserName":ByUser.userName
@@ -125,7 +123,7 @@ function deleteUser(){
 	if (ByUser.userName.length == 0) {alert("当前无用户！");return;}
 		$.ajax({
 				type:"POST",
-				url:"http://localhost:8080/backstageManagement/deleteUser",
+				url:"http://172.33.17.49:8080/backstageManagement/deleteUser",
 				contentType:"application/json",
 				data:{
 					"byUserName":ByUser.userName
@@ -168,7 +166,7 @@ function upLevelUser(Chosenstate){
 	$("#changeStateModal").modal("hide");
 	$.ajax({
 		type:"POST",
-		url:"http://localhost:8080/backstageManagement/userState",
+		url:"http://172.33.17.49:8080/backstageManagement/userState",
 		contentType:"application/json",
 		data:{
 			"byUserName":ByUser.userName,
@@ -198,7 +196,7 @@ function upLevelUser(Chosenstate){
 function showUser(searchId){
 	$.ajax({
 		type:"POST",
-		url:"http://localhost:8080/backstageManagement/selectUserInfo",
+		url:"http://172.33.17.49:8080/backstageManagement/selectUserInfo",
 		contentType:"application/x-www-form-urlencoded",
 		data:{
 			"searchValue":searchId
@@ -265,7 +263,7 @@ function checkIsNull(content){
 function getHeadPic(searchName){
 	$.ajax({
 		type:"POST",
-		url:"https://localhost:8080/userPhoto",
+		url:"http://172.33.17.49:8080/userP",
 		contentType:"application/x-www-form-urlencoded",
 		data:{
 			"userName":searchName
@@ -273,7 +271,12 @@ function getHeadPic(searchName){
 		dataType:"json",
 		success:function(json){
 			//获取头像
-			$('#userPic').attr('src',json.userPhoto);
+            if(json.userP != 0){
+                $('#userPic').attr('src',json.userP);
+                console.log(json);
+            }else{
+            	return 0;
+			}
 		},
 		error:function(XMLHttpRequest,textStatus){
 			console.log(XMLHttpRequest.responseText);

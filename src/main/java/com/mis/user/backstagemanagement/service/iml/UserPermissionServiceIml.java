@@ -29,15 +29,15 @@ public class UserPermissionServiceIml implements UserPermissionService{
                 //若更改成功，则返回true
                 if(userShowMapper.changePasswordByUserName(byUserName)){
                   return Canstants.SUCCESS;
-              } else{
-                  return Canstants.FAIL;//若密码更改失败
-              }
+                } else{
+                  return Canstants.FAIL;//0,若密码更改失败
+                }
             } else{
-                return Canstants.BACK_PERMISSION_FAIL; //若无权限更改用户密码
-          }
+                return Canstants.BACK_PERMISSION_FAIL; //2,若无权限更改用户密码
+                }
         } catch (Exception e){
-              return Canstants.BACK_PERMISSION_NULL;//未查询到权限值，抛出空指针异常处理
-        }
+            return Canstants.BACK_PERMISSION_NULL;//3,未查询到权限值，抛出空指针异常处理
+            }
     }
 
     /*
@@ -51,17 +51,17 @@ public class UserPermissionServiceIml implements UserPermissionService{
             if (userShowMapper.selectStateByUserName(hostUserName) > userShowMapper.selectStateByUserName(byUserName)) {
                 //修改成功
                 if (userShowMapper.updateStateByUserName(byUserName, state)) {
-                    return Canstants.SUCCESS;
+                    return Canstants.SUCCESS;//1
                 }
                 else {
-                    return Canstants.FAIL;//修改失败
+                    return Canstants.FAIL;//0,修改失败
                 }
             } else {
-                return Canstants.BACK_PERMISSION_FAIL;//权限不允许更改
+                return Canstants.BACK_PERMISSION_FAIL;//2,权限不允许更改
             }
         }
         catch (Exception e){
-            return Canstants.BACK_PERMISSION_NULL;//未查询到权限值，抛出空指针异常处理
+            return Canstants.BACK_PERMISSION_NULL;//3,未查询到权限值，抛出空指针异常处理
         }
     }
 
@@ -98,16 +98,20 @@ public class UserPermissionServiceIml implements UserPermissionService{
     * */
     @Override
     public int selectState(String hostUserName){
-        if(userShowMapper.selectByUserName(hostUserName) != null) {
-            return userShowMapper.selectStateByUserName(hostUserName);
-        }
-        else if(userShowMapper.selectByUserId(hostUserName) != null){
-            return userShowMapper.selectStateById(hostUserName);
-        }
-        else if(userShowMapper.selectByUserEmail(hostUserName) != null){
-            return userShowMapper.selectStateByE_mail(hostUserName);
-        }
-        else {
+        try {
+            if(userShowMapper.selectByUserName(hostUserName) != null) {
+                return userShowMapper.selectStateByUserName(hostUserName);
+            }
+            else if(userShowMapper.selectByUserId(hostUserName) != null){
+                return userShowMapper.selectStateById(hostUserName);
+            }
+            else if(userShowMapper.selectByUserEmail(hostUserName) != null){
+                return userShowMapper.selectStateByE_mail(hostUserName);
+            }
+            else {
+                return 0;
+            }
+        }catch (Exception e){
             return 0;
         }
     }

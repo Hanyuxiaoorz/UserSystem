@@ -8,7 +8,6 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mis.user.annotation.Permission;
 import com.mis.user.result.JsonResult;
 import com.mis.user.result.ResultCode;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -103,7 +102,7 @@ public class ControllerInterceptor {
 
     //判断是否已经登录
     private boolean isLogin(HttpServletRequest request) {
-        String token = (String) request.getSession().getAttribute("token");
+        String token = (String) request.getSession().getAttribute("user");
         if(token != null){
             return true;
         }

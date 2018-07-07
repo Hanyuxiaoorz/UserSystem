@@ -41,49 +41,53 @@ public class ExcelInputServiceIml implements ExcelInputService {
     @Override
     public String batchImport(String fileName, MultipartFile mfile, HttpSession session) {
         String result = null;
-        if (session.getAttribute("user") != null) {
-            log1 =(String) session.getAttribute("user") + "使用";
-            File uploadDir = new File(filePath + session.getAttribute("user"));
-            //判断是否存在，不存在即创建
-            if (!uploadDir.exists()) {
-                uploadDir.mkdirs();
-            }
-            File tempFile = new File(filePath + session.getAttribute("user") + File.separator + new Date().getTime() + ".xlsx");
-            //初始化输入流
-            InputStream is = null;
-            try {
-                //将上传的文件写入新的文件中
-                mfile.transferTo(tempFile);
-                //根据新建的文件实例化输入法
-                is = new FileInputStream(tempFile);
-                //根据版本选择创建Workbook的方式
-                Workbook wb = null;
-                //判断是2003还是2007
-                if (ExcelUtil.isExcel2003(fileName)) {
-                    log1 += "2003版";
-                    wb = new XSSFWorkbook(is);
-                } else if (ExcelUtil.isExcel2007(fileName)) {
-                    log1 += "2007版";
-                    wb = new XSSFWorkbook(is);
-                } else {
-                    result = "文件类型不符合要求，请重新选择";//不符合要求的文件类型
+        try {
+            if (session.getAttribute("user") != null) {
+                log1 =(String) session.getAttribute("user") + "使用";
+                File uploadDir = new File(filePath + session.getAttribute("user"));
+                //判断是否存在，不存在即创建
+                if (!uploadDir.exists()) {
+                    uploadDir.mkdirs();
                 }
-                log1 += "申请导入：";
-                result = readExcel(wb,tempFile);
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                if (is != null) {
-                    try {
-                        is.close();
-                    } catch (IOException e) {
-                        is = null;
-                        e.printStackTrace();
+                File tempFile = new File(filePath + session.getAttribute("user") + File.separator + new Date().getTime() + ".xlsx");
+                //初始化输入流
+                InputStream is = null;
+                try {
+                    //将上传的文件写入新的文件中
+                    mfile.transferTo(tempFile);
+                    //根据新建的文件实例化输入法
+                    is = new FileInputStream(tempFile);
+                    //根据版本选择创建Workbook的方式
+                    Workbook wb = null;
+                    //判断是2003还是2007
+                    if (ExcelUtil.isExcel2003(fileName)) {
+                        log1 += "2003版";
+                        wb = new XSSFWorkbook(is);
+                    } else if (ExcelUtil.isExcel2007(fileName)) {
+                        log1 += "2007版";
+                        wb = new XSSFWorkbook(is);
+                    } else {
+                        result = "文件类型不符合要求，请重新选择";//不符合要求的文件类型
+                    }
+                    log1 += "申请导入：";
+                    result = readExcel(wb,tempFile);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    if (is != null) {
+                        try {
+                            is.close();
+                        } catch (IOException e) {
+                            is = null;
+                            e.printStackTrace();
+                        }
                     }
                 }
+            }else {
+                result = "未登录，请登陆后进行操作";//3，未登录，无权限
             }
-        }else {
-            result = "未登录，请登陆后进行操作";//3，未登录，无权限
+        }catch (Exception e){
+            return e.getMessage();
         }
         return result;
     }
@@ -126,7 +130,7 @@ public class ExcelInputServiceIml implements ExcelInputService {
                 Cell cell = row.getCell(c);
                 if (null != cell){
                     userRegistInfo.setPassword("111111");
-                    if(c==0){
+                    if(c == 0){
                         userName = cell.getStringCellValue();
                         if(StringUtils.isEmpty(userName)){
                             rowMessage += "用户名不能为空；";
@@ -137,7 +141,7 @@ public class ExcelInputServiceIml implements ExcelInputService {
                         }else {
                             userRegistInfo.setUserName(userName);
                         }
-                    }else if(c==1){
+                    }else if(c == 1){
                         e_mail = cell.getStringCellValue();
                         if(StringUtils.isEmpty(e_mail)){
                             rowMessage += "用户e-mail不能为空；";
@@ -148,7 +152,7 @@ public class ExcelInputServiceIml implements ExcelInputService {
                         }else {
                             userRegistInfo.setE_mail(e_mail);
                         }
-                    }else if(c==2){
+                    }else if(c == 2){
                         id = (long) cell.getNumericCellValue();
                         String userId = String.valueOf(id);
                         if(userId.length() == 0){
@@ -162,7 +166,7 @@ public class ExcelInputServiceIml implements ExcelInputService {
                             userRegistInfo.setId(userId);
                         }
                     }
-                    else if(c==3){
+                    else if(c == 3){
                         study_direction = cell.getStringCellValue();
                         if(StringUtils.isEmpty(study_direction)){
                             rowMessage += "用户学习方向不能为空；";

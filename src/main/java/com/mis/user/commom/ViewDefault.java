@@ -19,11 +19,10 @@ public class ViewDefault {
     UserPermissionService userPermissionService;
 
     @GetMapping("/back-stage_management.html")
-    private String backStageManagement(String redirectUrl , HttpSession session , Model model){
+    private String backStageManagement(HttpSession session){
         String user = (String) session.getAttribute("user");
         if(StringUtils.isEmpty(user)){
             //表示不存在全局会话，跳转至登陆界面
-            model.addAttribute("redirectUrl",redirectUrl);
             return "login";
         }
         else{
@@ -40,12 +39,11 @@ public class ViewDefault {
     }
 
     @GetMapping("/viewUsers.html")
-    private String viewUsers(String redirectUrl , HttpSession session , Model model){
+    private String viewUsers(HttpSession session){
         //判断是否存在全局会话
         String user = (String) session.getAttribute("user");
         if(StringUtils.isEmpty(user)){
             //表示不存在全局会话，跳转至登陆界面
-            model.addAttribute("redirectUrl",redirectUrl);
             return "login";
         }
         else {
@@ -61,8 +59,23 @@ public class ViewDefault {
     }
 
     @GetMapping("/login.html")
-    private String login(){
-        return "login";
+    private String login(HttpSession session){
+        //判断是否存在全局会话
+        String user = (String) session.getAttribute("user");
+        if(StringUtils.isEmpty(user)){
+            //表示不存在全局会话，跳转至登陆界面
+            return "login";
+        }
+        else {
+            //存在全局会话
+            String hostUserName = (String) session.getAttribute("user");
+            if(userPermissionService.selectState(hostUserName) > 0){
+                return "userMess";
+            }
+            else {
+                return "login";
+            }
+        }
     }
 
     @GetMapping("/404.html")

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,10 +31,14 @@ public class UserShow {
     *
     */
     @RequestMapping(value="/userInfo",method = POST)
-    public Object showUser(){
+    public Object showUser(HttpServletRequest request){
         map.clear();
-        map.put("userInfo",this.userShowServiceIml.selectUserList());
-        //以JSON形式返回给前端
+        if (request.getSession().getAttribute("user") != null) {
+            map.put("userInfo", this.userShowServiceIml.selectUserList());
+            //以JSON形式返回给前端
+        }else {
+            map.put("userInfo", Canstants.FAIL);
+        }
         return JSON.toJSON(map);
     }
 
@@ -44,15 +47,19 @@ public class UserShow {
     *
     * */
     @RequestMapping(value = "/selectUserInfo{searchValue}",method = POST)
-    public Object selectUser(String searchValue){
+    public Object selectUser(HttpServletRequest request,String searchValue){
         map.clear();
-        if(userShowServiceIml.selectUserByInput(searchValue) !=null){
+        if (request.getSession().getAttribute("user") != null) {
+            if(userShowServiceIml.selectUserByInput(searchValue) !=null){
             return JSON.toJSON(userShowServiceIml.selectUserByInput(searchValue));
-        }
-        else{
+            }
+            else{
+                map.put("selectUserInfo",Canstants.FAIL);
+            }
+        }else {
             map.put("selectUserInfo",Canstants.FAIL);
-            return JSON.toJSON(map);
         }
+        return JSON.toJSON(map);
     }
 
     /*
@@ -60,10 +67,14 @@ public class UserShow {
     *
     * */
     @RequestMapping(value = "/mainAmount",method = GET)
-    public Object userAmount(){
+    public Object userAmount(HttpServletRequest request){
         map.clear();
-        map.put("userAmount",userShowServiceIml.userAmount());
-        map.put("adminAmount",userShowServiceIml.managerAmount());
+        if (request.getSession().getAttribute("user") != null) {
+            map.put("userAmount", userShowServiceIml.userAmount());
+            map.put("adminAmount", userShowServiceIml.managerAmount());
+        }else {
+            map.put("error",Canstants.FAIL);
+        }
         return JSON.toJSON(map);
     }
 

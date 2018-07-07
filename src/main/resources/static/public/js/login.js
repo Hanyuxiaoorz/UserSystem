@@ -3,7 +3,7 @@ function login(){
 	var npassword = $("#code").val();
 	$.ajax({
 		type:"POST",
-		url:"http://localhost:8080/login",
+		url:"http://172.33.17.49:8080/login",
 		async:false,
 		dataType:"json",
 		contentType:"application/x-www-form-urlencoded",
@@ -36,7 +36,7 @@ function checkRight(){
 	var UrlLink = window.location.pathname;
 	$.ajax({
 		type:"GET",
-		url:"http://localhost:8080"+UrlLink,
+		url:"http://172.33.17.49:8080"+UrlLink,
 		xhrFields: {
 			withCredentials: true
 	   },

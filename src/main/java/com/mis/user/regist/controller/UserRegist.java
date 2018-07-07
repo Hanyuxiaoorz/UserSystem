@@ -32,17 +32,22 @@ public class UserRegist {
     //使用POST方法获取前端请求
     @PostMapping(value = "/regist{userRegistInfo}")
     private Object regist(UserRegistInfo userRegistInfo, String vcode, HttpSession session){
-        //判断验证码是否正确
-        if(vcode.equals(session.getAttribute("imageCode"))){
-            map.clear();
-            map.put("regist",userRegistServiceimpl.regist(userRegistInfo));
-        }else {
-            map.clear();
-            map.put("regist",Canstants.REGIST_VCODE_FAIL);
+        try {
+            //判断验证码是否正确
+            if(vcode.equals(session.getAttribute("imageCode"))){
+                map.clear();
+                map.put("regist",userRegistServiceimpl.regist(userRegistInfo));
+            }else {
+                map.clear();
+                map.put("regist",Canstants.REGIST_VCODE_FAIL);
+            }
+            //以JSON形式返回给前端
+            return JSON.toJSON(map);
+        }catch (Exception e){
+            return e.getMessage();
         }
-        //以JSON形式返回给前端
-        return JSON.toJSON(map);
     }
+
 }
 
 

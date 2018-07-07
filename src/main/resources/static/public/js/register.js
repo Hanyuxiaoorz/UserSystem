@@ -36,7 +36,7 @@ function checkusername(){
 	            }
 	        } 
 	}
-			xmlhttp.open("GET","http://localhost:8080/regist/userNameVerify?userName="+username,true);
+			xmlhttp.open("GET","http://172.33.17.49:8080/regist/userNameVerify?userName="+username,true);
 	 		xmlhttp.send();
 }
 	
@@ -82,7 +82,7 @@ function checkemail(){
 	            }
 	        }
 	}
-			xmlhttp.open("GET","http://localhost:8080/regist/userEmailVerify?eMail="+email,true);
+			xmlhttp.open("GET","http://172.33.17.49:8080/regist/userEmailVerify?eMail="+email,true);
 	 		xmlhttp.send();	 
 }
 
@@ -124,7 +124,7 @@ function checkID(){
 	            }
 	        } 
 	}	 
-			xmlhttp.open("GET","http://localhost:8080/regist/userIdVerify?id="+id,true);
+			xmlhttp.open("GET","http://172.33.17.49:8080/regist/userIdVerify?id="+id,true);
 	 		xmlhttp.send();
 }
 

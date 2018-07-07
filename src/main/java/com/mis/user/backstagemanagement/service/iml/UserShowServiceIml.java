@@ -39,7 +39,6 @@ public class UserShowServiceIml implements UserShowService {
         }catch (Exception e){
             return Canstants.FAIL;
         }
-
     }
 
     @Override
@@ -117,16 +116,20 @@ public class UserShowServiceIml implements UserShowService {
     //查询数据通过用户的输入
     @Override
     public UserShowInfo selectUserByInput(String searchValue) {
-        if(userShowMapper.selectByUserName(searchValue) != null){
-            return userShowMapper.selectByUserName(searchValue);
-        }
-        else if(userShowMapper.selectByUserId(searchValue) != null){
-            return userShowMapper.selectByUserId(searchValue);
-        }
-        else if(userShowMapper.selectByUserEmail(searchValue) != null){
-            return userShowMapper.selectByUserEmail(searchValue);
-        }
-        else{
+        try {
+            if(userShowMapper.selectByUserName(searchValue) != null){
+                return userShowMapper.selectByUserName(searchValue);
+            }
+            else if(userShowMapper.selectByUserId(searchValue) != null){
+                return userShowMapper.selectByUserId(searchValue);
+            }
+            else if(userShowMapper.selectByUserEmail(searchValue) != null){
+                return userShowMapper.selectByUserEmail(searchValue);
+            }
+            else{
+                return null;
+            }
+        }catch (Exception e){
             return null;
         }
     }

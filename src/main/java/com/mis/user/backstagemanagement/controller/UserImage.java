@@ -21,13 +21,15 @@ public class UserImage {
     Map map = new HashMap<String,String>();
     @Value("${file.path}")
     private String filePath;
+    @Value("${file.path1}")
+    private String filePathRead;
     @RequestMapping(value = "/userImg",method = POST)
     public Object userImg(@RequestParam(value="file")MultipartFile file, HttpSession session) throws Exception {
         map.clear();
         try{
             if(session.getAttribute("user")!= null || session.getAttribute("token") != null) {
                 String extName = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
-                File file1 = new File("D:"+File.separator+"SSOUser"+File.separator+session.getAttribute("user"));
+                File file1 = new File(filePath + File.separator + session.getAttribute("user"));
                 //判断文件夹是否存在，不存在的话增加后缀，添加自己的文件夹，防止无限添加
                 if(!file1.exists()){
                     //创建文件夹，用于存放个人数据
@@ -42,11 +44,13 @@ public class UserImage {
                 }
                 //若无，直接进行储存
                 else {
+                    map.clear();
                     FileCopyUtils.copy(file.getInputStream(), new FileOutputStream(new File(filePath+ fileName)));
                     map.put("userImg",Canstants.SUCCESS);
                 }
             }
             else{
+                map.clear();
                 map.put("userImg",Canstants.FAIL);
             }
             filePath = filePath.replace((CharSequence) session.getAttribute("user"),"");
@@ -56,19 +60,20 @@ public class UserImage {
         return JSON.toJSON(map);
     }
 
+
+    //当前登录人的头像
     @RequestMapping(value = "/userPhoto",method = POST)
-    public Object userPhoto(HttpSession session){
+    public Object userPhoto(HttpSession session) {
+        String path = "SSOUser"+ File.separator + session.getAttribute("user") + File.separator + session.getAttribute("user") +".jpg";
         try {
-            if (session.getAttribute("user") != null){
-                File file = new File(filePath+session.getAttribute("user")+File.separator+session.getAttribute("user")+".jpg");
-                String path = filePath+session.getAttribute("user")+File.separator+session.getAttribute("user")+".jpg";
-                if(!file.exists()){
+            if (session.getAttribute("user") != null) {
+                File file = new File(filePath + session.getAttribute("user") + File.separator + session.getAttribute("user") + ".jpg");
+                if (!file.exists()) {
                     map.clear();
-                    map.put("userPhoto",Canstants.BACK_NULL);//4,该用户目前无头像
-                }
-                else{
+                    map.put("userPhoto", Canstants.BACK_NULL);//4,该用户目前无头像
+                } else {
                     map.clear();
-                    map.put("userPhoto",path);
+                    map.put("userPhoto", path);
                 }
             } else {
                 map.clear();
@@ -84,56 +89,29 @@ public class UserImage {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /*UserShowInfo userShowInfo = new UserShowInfo();
-        if(! file.isEmpty()){
-            try {
-                BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(new File("f:\\旗杯\\demo5\\src\\main\\webapp\\"+userShowInfo.getUserName()+".jpg")));//保存图片到目录下)
-                outputStream.write(file.getBytes());
-                outputStream.flush();
-                outputStream.close();
-                String filename="f:\\旗杯\\demo5\\src\\main\\webapp\\"+userShowInfo.getUserName()+".jpg";
-                *//*user.setTupian(filename);*//*
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-                return "上传失败," + e.getMessage();
-            } catch (IOException e) {
-                e.printStackTrace();
-                return "上传失败," + e.getMessage();
+    //查询人的头像
+    @RequestMapping(value = "/userP",method = POST)
+    public Object userP(String userName){
+        String path = "SSOUser"+ File.separator + userName + File.separator + userName+".jpg";
+        try {
+            if (userName != null){
+                File file = new File( filePath + userName + File.separator + userName + ".jpg");
+                if(!file.exists()){
+                    map.clear();
+                    map.put("userP",Canstants.FAIL);//4,该用户目前无头像
+                }
+                else{
+                    map.clear();
+                    map.put("userP",path);
+                }
+            } else {
+                map.clear();
+                map.put("userP", Canstants.FAIL);
+                return JSON.toJSON(map);
             }
-            return Canstants.SUCCESS;
-        } else {
-            return "上传失败，因为文件是空的.";
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-    }*/
+        return JSON.toJSON(map);
+    }
 }

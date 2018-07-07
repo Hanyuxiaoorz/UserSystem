@@ -2,6 +2,7 @@ package com.mis.user.util;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,31 +14,25 @@ public class CookieUtil {
      * @param name cookie名字
      * @return
      */
-    public Cookie getCookieByName(HttpServletRequest request, String name){
-        Map<String,Cookie> cookieMap = ReadCookieMap(request);
-        if(cookieMap.containsKey(name)){
-            Cookie cookie = (Cookie)cookieMap.get(name);
-            return cookie;
-        }else{
-            return null;
-        }
-    }
-
-
-
     /**
      * 将cookie封装到Map里面
      * @param request
      * @return
      */
-    private Map<String,Cookie> ReadCookieMap(HttpServletRequest request){
-        Map<String,Cookie> cookieMap = new HashMap<String,Cookie>();
+    public Object ReadCookievalue(HttpServletRequest request, HttpSession session){
+        String user = null;
         Cookie[] cookies = request.getCookies();
         if(null!=cookies){
             for(Cookie cookie : cookies){
-                cookieMap.put(cookie.getName(), cookie);
+                if(cookie.getName().equals("user")) {
+                    System.out.println(cookie.getValue());
+                    user = (String) session.getAttribute(cookie.getValue());
+                }else {
+                    System.out.println("111111111111");
+                    user = null;
+                }
             }
         }
-        return cookieMap;
+        return user;
     }
 }

@@ -1,48 +1,50 @@
 $(document).ready(function(){
-	//向表格中加入数据
-	$.ajax({
-				type:"POST",
-				url:"http://localhost:8080/backstageManagement/userInfo",
-				xhrFields: {
-					withCredentials: true
-				},
-				crossDomain: true,
-				contentType: "application/json",
-				dataType:"json",
-				success:function(json){
-					var tbody = "";
-					//遍历对象
-					$.each(json.userInfo,function(index,person){
-						var userName = person.userName;
-						var megs = "<tr class = 'userTr' onclick=herfView("+ person.id +")>";
-						//加入头衔
-						switch(person.state){
-							case 0:megs += "<td><div class='ui blue ribbon label'>成员</div></td>";break;
-							case 1:megs += "<td><div class='ui red ribbon label'>管理员</div></td>";break;
-							case 2:megs += "<td><div class='ui orange ribbon label'>超级管理员</div></td>";break;
-							default:break;
-						}
-						megs += "<td>"+ checkIsNull(person.userName)+"</td>" ;
-						megs += "<td>"+ checkIsNull(person.id)+"</td>" ;
-						megs += "<td>"+ checkIsNull(person.e_mail)+"</td>" ;
-						megs += "<td>"+ checkIsNull(person.sex)+"</td>" ;
-						megs += "<td>"+ checkIsNull(person.phone_number)+"</td>" ;
-						megs += "<td>"+ checkIsNull(person.major)+"</td>" ;
-						megs += "<td>"+ checkIsNull(person.class_number)+"</td>" ;
-						megs += "<td>"+ checkIsNull(person.study_direction)+"</td>" ;
-						megs += "<td>"+ checkIsNull(person.age)+"</td>" ;
-						megs += "<td>"+ checkIsNull(person.birth)+"</td>" ;
-						megs += "<td>"+ checkIsNull(person.habit)+"</td>" ;
-						megs += "</tr>";
-					tbody += megs;
-				});
-				$("#inforTable").children("tbody").append(tbody);
-			},
-			error: function (xhr, ajaxOptions, thrownError) {
-        			console.log(xhr.responseText);
-					console.log(thrownError);
-    		}
-		});
+    //显示用户名
+    getUserName();
+    //向表格中加入数据
+    $.ajax({
+        type:"POST",
+        url:"http://172.33.17.49:8080/backstageManagement/userInfo",
+        xhrFields: {
+            withCredentials: true
+        },
+        crossDomain: true,
+        contentType: "application/json",
+        dataType:"json",
+        success:function(json){
+            var tbody = "";
+            //遍历对象
+            $.each(json.userInfo,function(index,person){
+                var userName = person.userName;
+                var megs = "<tr class = 'userTr' onclick=herfView("+ person.id +")>";
+                //加入头衔
+                switch(person.state){
+                    case 0:megs += "<td><div class='ui blue ribbon label'>成员</div></td>";break;
+                    case 1:megs += "<td><div class='ui red ribbon label'>管理员</div></td>";break;
+                    case 2:megs += "<td><div class='ui orange ribbon label'>超级管理员</div></td>";break;
+                    default:break;
+                }
+                megs += "<td>"+ checkIsNull(person.userName)+"</td>" ;
+                megs += "<td>"+ checkIsNull(person.id)+"</td>" ;
+                megs += "<td>"+ checkIsNull(person.e_mail)+"</td>" ;
+                megs += "<td>"+ checkIsNull(person.sex)+"</td>" ;
+                megs += "<td>"+ checkIsNull(person.phone_number)+"</td>" ;
+                megs += "<td>"+ checkIsNull(person.major)+"</td>" ;
+                megs += "<td>"+ checkIsNull(person.class_number)+"</td>" ;
+                megs += "<td>"+ checkIsNull(person.study_direction)+"</td>" ;
+                megs += "<td>"+ checkIsNull(person.age)+"</td>" ;
+                megs += "<td>"+ checkIsNull(person.birth)+"</td>" ;
+                megs += "<td>"+ checkIsNull(person.habit)+"</td>" ;
+                megs += "</tr>";
+                tbody += megs;
+            });
+            $("#inforTable").children("tbody").append(tbody);
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            console.log(xhr.responseText);
+            console.log(thrownError);
+        }
+    });
 	//获取所有的表格页
 	var tablePages = $('.tbodys');
 	//只显示第一页
@@ -109,7 +111,7 @@ function checkIsNull(content){
 function upLoadExcel(){
 	$.ajax({
 		type:"POST",
-		url:"http:localhost:8080/backstageManagement/excelUserInfo",
+		url:"http://172.33.17.49:8080/backstageManagement/excelUserInfo",
 		xhrFields: {
 			withCredentials: true
 		},

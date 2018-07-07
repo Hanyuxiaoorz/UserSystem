@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.net.HttpCookie;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,15 +27,17 @@ public class UserPermission {
     *
     * */
     @RequestMapping(value = "/updatePassword{byUserName}",method = POST)
-    public Object resetPassword( String byUserName,HttpServletRequest request,HttpSession session){
-        System.out.println("11111");
-        if(session.getAttribute("user") != null){
-            System.out.println("00000");
-            String hostUserName = cookieUtil.getCookieByName(request,"user").getValue();
-            System.out.println(hostUserName);
-            map.clear();
-            map.put("updatePassword",userPermissionService.changePasswordByUserName(hostUserName,byUserName));
-        }else {
+    public Object resetPassword(String byUserName,HttpServletRequest request,HttpSession session){
+        try {
+            if(session.getAttribute("user") != null){
+                String hostUserName = (String) cookieUtil.ReadCookievalue(request,session);
+                map.clear();
+                map.put("updatePassword",userPermissionService.changePasswordByUserName(hostUserName,byUserName));
+            }else {
+                map.clear();
+                map.put("updatePassword",Canstants.FAIL);
+            }
+        }catch (Exception e){
             map.clear();
             map.put("updatePassword",Canstants.FAIL);
         }
@@ -50,9 +50,14 @@ public class UserPermission {
     * */
     @RequestMapping(value = "/deleteUser{byUserName}",method = POST)
     public Object deleteUser(String byUserName, HttpSession session){
-        String hostUserName = (String) session.getAttribute("user");
-        map.clear();
-        map.put("deleteUser",userPermissionService.deleteUserByUserName(hostUserName,byUserName));
+        try {
+            String hostUserName = (String) session.getAttribute("user");
+            map.clear();
+            map.put("deleteUser",userPermissionService.deleteUserByUserName(hostUserName,byUserName));
+        }catch (Exception e){
+            map.clear();
+            map.put("deleteUser",Canstants.FAIL);
+        }
         return JSON.toJSON(map);
     }
 
@@ -61,11 +66,15 @@ public class UserPermission {
     *
     * */
     @RequestMapping(value = "/userState{byUserName,state}",method = POST)
-    public Object updateUserStage(String byUserName, int state,HttpSession session){
-        String hostUserName = (String) session.getAttribute("user");
-        System.out.println(hostUserName);
-        map.clear();
-        map.put("userState",userPermissionService.updateUserStageByuserName(hostUserName,byUserName,state));
+    public Object updateUserStage(String byUserName, int state,HttpServletRequest request){
+        try{
+            String hostUserName = (String) request.getSession().getAttribute("user");
+            map.clear();
+            map.put("userState",userPermissionService.updateUserStageByuserName(hostUserName,byUserName,state));
+        }catch (Exception e){
+            map.clear();
+            map.put("userState",Canstants.FAIL);
+        }
         return JSON.toJSON(map);
     }
 }

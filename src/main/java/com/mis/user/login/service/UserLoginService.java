@@ -3,6 +3,7 @@ package com.mis.user.login.service;
 import com.mis.user.login.model.UserLoginInfo;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.net.HttpCookie;
@@ -22,7 +23,7 @@ public interface UserLoginService {
     /*
     * 登陆验证
     * */
-    int userNameLogin(UserLoginInfo userLoginInfo, HttpSession session, HttpServletResponse response);
+    int userNameLogin(UserLoginInfo userLoginInfo, HttpServletRequest request, HttpServletResponse response);
 
     /*String idLogin(UserLoginInfo userLoginInfo,HttpSession session);
 

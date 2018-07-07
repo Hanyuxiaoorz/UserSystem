@@ -1,4 +1,4 @@
-package com.mis.user.backstagemanagement;
+package com.mis.user.backstagemanagement.dao;
 
 import com.mis.user.backstagemanagement.dao.UserShowMapper;
 import com.mis.user.backstagemanagement.model.UserShowInfo;
