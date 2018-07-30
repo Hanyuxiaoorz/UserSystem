@@ -6,7 +6,7 @@ $(document).ready(function(){
 function getImg(){
     $.ajax({
         type:"POST",
-        url:"http://172.33.17.49:8080/userPhoto",
+        url:"http://localhost:8080/userPhoto",
         xhrFields: {
             withCredentials: true
         },
@@ -34,7 +34,7 @@ function getImg(){
 function getUserName(){
     $.ajax({
         type:"POST",
-        url:"http://172.33.17.49:8080/clientUserName",
+        url:"http://localhost:8080/clientUserName",
         xhrFields: {
             withCredentials: true
         },
@@ -56,7 +56,7 @@ function getUserName(){
 function logOut(){
     $.ajax({
         type:"POST",
-        url:"http://172.33.17.49:8080/loginOut",
+        url:"http://localhost:8080/loginOut",
         xhrFields: {
             withCredentials: true
         },

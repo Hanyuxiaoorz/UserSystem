@@ -209,7 +209,7 @@ function getData(){
     var DirNum = Array(5);
     $.ajax({
         type:"GET",
-        url:"http://172.33.17.49:8080/backstageManagement/study_directionAmount",
+        url:"http://localhost:8080/backstageManagement/study_directionAmount",
         dataType:"json",
         xhrFields: {
             withCredentials: true
@@ -232,7 +232,7 @@ function getData(){
 function getMainData(){
     $.ajax({
         type:"GET",
-        url:"http://172.33.17.49:8080/backstageManagement/mainAmount",
+        url:"http://localhost:8080/backstageManagement/mainAmount",
         dataType:"json",
         xhrFields: {
             withCredentials: true
