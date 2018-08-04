@@ -34,7 +34,7 @@ function searchUsers(){
 	$("#userInforShowArea").children(".teal").hide();
 	$.ajax({
 		type:"POST",
-		url:"http://172.33.17.49:8080/backstageManagement/selectUserInfo",
+		url:"http://localhost:8080/backstageManagement/selectUserInfo",
 		contentType:"application/x-www-form-urlencoded",
 		data:{
 			"searchValue": inputValue
@@ -94,7 +94,7 @@ function reSetPassword(){
 		if (ByUser.userName.length == 0) {alert("当前无用户！");return;}
 			$.ajax({
 				type:"POST",
-				url:"http://172.33.17.49:8080/backstageManagement/updatePassword",
+				url:"http://localhost:8080/backstageManagement/updatePassword",
 				contentType:"application/json",
 				data:{
 					"byUserName":ByUser.userName
@@ -123,7 +123,7 @@ function deleteUser(){
 	if (ByUser.userName.length == 0) {alert("当前无用户！");return;}
 		$.ajax({
 				type:"POST",
-				url:"http://172.33.17.49:8080/backstageManagement/deleteUser",
+				url:"http://localhost:8080/backstageManagement/deleteUser",
 				contentType:"application/json",
 				data:{
 					"byUserName":ByUser.userName
@@ -166,7 +166,7 @@ function upLevelUser(Chosenstate){
 	$("#changeStateModal").modal("hide");
 	$.ajax({
 		type:"POST",
-		url:"http://172.33.17.49:8080/backstageManagement/userState",
+		url:"http://localhost:8080/backstageManagement/userState",
 		contentType:"application/json",
 		data:{
 			"byUserName":ByUser.userName,
@@ -196,7 +196,7 @@ function upLevelUser(Chosenstate){
 function showUser(searchId){
 	$.ajax({
 		type:"POST",
-		url:"http://172.33.17.49:8080/backstageManagement/selectUserInfo",
+		url:"http://localhost:8080/backstageManagement/selectUserInfo",
 		contentType:"application/x-www-form-urlencoded",
 		data:{
 			"searchValue":searchId
@@ -263,7 +263,7 @@ function checkIsNull(content){
 function getHeadPic(searchName){
 	$.ajax({
 		type:"POST",
-		url:"http://172.33.17.49:8080/userP",
+		url:"http://localhost:8080/userP",
 		contentType:"application/x-www-form-urlencoded",
 		data:{
 			"userName":searchName

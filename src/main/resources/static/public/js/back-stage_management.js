@@ -4,7 +4,7 @@ $(document).ready(function(){
     //向表格中加入数据
     $.ajax({
         type:"POST",
-        url:"http://172.33.17.49:8080/backstageManagement/userInfo",
+        url:"http://localhost:8080/backstageManagement/userInfo",
         xhrFields: {
             withCredentials: true
         },
@@ -111,7 +111,7 @@ function checkIsNull(content){
 function upLoadExcel(){
 	$.ajax({
 		type:"POST",
-		url:"http://172.33.17.49:8080/backstageManagement/excelUserInfo",
+		url:"http://localhost:8080/backstageManagement/excelUserInfo",
 		xhrFields: {
 			withCredentials: true
 		},
