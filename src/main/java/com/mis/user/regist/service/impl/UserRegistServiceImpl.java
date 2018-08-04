@@ -2,7 +2,6 @@
 package com.mis.user.regist.service.impl;
 
 import com.mis.user.canstants.Canstants;
-import com.mis.user.regist.controller.UserRegist;
 import com.mis.user.regist.dao.UserRegistMapper;
 import com.mis.user.regist.model.UserRegistInfo;
 import com.mis.user.regist.service.UserRegistService;
@@ -15,7 +14,6 @@ public class UserRegistServiceImpl implements UserRegistService {
 
     @Autowired
     private UserRegistMapper userRegistMapper;
-    private UserRegistService userService;
     //验证账号是否已经存在
     @Override
     public int userNameVerify(String userName) {
@@ -68,7 +66,7 @@ public class UserRegistServiceImpl implements UserRegistService {
                 //验证用户唯一性信息是否已经存在
             } else if(userRegistMapper.registUserByUserName(userRegistInfo.getUserName()) != null || userRegistMapper.registUserByUserId(userRegistInfo.getId()) != null
                         || userRegistMapper.registUserByUserEmail(userRegistInfo.getE_mail()) != null) {
-                    return Canstants.REGIST_EXIST;
+                return Canstants.REGIST_EXIST;
             } else if (!userRegistInfo.getE_mail().matches(regex)){
                 return Canstants.REGIST_STYLE_FAIL;//4,邮箱格式错误
             }else if (this.userRegistMapper.insertUser(userRegistInfo) == -1) {

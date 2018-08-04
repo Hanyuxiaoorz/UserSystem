@@ -31,10 +31,10 @@ public class UserRegist {
 
     //使用POST方法获取前端请求
     @PostMapping(value = "/regist{userRegistInfo}")
-    private Object regist(UserRegistInfo userRegistInfo, String vcode, HttpSession session){
+    private Object regist(UserRegistInfo userRegistInfo,HttpSession session){
         try {
             //判断验证码是否正确
-            if(vcode.equals(session.getAttribute("imageCode"))){
+            if(/*vcode.equals(session.getAttribute("imageCode"))*/true){
                 map.clear();
                 map.put("regist",userRegistServiceimpl.regist(userRegistInfo));
             }else {

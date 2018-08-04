@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="/public/semantic/dist/semantic.min.css">
-	<link rel="stylesheet" type="text/css" href="/public/css/register.css">
-	<script src="/public/js/jquery-3.3.1.min.js"></script>
-	<script src="/public/semantic/dist/semantic.min.js"></script>
-	<script type="text/javascript" src="/public/js/register.js"></script>
+	<link rel="stylesheet" type="text/css" href="../public/semantic/dist/semantic.min.css">
+	<link rel="stylesheet" type="text/css" href="../public/css/register.css">
+	<script src="../public/js/jquery-3.3.1.min.js"></script>
+	<script src="../public/semantic/dist/semantic.min.js"></script>
+	<script type="text/javascript" src="../public/js/register.js"></script>
 	<meta charset="utf-8">
 	<title>注册</title>
 
@@ -49,23 +49,18 @@
 	<hr class="hr">
 
 
-	<!--<div class="ui compact menu" id="menu">-->
-		<!--<div class="ui simple dropdown item">-->
-			<!--<span id="direction">方向</span>-->
-			<!--<i class="dropdown icon" id="dropdown"></i>-->
-			<!--<div class="menu">-->
-				<!--<div class="item" data-value="0" onclick="qianduan()">前端</div>-->
-				<!--<div class="item" data-value="1" onclick="houtai()">后台</div>-->
-				<!--<div class="item" data-value="2" onclick="ceshi()">测试</div>-->
-			<!--</div>-->
-		<!--</div>-->
-	<!--</div>-->
+	<div class="ui compact menu" id="menu">
+		<div class="ui simple dropdown item">
+			<span id="direction">方向</span>
+			<i class="dropdown icon" id="dropdown"></i>
+			<div class="menu">
+				<div class="item" onclick="qianduan()">前端</div>
+				<div class="item" onclick="houtai()">后台</div>
+				<div class="item" onclick="ceshi()">测试</div>
+			</div>
+		</div>
+	</div>
 
-	<select class="ui dropdown"id="direction">
-		<option value="">方向</option>
-		<option value="前端">前端</option>
-		<option value="后台">后台</option>
-	</select>
 
 	<div class="ui blue button login" onclick="register()">注册</div>
 	<span id="checkanwserregister"></span>
@@ -77,7 +72,7 @@
 		<div class="image content">
 			<div class="image">
 				<!-- <i class="archive icon"></i> -->
-				<img id="zcimg"src="/public/img/zhuce.png">
+				<img id="zcimg"src="../public/img/zhuce.png">
 			</div>
 			<div class="description" id="description">
 				<p>请单击确定</p>

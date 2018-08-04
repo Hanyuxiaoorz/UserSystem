@@ -6,5 +6,5 @@
 
     <!-- spring容器启动时，静态配置替换 -->
     <context:property-placeholder location="classpath*:*.properties" ignore-unresolvable="true"/>
-    <import resource="config/DruidConfig.xml"/>
+    <import resource="classpath*:config/DruidConfig.xml"/>
 </beans>

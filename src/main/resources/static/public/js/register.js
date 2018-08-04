@@ -36,7 +36,7 @@ function checkusername(){
 	            }
 	        } 
 	}
-			xmlhttp.open("GET","http://172.33.17.49:8080/regist/userNameVerify?userName="+username,true);
+			xmlhttp.open("GET","http://localhost:8080/regist/userNameVerify?userName="+username,true);
 	 		xmlhttp.send();
 }
 	
@@ -82,7 +82,7 @@ function checkemail(){
 	            }
 	        }
 	}
-			xmlhttp.open("GET","http://172.33.17.49:8080/regist/userEmailVerify?eMail="+email,true);
+			xmlhttp.open("GET","http://localhost:8080/regist/userEmailVerify?eMail="+email,true);
 	 		xmlhttp.send();	 
 }
 
@@ -124,7 +124,7 @@ function checkID(){
 	            }
 	        } 
 	}	 
-			xmlhttp.open("GET","http://172.33.17.49:8080/regist/userIdVerify?id="+id,true);
+			xmlhttp.open("GET","http://localhost:8080/regist/userIdVerify?id="+id,true);
 	 		xmlhttp.send();
 }
 
@@ -165,14 +165,13 @@ function register(){
 	var id = document.getElementById("ID").value;
 	var code = document.getElementById("code").value;
 	var recode = document.getElementById("recode").value;
-	var direction = document.getElementById("direction").value;
-		alert(direction);
+	var direction = document.getElementById("direction").innerHTML;
 	if(regyh.test(username)){
 		if(regyx.test(email)){
 			if(id.length == 10){
 				if(code.length == 6){
 					if(code == recode){
-						if(direction != "方向"){
+						if(direction.innerHTML != "方向"){
 							// document.getElementById("checkanwserzc").innerHTML="注册成功";
 								var xmlhttp;
 								if (window.XMLHttpRequest){//IE7+, Firefox, Chrome, Opera, Safari
@@ -181,24 +180,21 @@ function register(){
 								else{// IE6, IE5
 								       xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 								}
-								
+						
 								xmlhttp.onreadystatechange=function(){
 								//当接受到响应时回调该方法
 								        if (xmlhttp.readyState==4 && (xmlhttp.status==200||xmlhttp.status==0))
 								        {
-								            
 								            var text = xmlhttp.responseText;
 								            var resultJson = eval("("+text+")");
 								            var regist= resultJson.regist;
 								            if (regist == 1){
 								            	$('.ui.basic.modal').modal('show');
-								            }else
-								            	alert("sb");
+								            }
 								        } 
 								}
-								alert(1111);
-                                var content = 'userName='+username+'&e_mail='+email+'&id='+id+'&password='+code+'&study_direction='+direction;
-								xmlhttp.open("POST","http://localhost:8080/regist"+content,true);
+                                var content = "userName="+username+"&e_mail="+email+"&id="+id+"&password="+code+"&study_direction="+direction;
+								xmlhttp.open("POST","http://localhost:8080/regist",true);
 								xmlhttp.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 						 		xmlhttp.send(content);
 						}
