@@ -193,8 +193,8 @@ function register(){
 								            }
 								        } 
 								}
-                                var content = 'userName='+username+'&eMail='+email+'&id='+id+'&password='+code+'&study_direction='+direction;
-								xmlhttp.open("POST","http://localhost:8080/regist"+content,true);
+                                var content = "userName="+username+"&e_mail="+email+"&id="+id+"&password="+code+"&study_direction="+direction;
+								xmlhttp.open("POST","http://localhost:8080/regist",true);
 								xmlhttp.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 						 		xmlhttp.send(content);
 						}
