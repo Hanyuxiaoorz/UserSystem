@@ -1,6 +1,4 @@
 $(document).ready(function(){
-    //显示用户名
-	$("#userName").text(CookieUtil.get("user"));
     getMainData();
     getData();
     //加载窗口实时消失

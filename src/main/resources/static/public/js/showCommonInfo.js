@@ -1,13 +1,14 @@
 $(document).ready(function(){
     //显示用户名
-	
+    getUserName();
+    getImg();
 });
 
 //获取用户头像
 function getImg(){
     $.ajax({
         type:"POST",
-        url:"https://localhost:8080/userPhoto",
+        url:"http://localhost:8080/userPhoto",
         xhrFields: {
             withCredentials: true
         },
@@ -34,7 +35,7 @@ function getImg(){
 function getUserName(){
     $.ajax({
         type:"POST",
-        url:"https://localhost:8080/clientUserName",
+        url:"http://localhost:8080/clientUserName",
         xhrFields: {
             withCredentials: true
         },

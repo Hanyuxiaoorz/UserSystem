@@ -22,4 +22,18 @@
 /nbbuild/
 /dist/
 /nbdist/
+<<<<<<< HEAD
 /.nb-gradle/
+=======
+/.nb-gradle/
+
+### project-relative ###
+*.DS_Store
+.idea/
+erp-account.iml
+graduationProject.iml
+target/
+.mvn/
+mvnw
+mvnw.cmd
+>>>>>>> 490e8e9ce91aa6e76cc4260c6961b4abb40fd245

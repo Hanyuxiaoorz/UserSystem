@@ -107,6 +107,8 @@ function checkIsNull(content){
 }
 //上传excel
 function upLoadExcel(){
+	var formData = new FormData();
+	formData.append('file',$('#upload')[0].files[0]);
 	$.ajax({
 		type:"POST",
 		url:"http:localhost:8080/backstageManagement/excelUserInfo",
@@ -114,9 +116,11 @@ function upLoadExcel(){
 			withCredentials: true
 		},
 		crossDomain: true,
-		contentType: "application/json",
-		data:$("#formExcel").serialize(),
+		contentType: false,
+		processData: false,
+		data:formData,
 		dataType:"json",
+		clearForm:true,
 		success:function(json){
 			alert(json.excelUserInfo);
 		},

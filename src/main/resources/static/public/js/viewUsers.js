@@ -1,7 +1,5 @@
 $(document).ready(function(){
 	//在这里展示写入立即加载内容
-	//显示用户名
-	$("#userName").text(CookieUtil.get("user"));
 
 	$(".loading").fadeOut();
 	//在这里写入非立即加载内容
@@ -265,15 +263,18 @@ function checkIsNull(content){
 function getHeadPic(searchName){
 	$.ajax({
 		type:"POST",
-		url:"https://localhost:8080/userPhoto",
+		url:"http://localhost:8080/userPhoto",
 		contentType:"application/x-www-form-urlencoded",
 		data:{
 			"userName":searchName
 		},
 		dataType:"json",
 		success:function(json){
+			if(json != 0){
 			//获取头像
 			$('#userPic').attr('src',json.userPhoto);
+			}
+			else console.log("头像获取失败.");
 		},
 		error:function(XMLHttpRequest,textStatus){
 			console.log(XMLHttpRequest.responseText);
