@@ -12,24 +12,24 @@ public interface UserRegistService {
     * 用户名是否已经被注册的验证
     *
     * */
-    String userNameVerify(String userName);
+    int userNameVerify(String userName);
 
     /*
     * 用户邮箱是否已经被注册的验证
     *
     * */
-    String userEmailVerify(String eMail);
+    int userEmailVerify(String eMail);
 
     /*
     * 用户学号是否已经被注册的验证
     *
     * */
-    String userIdVerify(String id);
+    int userIdVerify(String id);
 
     /*
     * 用户验证成功后的注册
     *
     * */
-    String regist(UserRegistInfo userRegistInfo);
+    int regist(UserRegistInfo userRegistInfo);
 
 }

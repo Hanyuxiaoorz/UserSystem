@@ -11,26 +11,25 @@
 -- 如果存在这个数据库那么就删除这个数据库
 /*Table structure for table `user_mess` */
 
-DROP TABLE IF EXISTS `user_message`;
+DROP TABLE IF EXISTS `USER_MESS`;
 
-CREATE TABLE `user_message` (
-	`USERNAME` varchar(50) NOT NULL COMMENT '用户姓名',
-	`PASSWORD` varchar(6) NOT NULL COMMENT '用户密码',
-	`ID` int(10) NOT NULL COMMENT '用户学号',
-	`E_MAIL` varchar(50) NOT NULL COMMENT '邮箱地址',
-	`SEX` char(1) DEFAULT NULL COMMENT '用户性别',
-	`PHONE_NUMBER` int(11) NOT NULL COMMENT '用户手机号',
-	`MAJOR` varchar(50) NOT NULL COMMENT '用户专业',
-	`CLASS_NUMBER` int(8) DEFAULT NULL COMMENT '用户班级代号',
-	`STUDY_DIRECTION` varchar(50) DEFAULT NULL COMMENT '用户学习方向',
-	`AGE` int(3) DEFAULT NULL COMMENT '用户年龄',
-	`BIRTH` date DEFAULT NULL COMMENT '用户出生日期',
-	`HABIT` varchar(50) DEFAULT NULL COMMENT '用户爱好',
-	`STATE` int(1) NOT NULL DEFAULT '0' COMMENT '用户目前功能状态',
-	 UNIQUE (`ID`),
-	 UNIQUE (`E_MAIL`),
-	 UNIQUE (`USERNAME`),
-	 UNIQUE (`PHONE_NUMBER`)
+CREATE TABLE `USER_MESS` (
+	`userName` varchar(50) NOT NULL COMMENT '用户姓名',
+	`password` varchar(6) NOT NULL COMMENT '用户密码',
+	`id` int(10) NOT NULL COMMENT '用户学号',
+	`e_mail` varchar(50) NOT NULL COMMENT '邮箱地址',
+	`sex` char(1) DEFAULT NULL COMMENT '用户性别',
+	`phone_number` varchar (11) DEFAULT NULL COMMENT '用户手机号',
+	`major` varchar(50) NOT NULL COMMENT '用户专业',
+	`class_number` varchar(8) DEFAULT NULL COMMENT '用户班级代号',
+	`study_direction` varchar(50) DEFAULT NULL COMMENT '用户学习方向',
+	`age` int(3) DEFAULT NULL COMMENT '用户年龄',
+	`birth` date DEFAULT NULL COMMENT '用户出生日期',
+	`habit` varchar(50) DEFAULT NULL COMMENT '用户爱好',
+	`state` int(1) NOT NULL DEFAULT '0' COMMENT '用户目前功能状态',
+	 UNIQUE (`id`),
+	 UNIQUE (`e_mail`),
+	 UNIQUE (`userName`),
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `user_mess` */

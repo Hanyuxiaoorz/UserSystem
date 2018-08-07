@@ -2,6 +2,7 @@ package com.mis.user.commom;
 
 import com.mis.user.util.ImageUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.imageio.ImageIO;
@@ -12,7 +13,7 @@ import java.io.OutputStream;
 
 @RestController
 public class ValiCode {
-    @RequestMapping("/valicode") //对应/valicode请求
+    @RequestMapping(value = "/valicode",method = RequestMethod.GET) //对应/valicode请求
     public void valicode(HttpServletResponse response, HttpSession session) throws Exception {
         //利用图片工具生成图片
         //第一个参数是生成的验证码，第二个参数是生成的图片

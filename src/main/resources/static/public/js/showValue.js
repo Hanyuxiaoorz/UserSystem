@@ -1,4 +1,6 @@
 $(document).ready(function(){
+    //显示用户名
+    getUserName();
     getMainData();
     getData();
     //加载窗口实时消失

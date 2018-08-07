@@ -25,28 +25,39 @@ public class UserRegistVerfy {
     UserRegistServiceImpl userRegistServiceIml;
     @GetMapping(value = "/regist/userNameVerify{userName}")
     private Object userNameVerify(String userName){
-        Map map = new HashMap<String,Object>(1);
-        map.put("userNameVerify",this.userRegistServiceIml.userNameVerify(userName));
-        //以JSON形式返回给前端
-        return JSON.toJSON(map);
+        try {
+            Map map = new HashMap<String,Object>(1);
+            map.put("userNameVerify",this.userRegistServiceIml.userNameVerify(userName));
+            //以JSON形式返回给前端
+            return JSON.toJSON(map);
+        }catch (Exception e){
+            return e.getMessage();
+        }
     }
 
     //用户Id是否已经被注册的验证
     @GetMapping(value = "/regist/userIdVerify{id}")
     private Object userIdVerify(String id){
-        map.clear();
-        map.put("userIdVerify",this.userRegistServiceIml.userIdVerify(id));
-        //转换成JSON形式返回给前端
-        return  JSON.toJSON(map);
+        try {
+            map.clear();
+            map.put("userIdVerify",this.userRegistServiceIml.userIdVerify(id));
+            //转换成JSON形式返回给前端
+            return  JSON.toJSON(map);
+        }catch (Exception e){
+            return e.getMessage();
+        }
     }
 
     //验证用户邮箱是否已经被注册的方法
     @GetMapping(value = "/regist/userEmailVerify{eMail}")
     private Object userEmailVerify(String eMail){
-        map.clear();
-        map.put("userEmailVerify",this.userRegistServiceIml.userEmailVerify(eMail));
-        //转换成JSON形式返回给前端
-        return  JSON.toJSON(map);
+        try {
+            map.clear();
+            map.put("userEmailVerify",this.userRegistServiceIml.userEmailVerify(eMail));
+            //转换成JSON形式返回给前端
+            return  JSON.toJSON(map);
+        }catch (Exception e){
+            return e.getMessage();
+        }
     }
-
 }

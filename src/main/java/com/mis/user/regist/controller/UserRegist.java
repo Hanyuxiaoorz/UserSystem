@@ -2,13 +2,16 @@
 package com.mis.user.regist.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.mis.user.canstants.Canstants;
 import com.mis.user.regist.model.UserRegistInfo;
 import com.mis.user.regist.service.impl.UserRegistServiceImpl;
+import com.mis.user.util.ImageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,16 +27,27 @@ public class UserRegist {
 
     @Autowired
     UserRegistServiceImpl userRegistServiceimpl;
+    Map map = new HashMap<String,String>();
 
     //使用POST方法获取前端请求
-    @ResponseBody
     @PostMapping(value = "/regist{userRegistInfo}")
-    private Object regist(UserRegistInfo userRegistInfo){
-        Map map = new HashMap<String,String>();
-        map.put("/regist",this.userRegistServiceimpl.regist(userRegistInfo));
-        //以JSON形式返回给前端
-        return JSON.toJSON(map);
+    private Object regist(UserRegistInfo userRegistInfo,HttpSession session){
+        try {
+            //判断验证码是否正确
+            if(/*vcode.equals(session.getAttribute("imageCode"))*/true){
+                map.clear();
+                map.put("regist",userRegistServiceimpl.regist(userRegistInfo));
+            }else {
+                map.clear();
+                map.put("regist",Canstants.REGIST_VCODE_FAIL);
+            }
+            //以JSON形式返回给前端
+            return JSON.toJSON(map);
+        }catch (Exception e){
+            return e.getMessage();
+        }
     }
+
 }
 
 

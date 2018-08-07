@@ -1,6 +1,7 @@
 $(document).ready(function(){
 	//在这里展示写入立即加载内容
-
+    //显示用户名
+    getUserName();
 	$(".loading").fadeOut();
 	//在这里写入非立即加载内容
 	//无用户信息时显示遮盖层
@@ -90,12 +91,12 @@ function searchUsers(){
 
 //点击修改密码
 function reSetPassword(){
-	
 		if (ByUser.userName.length == 0) {alert("当前无用户！");return;}
 			$.ajax({
 				type:"POST",
 				url:"http://localhost:8080/backstageManagement/updatePassword",
-				contentType:"application/json",
+                async:false,
+				contentType:"application/x-www-form-urlencoded",
 				data:{
 					"byUserName":ByUser.userName
 				},
@@ -106,11 +107,13 @@ function reSetPassword(){
 				dataType:"json",
 				success:function(json){
 					var result = parseInt(json.updatePassword);
-					if(result){
-					alert("已成功初始化" + ByUser.userName + "的密码!");
+					if(result == 1){
+						alert("已成功初始化" + ByUser.userName + "的密码!");
+					}else if(result == 2){
+                        alert("你没有此权限！");
 					}
 					else{
-						alert("你没有此权限！");
+                        alert("该用户出现异常！");
 					}
 				},
 				error:function(jqXHR){
@@ -124,7 +127,7 @@ function deleteUser(){
 		$.ajax({
 				type:"POST",
 				url:"http://localhost:8080/backstageManagement/deleteUser",
-				contentType:"application/json",
+				contentType:"application/x-www-form-urlencoded",
 				data:{
 					"byUserName":ByUser.userName
 				},
@@ -132,10 +135,10 @@ function deleteUser(){
 					withCredentials: true
 				},
 				crossDomain: true,
-				dataType:"text",
+				dataType:"json",
 				success:function(json){
 					var result = parseInt(json.deleteUser);
-					if(result){
+					if(result == 1){
 						alert("已成功删除" + ByUser.userName);
 						//清空原有数据
 						$('#userPic').attr("src","../static/public/img/normalHeadPic.png");
@@ -148,8 +151,12 @@ function deleteUser(){
 						//删除用户后显示遮盖层
 						$('#userInforShowArea').dimmer('show');
 					}
-					else{
-						alert("你没有此权限！");
+					else if(result == 2){
+						alert("你没有此权限！！！");
+					}else if(result == 3){
+						alert("该用户存在异常！！！")
+					}else {
+						alert("未知原因删除失败，请联系管理员！")
 					}
 					},
 				error: function (xhr, ajaxOptions, thrownError) {
@@ -167,7 +174,7 @@ function upLevelUser(Chosenstate){
 	$.ajax({
 		type:"POST",
 		url:"http://localhost:8080/backstageManagement/userState",
-		contentType:"application/json",
+		contentType:"application/x-www-form-urlencoded",
 		data:{
 			"byUserName":ByUser.userName,
 			"state":Chosenstate
@@ -263,18 +270,20 @@ function checkIsNull(content){
 function getHeadPic(searchName){
 	$.ajax({
 		type:"POST",
-		url:"http://localhost:8080/userPhoto",
+		url:"http://localhost:8080/userP",
 		contentType:"application/x-www-form-urlencoded",
 		data:{
 			"userName":searchName
 		},
 		dataType:"json",
 		success:function(json){
-			if(json != 0){
 			//获取头像
-			$('#userPic').attr('src',json.userPhoto);
+            if(json.userP != 0){
+                $('#userPic').attr('src',json.userP);
+                console.log(json);
+            }else{
+            	return 0;
 			}
-			else console.log("头像获取失败.");
 		},
 		error:function(XMLHttpRequest,textStatus){
 			console.log(XMLHttpRequest.responseText);

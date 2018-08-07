@@ -1,6 +1,4 @@
 $(document).ready(function(){
-    //显示用户名
-    getUserName();
     getImg();
 });
 
@@ -16,6 +14,7 @@ function getImg(){
         contentType: "application/json",
         dataType:"json",
         success:function(json){
+            console.log(json);
             if(json.userPhoto == 0){
                 console.log("头像获取失败");
             }
@@ -46,8 +45,8 @@ function getUserName(){
             $("#userName").text(json.clientUserName);
         },
         error: function (xhr, ajaxOptions, thrownError) {
-            console.log(xhr.responseText);
-            console.log(thrownError);
+/*            console.log(xhr.responseText);
+            console.log(thrownError);*/
         }
     })
 }

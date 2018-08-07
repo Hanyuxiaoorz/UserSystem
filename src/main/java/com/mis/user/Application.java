@@ -1,17 +1,16 @@
 package com.mis.user;
 
-import com.mis.user.base.ApplicationConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.ImportResource;
 
 @SpringBootApplication
 @ComponentScan("com.mis.user")
-@Import(ApplicationConfig.class)
-public class Application extends SpringBootServletInitializer{
+@ImportResource(value = "spring-applicationContext.xml")
+public class Application extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);

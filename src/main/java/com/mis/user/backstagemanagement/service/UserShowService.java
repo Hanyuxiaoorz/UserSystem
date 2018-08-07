@@ -19,9 +19,18 @@ public interface UserShowService {
     PageBean<UserShowInfo> findByPage(int currentPage);
 
     //查询用户记录总数
-    int selectCount();
+    int userAmount();
+
+    //查询管理员数量
+    int managerAmount();
 
     //通过用户主键查询单个用户的信息
-    UserShowInfo selectUserByInput(String input);//用户名
+    UserShowInfo selectUserByInput(String searchValue);//用户名
 
+    //查询学习方向
+    int androidNum();
+    int bgNum();
+    int frontNum();
+    int PyNum();
+    int algNum();
 }
