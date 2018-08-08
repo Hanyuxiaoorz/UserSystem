@@ -22,6 +22,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
 /**
  * @author: Dengsiyuan
  * @Date:2018.5.15
@@ -72,20 +74,18 @@ public class UserLogin {
         return JSON.toJSON(map);
     }
 //    }
-    /*@PostMapping(value = "/clientUserName")
+    @RequestMapping(value = "/clientUserName" , method = POST)
     public Object userNameSearch(HttpServletRequest request,HttpSession session){
         map.clear();
-        if(cookieUtil.ReadCookievalue(request,session) != null){
-            map.put("clientUserName",cookieUtil.ReadCookievalue(request,session));
-        }
+        map.put("clientUserName",session.getAttribute("user"));
         return JSON.toJSON(map);
-    }*/
+    }
 
     /**
      * 退出登录
      * @Param: session
      * */
-    @PostMapping(value = "/loginOut")
+    @RequestMapping(value = "/loginOut" , method = POST)
     public Object loginOut(HttpServletRequest request){
         map.clear();
         String s = request.getHeader("user");

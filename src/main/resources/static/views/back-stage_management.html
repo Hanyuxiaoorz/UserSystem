@@ -25,17 +25,17 @@
 	<header>
 		<div class="ui  huge inverted borderless fixed fl menu" id="top_menu">
 			<a class="item">
-				<img class="ui tiny img" src="/public/img/headerLogo.png">
+				<img class="ui tiny img" src="../public/img/headerLogo.png">
 			</a>
   			<a class="item">Mis Lab</a>
   			<a class="active item">后台管理</a>
   		  <div class="right menu">
 				<div class="item">
-					<img class="ui mini rounded image" src="/public/img/normalHeadPic.png" id="userImg">
+					<img class="ui mini rounded image" src="../public/img/normalHeadPic.png" id="userImg">
 				</div>
 					<a class="item" id="userName"></a>
 				<div class="item">
-					<button class="ui tiny red button" onclick="loginOut()"><font>注销</font></button>
+					<button class="ui tiny red button" onclick="logOut()"><font>注销</font></button>
 				</div>
 		  </div>
 		</div>
@@ -51,9 +51,7 @@
   		</div>
   		<div class="pusher">
 		</div>
-		<form id="formExcel" name="upExcel" action="/backstageManagement/excelUserInfo" method="POST">
-			  <input type="file" name="uploadExcel" multiple class="ui input" id="upload" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" onchange ="upLoadExcel()">
-		</form>
+		<input type="file" name="file" multiple class="ui input" id="upload" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" onchange ="upLoadExcel()">
 		<div class="ui large blue button" id="fileInput"  data-tooltip="注意为Excel" data-position="top left" data-inverted=""><font>导入表格</font><i class="ui  right file icon"></i></div>
   		<table class="ui  table" id="inforTable">
   			<thead>

@@ -6,7 +6,7 @@ $(document).ready(function(){
 function getImg(){
     $.ajax({
         type:"POST",
-        url:"http://172.33.17.49:8080/userPhoto",
+        url:"http://localhost:8080/userPhoto",
         xhrFields: {
             withCredentials: true
         },
@@ -34,7 +34,7 @@ function getImg(){
 function getUserName(){
     $.ajax({
         type:"POST",
-        url:"http://172.33.17.49:8080/clientUserName",
+        url:"http://localhost:8080/clientUserName",
         xhrFields: {
             withCredentials: true
         },
@@ -42,7 +42,6 @@ function getUserName(){
         contentType: "application/json",
         dataType:"json",
         success:function(json){
-            alert(json.clientUserName);
             $("#userName").text(json.clientUserName);
         },
         error: function (xhr, ajaxOptions, thrownError) {
@@ -56,7 +55,7 @@ function getUserName(){
 function logOut(){
     $.ajax({
         type:"POST",
-        url:"http://172.33.17.49:8080/loginOut",
+        url:"http://localhost:8080/loginOut",
         xhrFields: {
             withCredentials: true
         },
@@ -64,7 +63,7 @@ function logOut(){
         contentType: "application/json",
         success:function(){
             alert("已成功注销！");
-            window.location.href="http://172.33.17.49:8080/login.html"
+            window.location.href="http://localhost:8080/login.html"
         },
         error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.responseText);

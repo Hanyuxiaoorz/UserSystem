@@ -27,10 +27,11 @@ public class UserPermission {
     *
     * */
     @RequestMapping(value = "/updatePassword{byUserName}",method = POST)
-    public Object resetPassword(String byUserName,HttpServletRequest request,HttpSession session){
+    public Object resetPassword(String byUserName,HttpSession session){
         try {
+            System.out.println(byUserName);
             if(session.getAttribute("user") != null){
-                String hostUserName = (String) cookieUtil.ReadCookievalue(request,session);
+                String hostUserName = (String) session.getAttribute("user");
                 map.clear();
                 map.put("updatePassword",userPermissionService.changePasswordByUserName(hostUserName,byUserName));
             }else {
@@ -39,6 +40,7 @@ public class UserPermission {
             }
         }catch (Exception e){
             map.clear();
+            e.printStackTrace();
             map.put("updatePassword",Canstants.FAIL);
         }
         return JSON.toJSON(map);
@@ -66,7 +68,7 @@ public class UserPermission {
     *
     * */
     @RequestMapping(value = "/userState{byUserName,state}",method = POST)
-    public Object updateUserStage(String byUserName, int state,HttpServletRequest request){
+    public Object updateUserStage(String byUserName, Integer state,HttpServletRequest request){
         try{
             String hostUserName = (String) request.getSession().getAttribute("user");
             map.clear();

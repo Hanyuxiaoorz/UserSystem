@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.thymeleaf.util.StringUtils;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.constraints.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,7 +31,8 @@ public class ExcelInput {
         try {
             //判断文件是否为空
             if (file == null) {
-                return Canstants.BACK_NULL;//4,文件为空
+                map.clear();
+                map.put("excelUserInfo","您所上传文件为空！！");//4,文件为空
             }
 
             //获取文件名
@@ -38,13 +40,14 @@ public class ExcelInput {
 
             //验证文件名是否合格
             if (!ExcelUtil.validateExcel(fileName)) {
-                return Canstants.BACK_PERMISSION_NULL;//3，文件不符合要求
+                map.clear();
+                map.put("excelUserInfo","文件类型不符合要求");//3，文件不符合要求
             }
 
             //获取到文件名后，再次判断是否符合要求，是否为空
             long size = file.getSize();
             if (StringUtils.isEmpty(fileName) || size == 0) {
-                return Canstants.BACK_NULL;//4,文件大小或名称为空
+                map.put("excelUserInfo","文件大小或名称为空!!");//4,文件大小或名称为空
             }
 
             //批量导入
@@ -54,7 +57,8 @@ public class ExcelInput {
 
         }catch (Exception e){
             map.clear();
-            map.put("excelUserInfo",Canstants.FAIL);
+            map.put("excelUserInfo","上传失败！！！");
+            e.printStackTrace();
         }
         return JSON.toJSON(map);
     }

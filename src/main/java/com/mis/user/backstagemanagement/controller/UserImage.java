@@ -78,7 +78,6 @@ public class UserImage {
             } else {
                 map.clear();
                 map.put("userPhoto", Canstants.FAIL);
-                return JSON.toJSON(map);
             }
 
         } catch (Exception e) {
@@ -107,7 +106,6 @@ public class UserImage {
             } else {
                 map.clear();
                 map.put("userP", Canstants.FAIL);
-                return JSON.toJSON(map);
             }
         } catch (Exception e) {
             e.printStackTrace();
