@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	getUserName();
 	//向表格中加入数据
 	$.ajax({
 				type:"POST",
