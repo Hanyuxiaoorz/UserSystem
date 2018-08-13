@@ -5,12 +5,16 @@ import com.mis.user.canstants.Canstants;
 import com.mis.user.regist.dao.UserRegistMapper;
 import com.mis.user.regist.model.UserRegistInfo;
 import com.mis.user.regist.service.UserRegistService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 @Service
 public class UserRegistServiceImpl implements UserRegistService {
+
+    private Logger logger = LoggerFactory.getLogger(UserRegistServiceImpl.class);
 
     @Autowired
     private UserRegistMapper userRegistMapper;
@@ -36,6 +40,7 @@ public class UserRegistServiceImpl implements UserRegistService {
             } else
                 return Canstants.SUCCESS;
         }catch (Exception e){
+            logger.error(e.getClass() + "{}", e);
             return Canstants.FAIL;
         }
     }
