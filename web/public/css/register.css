@@ -1,7 +1,7 @@
 .main{
 	position: relative;
 	width: 1000px;
-	height: 800px;
+	height: 1000px;
 	left: 38%;
 }
 #title_1{
@@ -14,7 +14,7 @@
 .box{
 	position: absolute;
 	width: 350px;
-	margin-top: 30px;
+	margin-top: 25px;
 }
 .hr{
 	border: 1px solid white;
@@ -37,9 +37,20 @@
 #dropdown{
 	margin-left: 282px;
 }
+#codebox{
+	position: absolute;
+	margin-top: 100px;
+	width: 350px;
+	height: 38px;
+}
+.code{
+	float: left;
+	width: 150px;
+	height: 38px;
+}
 .login{
 	position: absolute;
-	top: 635px;
+	top: 670px;
 	width: 350px;
 	height: 38px;
 }
@@ -47,7 +58,7 @@
 	position: absolute;
 	width: 350px;
 	height: 30px;
-	margin-top: 30px;
+	margin-top: 25px;
 }
 #modal{
 	width: 400px;
@@ -61,5 +72,21 @@
 	margin-left: 130px;
 	margin-top: 30px;
 }
+.emailcodebutton{
+	position: absolute;
+	width: 150px;
+	height: 38px;
+}
+#emailbutton{
+	font-size: 14px;
+	color:#2e2e2e;
+}
+#emailcode{
+	float: right;
+	width: 150px;
+	height: 38px;
+}
+
+
 
 

@@ -1,56 +1,58 @@
-function checkusername(){
-	var  = /^[0-9a-zA-Z]+$/;
-	var str = document.getElementById("username");
-	if(!reg.test(str.value)){
-		document.getElementById("checkanwserusername").innerHTML="您输入的字符不是数字或者字母";
-	}
-	if(str.value==""){
-		document.getElementById("checkanwserusername").innerHTML="用户名不能为空";
-	}
-	if(reg.test(str.value)){
-		document.getElementById("checkanwserusername").innerHTML="";
-	}
-
-
-	var xmlhttp;
-	if (window.XMLHttpRequest){//IE7+, Firefox, Chrome, Opera, Safari
-	       xmlhttp=new XMLHttpRequest();
-	}
-	else{// IE6, IE5
-	       xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	var username = document.getElementById("username").value;
-	xmlhttp.onreadystatechange=function(){
-	//当接受到响应时回调该方法
-	        if (xmlhttp.readyState==4 && (xmlhttp.status==200||xmlhttp.status==0))
-	        {
-	            var tip = document.getElementById("checkanwserusername");
-	            var text = xmlhttp.responseText;
-	            var resultJson = eval("("+text+")");
-	            var regNameFail	= resultJson.REGIST_NAME_FAIL;
-	            var reVerify = resultJson.REGIST_VERIFY_SUCCESS;
-	            if (reVerify==1){
-	            	tip.innerHTML = "此用户名可用";
-	            }
-	            else{
-	            	tip.innerHTML = "此用户名已经注册";
-	            }
-	        } 
-	}
-	xmlhttp.open("GET","http://localhost:8080/regist/userNameVerify?userName="+username,true);
-	xmlhttp.send();
+function code(){
+	document.getElementById("img").src="http://localhost:8080/valicode?"+Math.random();
 }
-
-
-function checkcode(){
-	var str = document.getElementById("code");
-	if(str.value.length != 6){
-		document.getElementById("checkanwsercode").innerHTML="请确认密码为6位数";
-	}
-	if(str.value==""){
-		document.getElementById("checkanwsercode").innerHTML="密码不能为空";
-	}
-	if(str.value.length == 6){
-		document.getElementById("checkanwsercode").innerHTML="";
-	}
+function login(){
+	var username = $("#user").val();
+	var npassword = $("#code").val();
+	var codetext = $("#codetext").val();
+	
+	$.ajax({
+		type:"POST",
+		url:"http://localhost:8080/login",
+		async:false,
+		dataType:"json",
+		contentType:"application/x-www-form-urlencoded",
+		xhrFields: {
+			withCredentials: true
+	   },
+	   crossDomain: true,
+		data:{
+			"username": username,
+			"password":npassword,
+			"codetext":codetext
+		},
+		success:function(stateNum){
+			var number = parseInt(stateNum.login);
+			switch(number){
+				case 0:alert("登录失败!"); break;
+				case 1:window.location.reload();break;
+				case 2:alert("登录信息未填写完整！");break;
+				case 3:alert("无权登陆该系统！");break;
+				case 4:alert("验证码输入不正确！");break;
+				default:alert("未知错误！");
+			}
+		},
+		error:function(){
+			alert(stateNum.login);
+		}
+	});
+}
+//查看权限
+function checkRight(){
+	var UrlLink = window.location.pathname;
+	$.ajax({
+		type:"GET",
+		url:"http://localhost:8080"+UrlLink,
+		xhrFields: {
+			withCredentials: true
+	   },
+	   data:"json",
+	   success:function(){
+			window.location.reload();
+	   },
+	   error:function(XMLHttpRequest,textStatus,errorThrown){
+		   console.log(textStatus);
+		   console.log(errorThrown);
+	   }
+	});
 }

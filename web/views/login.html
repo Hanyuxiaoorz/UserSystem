@@ -10,26 +10,36 @@
 	<meta charset="utf-8">
 </head>
 <body>
-	<center>
-	<h1 id="title_1">Mis</h1>
-	<div class="ui input" class="input">
-		<input type="text" id= "user" placeholder="用户名/邮箱/学号" onblur="checkuser()">
-	</div>
-	<span id="checkanwseruser"></span>
-	<hr class="hr">
-
-
-	<div class="ui input" class="input">
-		<input type="password"  id="code" maxlength="6" placeholder="密码(6位)" onblur="checkcode()">
-	</div>
-	<span id="checkanwsercode"></span>
-	<hr class="hr">
-
-
-	<div class=" blue ui button" id="button" onclick="register()">注册</div>
-	<hr class="hr">
-
+	<div class="main">
+		<h1 id="title_1">Mis</h1>
+		<hr class="hr">
+		<div class="ui input box">
+			<input type="text" id= "username" placeholder="用户名/邮箱／学号" >
+		</div>
+		<hr class="hr">
 	
+	
+		<div class="ui input box">
+			<input type="password"  id="code" maxlength="6" placeholder="密码(6位)">
+		</div>
+		<hr class="hr">
+	
+	
+		<div id="codebox">
+		<div class="ui input code">
+			<input type="text" id="codetext" placeholder="验证码" maxlength="4">
+		</div>
+	
+		<div id="imgcode">
+			<img src="http://localhost:8080/valicode" onclick="code()" id="img">
+			<!-- <img src="../public/img/1.png" onclick="code()" id="img"> -->
+		</div>
+		</div>
+		<hr class="hr">
+	
+	
+		<div class=" blue ui button login" onclick="login()">登录</div>
+		</div>
 
 </body>
 </html>

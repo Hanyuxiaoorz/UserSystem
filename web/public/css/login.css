@@ -1,33 +1,47 @@
-#title_1{
-    font-size: 60px;
-    font-weight: bolder;
-    position: relative;
-    top: 50px;
-}
-.input{
+.main{
 	position: relative;
-	top: 70px;
+	width: 1000px;
+	height: 800px;
+	left: 38%;
+}
+#title_1{
+	position: relative;
+	font-size: 60px;
+	font-weight: bolder;
+	margin-top: 30px;
+	margin-left: 120px;
+}
+.box{
+	position: absolute;
 	width: 350px;
-	margin-top: 15px;
+	margin-top: 30px;
 }
 .hr{
-	border: 1px solid white;	
+	border: 1px solid white;
 }
-#checkanwseruser{
-	color: #c7c7cb;
+#codebox{
 	position: absolute;
-	top: 183px;
-	left: 900px;
-}
-#checkanwsercode{
-	color: #c7c7cb;
-	position: absolute;
-	top: 250px;
-	left: 900px;
-}
-#button{
-	position: relative;;
-	top: 100px;
+	margin-top: 30px;
 	width: 350px;
-	left: 1.5px;
+	height: 38px;
+}
+.code{
+	float: left;
+	width: 150px;
+	height: 38px;
+}
+#img{
+	width: 150px;
+	height: 38px;
+}
+#imgcode{
+	float: right;
+	width: 150px;
+	height: 38px;
+}
+.login{
+	position: absolute;
+	top: 385px;
+	width: 350px;
+	height: 38px;
 }

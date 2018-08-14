@@ -517,3 +517,76 @@ function hobby_cancel(){
 }
 
 
+function submit(){
+	var sex = $("input[name='gender']:checked").val();
+	var direction = $("input[name='direction']:checked").val();
+	var name = $("#name").val();
+	var label = $("#label").val();
+	var age = $("#age").val();
+	var year = $("#year").val();
+	var month = $("#month").val();
+	var day = $("#day").val();
+	var phone = $("#phone").val();
+	var email = $("#email").val();
+	var grade = $("#grade").val();
+	var classmate = $("#classmate").val();
+	var major = $("major").val();
+	var hobby = $("#hobby").val();
+	
+	$.ajax({
+		type:"POST",
+		url:"http://localhost:8080/personage",
+		async:false,
+		dataType:"json",
+		contentType:"application/x-www-form-urlencoded",
+		xhrFields: {
+			withCredentials: true
+	   },
+	   crossDomain: true,
+		data:{
+			"sex":sex,
+			"direction":direction,
+			"name": name,
+			"label":label,
+			"age":age,
+			"year":year,
+			"month":month,
+			"day":day,
+			"phone":phone,
+			"email":email,
+			"grade":grade,
+			"classmate":classmate,
+			"major":major,
+			"hobby":hobby,
+
+		},
+		success:function(stateNum){
+			var number = parseInt(stateNum.personage);
+			switch(number){
+				case 0:alert("提交失败"); break;
+				case 1:alert("提交成功");break;
+				default:alert("未知错误！");
+			}
+		},
+		error:function(){
+			alert(stateNum.personage);
+		}
+	});
+}
+window.onload=username;
+function username(){
+	var username = $(".username").text();
+	$.ajax({ 
+		type:"Get", 
+		url:"http://localhost:8080/clintUserName", 
+		data:{"username":username},  
+		async : false,  
+		dataType : "json",  
+		success : function(data) {  
+		for(var i = 0; i < data.length; i++) {  
+			 var datas = data[i];  
+			 $(".username").append("<p>"+datas.email+"</p>")
+		}  
+		}  
+	});
+}
