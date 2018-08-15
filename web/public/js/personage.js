@@ -557,7 +557,7 @@ function submit(){
 			"grade":grade,
 			"classmate":classmate,
 			"major":major,
-			"hobby":hobby,
+			"hobby":hobby
 
 		},
 		success:function(stateNum){
@@ -576,12 +576,15 @@ function submit(){
 window.onload=username;
 function username(){
 	var username = $(".username").text();
-	$.ajax({ 
-		type:"Get", 
-		url:"http://localhost:8080/clintUserName", 
-		data:{"username":username},  
-		async : false,  
-		dataType : "json",  
+	$.ajax({
+        type:"POST",
+        url:"http://localhost:8080/clientUserName",
+        xhrFields: {
+            withCredentials: true
+        },
+        crossDomain: true,
+        contentType: "application/json",
+        dataType:"json",
 		success : function(data) {  
 		for(var i = 0; i < data.length; i++) {  
 			 var datas = data[i];  
