@@ -1,0 +1,233 @@
+body{
+	background-color: #f6f6f6;
+}
+.main{
+	position: relative;
+	width: 1000px;
+	margin: 0 auto;
+	box-shadow: 0 0 1em #ccc;
+}
+.header{
+	width: 1000px;
+	height: 240px;
+}
+.headerimg{
+	width: 1000px;
+	height: 240px;
+}
+.userimgbox{
+	position:absolute;
+	top: 215px;
+	left: 25px;
+	width: 168px;
+	height: 168px;
+	z-index: 2;
+}
+.user{
+	position: relative;
+	width: 168px;
+	height: 168px;
+    vertical-align: middle;
+    text-align: center;
+}
+.userimg{
+	width: 160px;
+	height: 160px;
+}
+.usermask{
+	position: relative;
+	top: -170px;
+	left: 5px;
+	width: 168px;
+	height: 168px;
+	text-align: center;
+	vertical-align: middle;
+}
+.usermask p{
+	color: white;
+	font-size: 15px;
+	font-weight: bold;
+	margin-top: 15px;
+}
+.usermask i{
+	color: white;
+	margin-top: 50px;
+}
+.content{
+	position: relative;
+	width: 960px;
+}
+.userhead{
+	position: relative;
+	width: 760px;
+	height: 35px;
+	left: 220px;
+	top: 10px;
+}
+.data{
+	position: relative;
+	width: 760px;
+	left: 220px;
+}
+.field{
+	position: relative;
+	width: 760px;
+	height: 97px;
+	border-bottom: 1px solid #ccc;
+}
+.field-label{
+	position: relative;
+	top: 30px;
+}
+.field-content{
+	width: 760px;
+/*	height: 96px;*/
+	height: 36px;
+}
+.box1{
+	position: relative;
+	width: 560px;
+	height: 36px;
+	top: -15px;
+	left: 150px;
+}
+.writebox{
+	position: relative;
+	width: 560px;
+	height: 19px;
+	top: 10px;
+}
+.writebox:hover{
+	cursor: pointer;
+}
+.writebox i{
+	color: #285194;
+}
+.writebox span{
+	color: #285194;
+}
+.box2{
+	position: relative;
+	width: 560px;
+	height: 90px;
+	top: -5px;
+	left: 150px;
+	display: none;
+}
+.ButtonGroup{
+	position: relative;
+	width: 560px;
+	height: 36px;
+	top: 30px;
+}
+.box3{
+	position: relative;
+	width: 560px;
+	height: 36px;
+	top: -15px;
+	left: 150px;
+	display: none;
+}
+.amend-result{
+	position: relative;
+	color: black;
+	font-size: 15px;
+	top: 10px;
+}
+.amend-result2{
+	position: relative;
+	color: black;
+	font-size: 15px;
+	top: 10px;
+	margin-left: 15px;
+}
+.amend-result3{
+	position: relative;
+	color: black;
+	font-size: 15px;
+	top: 10px;
+	margin-left: 15px;
+}
+.changebox{
+	position: relative;
+	left: 50px;
+	top: -10px;
+	width: 60px;
+	height: 36px;
+	display: none;
+}
+.box3:hover .changebox {
+	display: block;
+	cursor: pointer;
+}
+.changebox i{
+	color: #285194;
+}
+.amend{
+	color: #285194;
+}
+.inputbox{
+	position: relative;
+	top: -6px;
+	width: 549px;
+	height: 33px;
+}
+.Input{
+	width: 514px;
+	height: 33px;
+}
+.ButtonGroup2{
+	position: relative;
+	width: 560px;
+	height: 36px;
+	top: -37px;
+	left: 150px;
+}
+.inputbox2{
+	position: relative;
+	top: -6px;
+	width: 250px;
+	height: 33px;
+}
+.Input2{
+	width: 50px;
+	height: 33px;
+}
+.changebox2{
+	position: relative;
+	left: 500px;
+	top: -10px;
+	width: 60px;
+	height: 36px;
+	display: none;
+}
+.changebox2 i{
+	color: #285194;
+}
+.box3:hover .changebox2 {
+	display: block;
+	cursor: pointer;
+}
+.ButtonGroup3{
+	position: relative;
+	width: 560px;
+	height: 36px;
+	top: -37px;
+	left: 350px;
+}
+.spanbirth{
+	position: relative;
+	top: 10px;
+	margin-left: 20px;
+	font-size: 15px;
+}
+.inputbox3{
+	position: relative;
+	top: -6px;
+	width: 200px;
+	height: 33px;
+}
+.Input3{
+	width: 200px;
+	height: 33px;
+}

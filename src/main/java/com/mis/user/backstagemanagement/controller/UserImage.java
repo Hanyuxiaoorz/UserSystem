@@ -21,13 +21,11 @@ public class UserImage {
     Map map = new HashMap<String,String>();
     @Value("${file.path}")
     private String filePath;
-    @Value("${file.path1}")
-    private String filePathRead;
     @RequestMapping(value = "/userImg",method = POST)
-    public Object userImg(@RequestParam(value="file")MultipartFile file, HttpSession session) throws Exception {
+    public Object userImg(@RequestParam(value="file", required=false)MultipartFile file, HttpSession session) throws Exception {
         map.clear();
         try{
-            if(session.getAttribute("user")!= null || session.getAttribute("token") != null) {
+            if(session.getAttribute("user")!= null) {
                 String extName = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
                 File file1 = new File(filePath + File.separator + session.getAttribute("user"));
                 //判断文件夹是否存在，不存在的话增加后缀，添加自己的文件夹，防止无限添加
@@ -65,12 +63,13 @@ public class UserImage {
     @RequestMapping(value = "/userPhoto",method = POST)
     public Object userPhoto(HttpSession session) {
         String path = "SSOUser"+ File.separator + session.getAttribute("user") + File.separator + session.getAttribute("user") +".jpg";
+        String defaultPath = filePath + File.separator + "normalHeadedrPic.pic";
         try {
             if (session.getAttribute("user") != null) {
                 File file = new File(filePath + session.getAttribute("user") + File.separator + session.getAttribute("user") + ".jpg");
                 if (!file.exists()) {
                     map.clear();
-                    map.put("userPhoto", Canstants.BACK_NULL);//4,该用户目前无头像
+                    map.put("userPhoto", defaultPath);//默认头像,该用户目前无头像
                 } else {
                     map.clear();
                     map.put("userPhoto", path);
@@ -92,12 +91,13 @@ public class UserImage {
     @RequestMapping(value = "/userP",method = POST)
     public Object userP(String userName){
         String path = "SSOUser"+ File.separator + userName + File.separator + userName+".jpg";
+        String defaultPath = "SSOUser"+ File.separator + "normalHeadedrPic.pic";
         try {
             if (userName != null){
                 File file = new File( filePath + userName + File.separator + userName + ".jpg");
                 if(!file.exists()){
                     map.clear();
-                    map.put("userP",Canstants.FAIL);//4,该用户目前无头像
+                    map.put("userP",defaultPath);//默认头像,该用户目前无头像
                 }
                 else{
                     map.clear();

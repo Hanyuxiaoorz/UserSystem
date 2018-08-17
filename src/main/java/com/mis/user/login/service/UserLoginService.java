@@ -23,7 +23,7 @@ public interface UserLoginService {
     /*
     * 登陆验证
     * */
-    int userNameLogin(UserLoginInfo userLoginInfo, HttpServletRequest request, HttpServletResponse response);
+    int userLogin(UserLoginInfo userLoginInfo, HttpServletRequest request, HttpServletResponse response);
 
     /*String idLogin(UserLoginInfo userLoginInfo,HttpSession session);
 

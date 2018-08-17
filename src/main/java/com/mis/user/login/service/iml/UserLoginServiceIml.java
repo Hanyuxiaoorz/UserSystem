@@ -5,6 +5,8 @@ import com.mis.user.login.dao.UserLoginMapper;
 import com.mis.user.login.model.UserLoginInfo;
 import com.mis.user.login.service.UserLoginService;
 import org.apache.poi.util.StringUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,8 @@ import java.util.UUID;
 
 @Service
 public class UserLoginServiceIml implements UserLoginService {
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     UserLoginMapper userLoginMapper;
@@ -72,21 +76,33 @@ public class UserLoginServiceIml implements UserLoginService {
 
     //用户名
     @Override
-    public int userNameLogin(UserLoginInfo userLoginInfo, HttpServletRequest request, HttpServletResponse response) {
+    public int userLogin(UserLoginInfo userLoginInfo, HttpServletRequest request, HttpServletResponse response) {
         try {
-            if (userLoginMapper.loginUserByUserName(userLoginInfo) != null
-                    || userLoginMapper.loginUserById(userLoginInfo) != null
-                    || userLoginMapper.loginUserByEmail(userLoginInfo) != null) {
+            if (userLoginMapper.loginUserByUserName(userLoginInfo) != null) {
                 String userToken = UUID.randomUUID().toString();
                 request.getSession().setAttribute("user",userLoginInfo.getUserName());
-                request.getSession().setAttribute(userToken,userLoginInfo.getUserName());
                 Cookie cookie = new Cookie("user",userToken);
                 response.addCookie(cookie);
                 return Canstants.SUCCESS;
-            } else{
+            }else if (userLoginMapper.loginUserById(userLoginInfo) != null){
+                String userToken = UUID.randomUUID().toString();
+                request.getSession().setAttribute("user",userLoginMapper.userNameById(userLoginInfo.getId()));
+                Cookie cookie = new Cookie("user",userToken);
+                response.addCookie(cookie);
+                return Canstants.SUCCESS;
+            }else if (userLoginMapper.loginUserById(userLoginInfo)!=null){
+                String userToken = UUID.randomUUID().toString();
+                request.getSession().setAttribute("user",userLoginMapper.userNameByEmail(userLoginInfo.getE_mail()));
+                Cookie cookie = new Cookie("user",userToken);
+                response.addCookie(cookie);
+                return Canstants.SUCCESS;
+            }
+
+            else{
                 return Canstants.FAIL;
             }
         }catch (Exception e){
+            logger.error(e.getClass()+"{}",e);
             return Canstants.FAIL;
         }
     }

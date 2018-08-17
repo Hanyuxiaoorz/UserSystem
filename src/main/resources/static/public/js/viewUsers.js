@@ -141,7 +141,7 @@ function deleteUser(){
 					if(result == 1){
 						alert("已成功删除" + ByUser.userName);
 						//清空原有数据
-						$('#userPic').attr("src","../static/public/img/normalHeadPic.png");
+						$('#userPic').attr("src","../static/public/img/normalHeadPic.pic");
 						$(".list").children('.item').children('.content').empty();
 						$("#userInforShowArea").children(".teal").fadeOut();
 						ByUser = {

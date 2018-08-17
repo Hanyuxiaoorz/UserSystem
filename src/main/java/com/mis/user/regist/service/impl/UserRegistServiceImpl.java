@@ -5,12 +5,16 @@ import com.mis.user.canstants.Canstants;
 import com.mis.user.regist.dao.UserRegistMapper;
 import com.mis.user.regist.model.UserRegistInfo;
 import com.mis.user.regist.service.UserRegistService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 @Service
 public class UserRegistServiceImpl implements UserRegistService {
+
+    private Logger logger = LoggerFactory.getLogger(UserRegistServiceImpl.class);
 
     @Autowired
     private UserRegistMapper userRegistMapper;
@@ -70,12 +74,13 @@ public class UserRegistServiceImpl implements UserRegistService {
             } else if (!userRegistInfo.getE_mail().matches(regex)){
                 return Canstants.REGIST_STYLE_FAIL;//4,邮箱格式错误
             }else if (this.userRegistMapper.insertUser(userRegistInfo) == -1) {
-                        return Canstants.FAIL;//0，注册失败
+                return Canstants.FAIL;//0，注册失败
             } else {
                 return Canstants.SUCCESS;//1，注册成功
             }
         }
         catch (Exception e){
+            logger.error(e.getClass() + "{}", e);
             return Canstants.FAIL;//有异常
         }
     }
