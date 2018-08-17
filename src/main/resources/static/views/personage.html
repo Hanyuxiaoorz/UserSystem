@@ -26,7 +26,7 @@
 			</div>
 		<div class="content">	
 			<div class="userhead">
-				<h1><span class="username">大牙</span></h1>
+				<h1><span class="username"></span></h1>
 			</div>
 				<div class="data">
 					<div class="field">
@@ -110,7 +110,7 @@
 						<div class
 						="box2">
 							<div class="inputbox3">
-								<input class="Input3" maxlength="11">
+								<input class="Input3" maxlength="11" id="name">
 							</div>
 							<div class="ButtonGroup3">			
 								<button class="tiny ui primary button" type="submit" onclick="name_submit()">保存</button>
@@ -144,7 +144,7 @@
 						<div class
 						="box2">
 							<div class="inputbox">
-								<input class="Input" maxlength="32">
+								<input class="Input" maxlength="32" id="label">
 							</div>
 							<div class="ButtonGroup">			
 								<button class="tiny ui primary button" type="submit" onclick="label_submit()">保存</button>
@@ -180,7 +180,7 @@
 						<div class
 						="box2">
 							<div class="inputbox2">
-								<input class="Input2" maxlength="32">
+								<input class="Input2" maxlength="32" id="age">
 							</div>
 							<div class="ButtonGroup2">			
 								<button class="tiny ui primary button" type="submit" onclick="age_submit()">保存</button>
@@ -216,9 +216,9 @@
 						<div class
 						="box2">
 							<div class="inputbox2">
-								<input class="Input2">年
-								<input class="Input2">月
-								<input class="Input2">日
+								<input class="Input2" id="year">年
+								<input class="Input2" id="month">月
+								<input class="Input2"id="day">日
 							</div>
 							<div class="ButtonGroup3">			
 								<button class="tiny ui primary button" type="submit" onclick="birth_submit()">保存</button>
@@ -257,7 +257,7 @@
 						<div class
 						="box2">
 							<div class="inputbox3">
-								<input class="Input3" maxlength="11">
+								<input class="Input3" maxlength="11" id="phone">
 							</div>
 							<div class="ButtonGroup3">			
 								<button class="tiny ui primary button" type="submit" onclick="phone_submit()">保存</button>
@@ -291,7 +291,7 @@
 						<div class
 						="box2">
 							<div class="inputbox3">
-								<input class="Input3" maxlength="11">
+								<input class="Input3" maxlength="11" id="email">
 							</div>
 							<div class="ButtonGroup3">			
 								<button class="tiny ui primary button" type="submit" onclick="email_submit()">保存</button>
@@ -327,7 +327,7 @@
 						<div class
 						="box2">
 							<div class="inputbox2">
-								<input class="Input2" maxlength="32">
+								<input class="Input2" maxlength="32" id="grade">
 							</div>
 							<div class="ButtonGroup2">			
 								<button class="tiny ui primary button" type="submit" onclick="grade_submit()">保存</button>
@@ -362,7 +362,7 @@
 						<div class
 						="box2">
 							<div class="inputbox3">
-								<input class="Input3" maxlength="11">
+								<input class="Input3" maxlength="11" id="classmate">
 							</div>
 							<div class="ButtonGroup3">			
 								<button class="tiny ui primary button" type="submit" onclick="class_submit()">保存</button>
@@ -396,7 +396,7 @@
 						<div class
 						="box2">
 							<div class="inputbox3">
-								<input class="Input3" maxlength="11">
+								<input class="Input3" maxlength="11" id="major">
 							</div>
 							<div class="ButtonGroup3">			
 								<button class="tiny ui primary button" type="submit" onclick="major_submit()">保存</button>
@@ -431,7 +431,7 @@
 						<div class
 						="box2">
 							<div class="inputbox">
-								<input class="Input" maxlength="32">
+								<input class="Input" maxlength="32" id="hobby">
 							</div>
 							<div class="ButtonGroup">			
 								<button class="tiny ui primary button" type="submit" onclick="hobby_submit()">保存</button>
@@ -449,6 +449,16 @@
 						</div>
 					</div>
 					</div>
+
+
+					<div class="field">
+					<div class="ButtonGroup">			
+						<button class="medium ui primary button" type="submit" onclick="submit()">提交</button>
+						<button class="medihun ui button" type="button" onclick="class_cancel()">取消</button>
+					</div>
+							
+						</div>
+						</div>
 
 			
 					</div>

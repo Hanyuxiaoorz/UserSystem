@@ -10,7 +10,7 @@ import java.io.OutputStream;
 import java.util.Random;
 import javax.imageio.ImageIO;
 
-public final class ImageUtil {
+public final class VerifyCodeImageUtil {
 
     // 验证码字符集
     private static final char[] chars = {

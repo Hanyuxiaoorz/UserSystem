@@ -34,7 +34,6 @@ public class UserLogin {
 
     @Autowired
     UserLoginServiceIml userLoginServiceIml;
-    CookieUtil cookieUtil;
     UserLoginInfo userLoginInfo = new UserLoginInfo();
     Map map = new HashMap<String,String>();
 
@@ -42,40 +41,51 @@ public class UserLogin {
      *普通成员登陆
      * @param input
      * @param password
-     * @param vcode
+     * @param vCode
      * @param request
      * @param response
      * */
-    @PostMapping(value = "/login{input,password,vcode}")
-    public Object loginVerify(String input, String password, String vcode, HttpServletRequest request, HttpServletResponse response) {
+    @PostMapping(value = "/login{input,password,vCode}")
+    public Object loginVerify(String input, String password, String vCode, HttpServletRequest request, HttpServletResponse response) {
         map.clear();
-//        if(vcode.equals(session.getAttribute("imageCode"))){
-        if (request.getSession().getAttribute("user") != null) {
-            map.put("login", Canstants.SUCCESS);
+        //验证验证码是否正确
+        if(vCode.equalsIgnoreCase((String) request.getSession().getAttribute("imageCode"))){
+            //验证是否已经登陆过，登陆过不进入下一层if，直接放行
+            if (request.getSession().getAttribute("user") != null) {
+                map.put("login", Canstants.SUCCESS);
+            }
+            //判断登录凭证是否有效
+            else {
+                userLoginInfo.setPassword(password);
+                //用户名
+                if (userLoginServiceIml.judgeUserName(input) != null) {
+                    userLoginInfo.setUserName(input);
+                    map.put("login", userLoginServiceIml.userLogin(userLoginInfo, request, response));
+                }
+                //id
+                else if (userLoginServiceIml.judgeId(input) != null) {
+                    userLoginInfo.setId(input);
+                    map.put("login", userLoginServiceIml.userLogin(userLoginInfo, request, response));
+                }
+                //E-mail
+                else if (userLoginServiceIml.judgeEmail(input) != null) {
+                    userLoginInfo.setE_mail(input);
+                    map.put("login", userLoginServiceIml.userLogin(userLoginInfo, request, response));
+                }
+                //无效的登录信息
+                else {
+                    map.put("login", Canstants.LOGIN_INFO_NULL);
+                }
+            }
         }
-//            else {
-        userLoginInfo.setPassword(password);
-        if (userLoginServiceIml.judgeUserName(input) != null) {
-            userLoginInfo.setUserName(input);
-            map.put("login", userLoginServiceIml.userNameLogin(userLoginInfo, request, response));
-        } else if (userLoginServiceIml.judgeId(input) != null) {
-            userLoginInfo.setId(input);
-            map.put("login", userLoginServiceIml.userNameLogin(userLoginInfo, request, response));
-        } else if (userLoginServiceIml.judgeEmail(input) != null) {
-            userLoginInfo.setE_mail(input);
-            map.put("login", userLoginServiceIml.userNameLogin(userLoginInfo, request, response));
-        } else {
-            map.put("login", Canstants.LOGIN_INFO_NULL);
+        //验证码不正确
+        else {
+            map.put("login",Canstants.LOGIN_VCODE_FAIL);
         }
-//            }
-//        }else {
-           /* map.put("login",Canstants.REGIST_VCODE_FAIL);
-        }*/
         return JSON.toJSON(map);
     }
-//    }
     @RequestMapping(value = "/clientUserName" , method = POST)
-    public Object userNameSearch(HttpServletRequest request,HttpSession session){
+    public Object userNameSearch(HttpSession session){
         map.clear();
         map.put("clientUserName",session.getAttribute("user"));
         return JSON.toJSON(map);
@@ -88,7 +98,6 @@ public class UserLogin {
     @RequestMapping(value = "/loginOut" , method = POST)
     public Object loginOut(HttpServletRequest request){
         map.clear();
-        String s = request.getHeader("user");
         request.getSession().invalidate();
         map.put("loginOut",Canstants.SUCCESS);
         return JSON.toJSON(map);

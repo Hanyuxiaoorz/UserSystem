@@ -1,6 +1,7 @@
 package com.mis.user.regist.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.mis.user.canstants.Canstants;
 import com.mis.user.regist.service.impl.UserRegistServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,12 +27,14 @@ public class UserRegistVerfy {
     @GetMapping(value = "/regist/userNameVerify{userName}")
     private Object userNameVerify(String userName){
         try {
-            Map map = new HashMap<String,Object>(1);
+            map.clear();
             map.put("userNameVerify",this.userRegistServiceIml.userNameVerify(userName));
             //以JSON形式返回给前端
             return JSON.toJSON(map);
         }catch (Exception e){
-            return e.getMessage();
+            map.clear();
+            map.put("userNameVerify", Canstants.FAIL);
+            return JSON.toJSON(map);
         }
     }
 
@@ -44,7 +47,9 @@ public class UserRegistVerfy {
             //转换成JSON形式返回给前端
             return  JSON.toJSON(map);
         }catch (Exception e){
-            return e.getMessage();
+            map.clear();
+            map.put("userIdVerify",Canstants.FAIL);
+            return JSON.toJSON(map);
         }
     }
 
@@ -57,7 +62,9 @@ public class UserRegistVerfy {
             //转换成JSON形式返回给前端
             return  JSON.toJSON(map);
         }catch (Exception e){
-            return e.getMessage();
+            map.clear();
+            map.put("userEmailVerify",Canstants.FAIL);
+            return JSON.toJSON(map);
         }
     }
 }

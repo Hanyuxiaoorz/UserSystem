@@ -24,10 +24,10 @@ public class UserImage {
     @Value("${file.path1}")
     private String filePathRead;
     @RequestMapping(value = "/userImg",method = POST)
-    public Object userImg(@RequestParam(value="file")MultipartFile file, HttpSession session) throws Exception {
+    public Object userImg(@RequestParam(value="file", required=false)MultipartFile file, HttpSession session) throws Exception {
         map.clear();
         try{
-            if(session.getAttribute("user")!= null || session.getAttribute("token") != null) {
+            if(session.getAttribute("user")!= null) {
                 String extName = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
                 File file1 = new File(filePath + File.separator + session.getAttribute("user"));
                 //判断文件夹是否存在，不存在的话增加后缀，添加自己的文件夹，防止无限添加

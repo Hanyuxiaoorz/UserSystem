@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	getUserName();
 	//向表格中加入数据
 	$.ajax({
 				type:"POST",
@@ -111,7 +112,7 @@ function upLoadExcel(){
 	formData.append('file',$('#upload')[0].files[0]);
 	$.ajax({
 		type:"POST",
-		url:"/backstageManagement/excelUserInfo",
+		url:"http:localhost:8080/backstageManagement/excelUserInfo",
 		xhrFields: {
 			withCredentials: true
 		},

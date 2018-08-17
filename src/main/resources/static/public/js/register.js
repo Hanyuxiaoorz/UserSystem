@@ -3,9 +3,11 @@ function checkusername(){
 	var str = document.getElementById("username");
 	if(!reg.test(str.value)){
 		document.getElementById("checkanwserusername").innerHTML="您输入的字符不是数字或者字母";
+		return;
 	}
 	if(str.value == ""){
 		document.getElementById("checkanwserusername").innerHTML="用户名不能为空";
+		return;
 	}
 	if(reg.test(str.value)){
 		document.getElementById("checkanwserusername").innerHTML="";
@@ -45,13 +47,15 @@ function checkusername(){
 
 
 function checkemail(){
-    var reg=  /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$ /;
+    var reg= /^[a-zA-Z0-9_-\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
 	var str = document.getElementById("email");
-	if(!reg.test(str.value)){
-		document.getElementById("checkanwseremail").innerHTML="您输入的邮箱格式有误，请检查";
-	}
 	if(str.value==""){
 		document.getElementById("checkanwseremail").innerHTML="邮箱不能为空";
+		return;
+	}
+	if(!reg.test(str.value)){
+		document.getElementById("checkanwseremail").innerHTML="您输入的邮箱格式有误，请检查";
+		return;
 	}
 	if(reg.test(str.value)){
 		document.getElementById("checkanwseremail").innerHTML="";
@@ -75,11 +79,17 @@ function checkemail(){
 	            var resultJson = eval("("+text+")");
 	            var reVerify = resultJson.userEmailVerify;
 	            if (reVerify==1){
-	            	tip.innerHTML = "此邮箱可用";
-	            }
-	            else{
-	            	tip.innerHTML = "此邮箱已经注册";
-	            }
+					tip.innerHTML = "此邮箱可用";
+					return;
+				}
+				if (reVerify==2){
+					tip.innerHTML = "此邮箱已经注册";
+					return;
+				}
+				if (reVerify==0){
+					tip.innerHTML = "出现bug";
+					return;
+				}
 	        }
 	}
 			xmlhttp.open("GET","http://localhost:8080/regist/userEmailVerify?eMail="+email,true);
@@ -91,9 +101,11 @@ function checkID(){
 	var str = document.getElementById("ID");
 	if(str.value.length != 10){
 		document.getElementById("checkanwserID").innerHTML="学号输入有误";
+		return;
 	}
 	if(str.value==""){
 		document.getElementById("checkanwserID").innerHTML="学号不能为空";
+		return;
 	}
 	if(str.value.length == 10){
 		document.getElementById("checkanwserID").innerHTML="";
@@ -117,10 +129,16 @@ function checkID(){
 	            var resultJson = eval("("+text+")");
 	            var reVerify = resultJson.userIdVerify;
 	            if (reVerify==1){
-	            	tip.innerHTML = "此学号可用";
+					tip.innerHTML = "此学号可用";
+					return;
 	            }
-	            else{
-	            	tip.innerHTML = "此学号已经注册";
+	            if (reVerify==2){
+					tip.innerHTML = "此学号已经注册";
+					return;
+				}
+				if (reVerify==0){
+					tip.innerHTML = "异常，请联系管理员";
+					return;
 	            }
 	        } 
 	}	 
@@ -166,6 +184,7 @@ function register(){
 	var code = document.getElementById("code").value;
 	var recode = document.getElementById("recode").value;
 	var direction = document.getElementById("direction").innerHTML;
+	var codetext = document.getElementById("codetext").value;
 	if(regyh.test(username)){
 		if(regyx.test(email)){
 			if(id.length == 10){
@@ -239,6 +258,32 @@ function ceshi(){
 // ;
 // }
 
+var countdown=60;
+    function settime(val) {
+        if (countdown == 0) {
+            val.removeAttribute("disabled");
+            val.innerHTML="邮箱验证";
+            countdown = 60;
+        } else {
+            val.setAttribute("disabled", true);
+            val.innerHTML="重新点击(" + countdown + ")";
+            countdown--;
+            setTimeout(function() {
+                settime(val)
+            },1000)
+		}
+		
+		var xmlhttp;
+		if (window.XMLHttpRequest){//IE7+, Firefox, Chrome, Opera, Safari
+			xmlhttp=new XMLHttpRequest();
+		}
+		else{// IE6, IE5
+			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		var email = document.getElementById("email").value;
+		xmlhttp.open("GET","http://localhost:8080/verifyMail?e_mail="+email,true);
+		xmlhttp.send();
+    }
 
 
 
