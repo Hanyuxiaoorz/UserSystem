@@ -1,5 +1,11 @@
 $(document).ready(function(){
     getImg();
+    $('#userImg').click(function () {
+        toPersonPage($('#userName').text());
+    });
+    $('#userName').click(function () {
+        toPersonPage($('#userName').text());
+    })
 });
 
 //获取用户头像
@@ -70,4 +76,9 @@ function logOut(){
             console.log(thrownError);
         }
     });
+}
+
+//点击用户名和头像跳转
+function  toPersonPage(username){
+    window.location.href="personage.html?username" + username;
 }

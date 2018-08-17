@@ -69,3 +69,6 @@
     left: 150px;
     top: -50px;
 }
+#userImg{
+	cursor: pointer;
+}
