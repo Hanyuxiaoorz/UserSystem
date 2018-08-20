@@ -14,5 +14,7 @@ public interface UserLoginMapper {
     UserLoginInfo judgeId(String id);
     UserLoginInfo judgeEmail(String e_mail);
 
+    String userNameById(String id);
+    String userNameByEmail(String e_mail);
 
 }

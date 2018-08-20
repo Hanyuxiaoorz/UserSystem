@@ -21,8 +21,8 @@ public class UserImage {
     Map map = new HashMap<String,String>();
     @Value("${file.path}")
     private String filePath;
-    @Value("${file.path1}")
-    private String filePathRead;
+    @Value("${default.path}")
+    private String defaultPath;
     @RequestMapping(value = "/userImg",method = POST)
     public Object userImg(@RequestParam(value="file", required=false)MultipartFile file, HttpSession session) throws Exception {
         map.clear();
@@ -70,7 +70,7 @@ public class UserImage {
                 File file = new File(filePath + session.getAttribute("user") + File.separator + session.getAttribute("user") + ".jpg");
                 if (!file.exists()) {
                     map.clear();
-                    map.put("userPhoto", Canstants.BACK_NULL);//4,该用户目前无头像
+                    map.put("userPhoto", defaultPath);//默认头像,该用户目前无头像
                 } else {
                     map.clear();
                     map.put("userPhoto", path);
@@ -97,7 +97,7 @@ public class UserImage {
                 File file = new File( filePath + userName + File.separator + userName + ".jpg");
                 if(!file.exists()){
                     map.clear();
-                    map.put("userP",Canstants.FAIL);//4,该用户目前无头像
+                    map.put("userP",defaultPath);//默认头像,该用户目前无头像
                 }
                 else{
                     map.clear();

@@ -78,15 +78,27 @@ public class UserLoginServiceIml implements UserLoginService {
     @Override
     public int userLogin(UserLoginInfo userLoginInfo, HttpServletRequest request, HttpServletResponse response) {
         try {
-            if (userLoginMapper.loginUserByUserName(userLoginInfo) != null
-                    || userLoginMapper.loginUserById(userLoginInfo) != null
-                    || userLoginMapper.loginUserByEmail(userLoginInfo) != null) {
+            if (userLoginMapper.loginUserByUserName(userLoginInfo) != null) {
                 String userToken = UUID.randomUUID().toString();
                 request.getSession().setAttribute("user",userLoginInfo.getUserName());
                 Cookie cookie = new Cookie("user",userToken);
                 response.addCookie(cookie);
                 return Canstants.SUCCESS;
-            } else{
+            }else if (userLoginMapper.loginUserById(userLoginInfo) != null){
+                String userToken = UUID.randomUUID().toString();
+                request.getSession().setAttribute("user",userLoginMapper.userNameById(userLoginInfo.getId()));
+                Cookie cookie = new Cookie("user",userToken);
+                response.addCookie(cookie);
+                return Canstants.SUCCESS;
+            }else if (userLoginMapper.loginUserById(userLoginInfo)!=null){
+                String userToken = UUID.randomUUID().toString();
+                request.getSession().setAttribute("user",userLoginMapper.userNameByEmail(userLoginInfo.getE_mail()));
+                Cookie cookie = new Cookie("user",userToken);
+                response.addCookie(cookie);
+                return Canstants.SUCCESS;
+            }
+
+            else{
                 return Canstants.FAIL;
             }
         }catch (Exception e){
