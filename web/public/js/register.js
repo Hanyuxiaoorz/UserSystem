@@ -262,17 +262,19 @@ var countdown=60;
     function settime(val) {
         if (countdown == 0) {
             val.removeAttribute("disabled");
-            val.innerHTML="邮箱验证";
+            val.value="邮箱验证";
             countdown = 60;
         } else {
-            val.setAttribute("disabled", true);
-            val.innerHTML="重新点击(" + countdown + ")";
+			val.setAttribute("disabled",true);
+            val.value="重新点击(" + countdown + ")";
             countdown--;
             setTimeout(function() {
                 settime(val)
             },1000)
 		}
-		
+	}
+
+	function sentemail(){	
 		var xmlhttp;
 		if (window.XMLHttpRequest){//IE7+, Firefox, Chrome, Opera, Safari
 			xmlhttp=new XMLHttpRequest();
