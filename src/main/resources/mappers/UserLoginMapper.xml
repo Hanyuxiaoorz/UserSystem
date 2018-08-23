@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mis.user.login.dao.UserLoginMapper">
+    <resultMap id="BaseResultMap" type="com.mis.user.login.model.UserLoginInfo">
+        <result column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="userName" property="userName" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+        <result column="e_mail" property="e_mail" jdbcType="VARCHAR" />
+        <result column="state" property="state" jdbcType="VARCHAR" />
+    </resultMap>
+    <!-- 对用户输入信息的查询 -->
+    <!-- 判断是否为用户名 -->
+    <select id="judgeUserName" parameterType="com.mis.user.login.model.UserLoginInfo" resultMap="BaseResultMap">
+        SELECT *
+        FROM user_mess
+        WHERE username = #{userName,jdbcType=VARCHAR}
+    </select>
+
+    <select id="judgeId" parameterType="com.mis.user.login.model.UserLoginInfo" resultMap="BaseResultMap">
+        SELECT *
+        FROM user_mess
+        WHERE id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="judgeEmail" parameterType="com.mis.user.login.model.UserLoginInfo" resultMap="BaseResultMap">
+        SELECT *
+        FROM user_mess
+        WHERE e_mail = #{e_mail,jdbcType=VARCHAR}
+    </select>
+    <!-- 用户输入信息的查询结束 -->
+
+    <!-- session存储 -->
+    <select id="userNameById" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT username
+        FROM user_mess
+        WHERE id = #{id}
+    </select>
+
+    <select id="userNameByEmail" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT username
+        FROM user_mess
+        WHERE e_mail = #{e_mail}
+    </select>
+
+    <!-- 登陆验证 -->
+    <!-- 通过用户名登陆的验证 -->
+    <select id="loginUserByUserName" parameterType="com.mis.user.login.model.UserLoginInfo" resultMap="BaseResultMap">
+      SELECT *
+      FROM user_mess
+      WHERE userName = #{userName} AND password = #{password}
+    </select>
+
+        <!-- 通过用户学号登陆的验证 -->
+    <select id="loginUserById" parameterType="com.mis.user.login.model.UserLoginInfo" resultMap="BaseResultMap">
+      SELECT *
+      FROM user_mess
+      WHERE id = #{id} AND password = #{password}
+    </select>
+
+        <!-- 通过用户邮箱登陆的验证 -->
+    <select id="loginUserByEmail" parameterType="com.mis.user.login.model.UserLoginInfo" resultMap="BaseResultMap">
+      SELECT *
+      FROM user_mess
+      WHERE e_mail = #{e_mail} AND password = #{password}
+    </select>
+
+    <select id="stateVerifyByUserName" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT state
+        FROM user_mess
+        WHERE userName = #{userName}
+    </select>
+
+    <select id="stateVerifyById" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT state
+        FROM user_mess
+        WHERE id = #{id}
+    </select>
+
+    <select id="stateVerifyByEmail" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT state
+        FROM user_mess
+        WHERE e_mail = #{e_mail}
+    </select>
+        <!-- 登陆验证结束 -->
+</mapper>
