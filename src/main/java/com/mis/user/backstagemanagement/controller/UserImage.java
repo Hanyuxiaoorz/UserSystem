@@ -21,6 +21,8 @@ public class UserImage {
     Map map = new HashMap<String,String>();
     @Value("${file.path}")
     private String filePath;
+    @Value("${default.path}")
+    private String defaultPath;
     @RequestMapping(value = "/userImg",method = POST)
     public Object userImg(@RequestParam(value="file", required=false)MultipartFile file, HttpSession session) throws Exception {
         map.clear();
@@ -63,7 +65,6 @@ public class UserImage {
     @RequestMapping(value = "/userPhoto",method = POST)
     public Object userPhoto(HttpSession session) {
         String path = "SSOUser"+ File.separator + session.getAttribute("user") + File.separator + session.getAttribute("user") +".jpg";
-        String defaultPath = filePath + File.separator + "normalHeadedrPic.pic";
         try {
             if (session.getAttribute("user") != null) {
                 File file = new File(filePath + session.getAttribute("user") + File.separator + session.getAttribute("user") + ".jpg");
@@ -91,7 +92,6 @@ public class UserImage {
     @RequestMapping(value = "/userP",method = POST)
     public Object userP(String userName){
         String path = "SSOUser"+ File.separator + userName + File.separator + userName+".jpg";
-        String defaultPath = "SSOUser"+ File.separator + "normalHeadedrPic.pic";
         try {
             if (userName != null){
                 File file = new File( filePath + userName + File.separator + userName + ".jpg");

@@ -575,7 +575,7 @@ function submit(){
 }
 window.onload=username;
 function username(){
-	var username = $(".username").text();
+	var username = $("#username").text();
 	$.ajax({
         type:"POST",
         url:"http://localhost:8080/clientUserName",
@@ -586,9 +586,11 @@ function username(){
         contentType: "application/json",
         dataType:"json",
 		success : function(data) {  
-		for(var i = 0; i < data.length; i++) {  
-			 var datas = data[i];  
-			 $(".username").append("<p>"+datas.email+"</p>")
+		var html = "";
+		for(var i = 0; i < data.length; i++) { 
+			var datas = ""; 
+			datas += data[i];  
+			 $("#username").text(datas.username);
 		}  
 		}  
 	});
