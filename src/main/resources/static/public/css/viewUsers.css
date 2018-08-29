@@ -110,3 +110,6 @@
 	position: fixed;
 	top: 400px;
 }
+#userImg{
+	cursor: pointer;
+}

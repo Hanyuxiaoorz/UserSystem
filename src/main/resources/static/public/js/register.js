@@ -283,7 +283,7 @@ var countdown=60;
 			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 		}
 		var email = document.getElementById("email").value;
-		xmlhttp.open("GET","http://localhost:8080/regist/verifyMail"+email,true);
+		xmlhttp.open("GET","http://localhost:8080/regist/verifyMail?e_mail"+email,true);
 		xmlhttp.send();
  
     }
