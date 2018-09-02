@@ -102,8 +102,7 @@
 
     <!-- 通过用户名更改用户密码 -->
     <update id="changePasswordByUserName" parameterType="java.lang.String">
-        UPDATE
-        user_mess
+        UPDATE user_mess
         SET password="111111"
         WHERE
         userName = #{userName,jdbcType=VARCHAR}
@@ -136,8 +135,7 @@
 
     <!-- 更改用户等级 -->
     <update id="updateStateByUserName" parameterMap="ParameterMap">
-        UPDATE
-        user_mess
+        UPDATE user_mess
         SET state = #{state}
         WHERE userName = #{userName,jdbcType=VARCHAR}
     </update>
@@ -146,7 +144,7 @@
     <delete id="deleteUserByUserName" parameterType="java.lang.String" >
         DELETE
         FROM user_mess
-        WHERE userName = #{userName}
+        WHERE userName = #{userName,jdbcType=VARCHAR}
     </delete>
     <!-- 后台管理结束 -->
 </mapper>

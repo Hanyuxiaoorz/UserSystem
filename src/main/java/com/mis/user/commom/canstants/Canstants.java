@@ -1,4 +1,4 @@
-package com.mis.user.canstants;
+package com.mis.user.commom.canstants;
 
 public class Canstants {
 

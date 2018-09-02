@@ -1,24 +1,22 @@
 package com.mis.user.regist.dao;
 
-import com.mis.user.regist.service.impl.MailServiceImpl;
+import com.mis.user.Application;
+import com.mis.user.userEmailVerify.service.UserMailVerifyServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-
-@SpringBootTest
+@ContextConfiguration(classes = Application.class)
 public class MailServiceImplTest {
 
     @Autowired
-    private MailServiceImpl mailServiceImpl;
+    private UserMailVerifyServiceImpl userMailVerifyServiceImpl;
 
     @Test
     public void testSimpleMail() throws Exception {
-        mailServiceImpl.sendVerifyMail("1123570657@qq.com","重庆邮电大学教务处","赶紧请邓思远吃饭！");
+        userMailVerifyServiceImpl.sendVerifyMail("1123570657@qq.com","重庆邮电大学教务处","赶紧请邓思远吃饭！");
     }
 }

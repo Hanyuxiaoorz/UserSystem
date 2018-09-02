@@ -108,26 +108,26 @@ function checkIsNull(content){
 }
 //上传excel
 function upLoadExcel(){
-	var formData = new FormData();
-	formData.append('file',$('#upload')[0].files[0]);
-	$.ajax({
-		type:"POST",
-		url:"http:localhost:8080/backstageManagement/excelUserInfo",
-		xhrFields: {
-			withCredentials: true
-		},
-		crossDomain: true,
-		contentType: false,
-		processData: false,
-		data:formData,
-		dataType:"json",
-		clearForm:true,
-		success:function(json){
-			alert(json.excelUserInfo);
-		},
-		error: function (xhr, ajaxOptions, thrownError) {
-			console.log(xhr.responseText);
-			console.log(thrownError);
-		}
-	});
+    var formData = new FormData();
+    formData.append('file',$('#upload')[0].files[0]);
+    $.ajax({
+        type:"POST",
+        url:"http://localhost:8080/backstageManagement/excelUserInfo",
+        xhrFields: {
+            withCredentials: true
+        },
+        crossDomain: true,
+        contentType: false,
+        processData: false,
+        data:formData,
+        dataType:"json",
+        clearForm:true,
+        success:function(json){
+            alert(json.excelUserInfo);
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            console.log(xhr.responseText);
+            console.log(thrownError);
+        }
+    });
 }

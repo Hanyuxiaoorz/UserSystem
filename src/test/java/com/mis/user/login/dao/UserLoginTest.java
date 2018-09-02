@@ -16,15 +16,6 @@ public class UserLoginTest {
     UserLoginMapper userLoginMapper;
 
     @Test
-    public void loginUserByUserName(){
-        UserLoginInfo userLoginInfo = new UserLoginInfo();
-        userLoginInfo.setUserName("dsy");
-        userLoginInfo.setPassword("123456");
-        UserLoginInfo result = userLoginMapper.loginUserByUserName(userLoginInfo);
-        Assert.assertTrue("2017211005".equals(result.getId()));
-    }
-
-    @Test
     public void loginUserByEmail(){
         UserLoginInfo userLoginInfo = new UserLoginInfo();
         userLoginInfo.setE_mail("2208864697@qq.com");
@@ -40,15 +31,6 @@ public class UserLoginTest {
         userLoginInfo.setPassword("123456");
         UserLoginInfo result = userLoginMapper.loginUserById(userLoginInfo);
         Assert.assertTrue("dsy".equals(result.getUserName()));
-    }
-
-    @Test
-    public void judgeUserName(){
-        UserLoginInfo userLoginInfo = new UserLoginInfo();
-        userLoginInfo.setUserName("dsy");
-        userLoginInfo.setPassword("123456");
-        UserLoginInfo result = userLoginMapper.loginUserByUserName(userLoginInfo);
-        Assert.assertTrue("2208864697@qq.com".equals(result.getE_mail()));
     }
 
     @Test

@@ -2,7 +2,7 @@
 package com.mis.user.regist.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.mis.user.canstants.Canstants;
+import com.mis.user.commom.canstants.Canstants;
 import com.mis.user.regist.model.UserRegistInfo;
 import com.mis.user.regist.service.impl.UserRegistServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

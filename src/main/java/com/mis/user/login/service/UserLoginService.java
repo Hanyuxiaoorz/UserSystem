@@ -15,8 +15,6 @@ public interface UserLoginService {
     * 用户输入信息的判断
     *
     * */
-
-    Object judgeUserName(String userName);
     Object judgeId(String id);
     Object judgeEmail(String e_mail);
 
@@ -25,14 +23,4 @@ public interface UserLoginService {
     * */
     int userLogin(UserLoginInfo userLoginInfo, HttpServletRequest request, HttpServletResponse response);
 
-    /*String idLogin(UserLoginInfo userLoginInfo,HttpSession session);
-
-    String eMailLogin(UserLoginInfo userLoginInfo,HttpSession session);*/
-
-/*    //管理员登陆
-    int VIPUserNameLogin(UserLoginInfo userLoginInfo,HttpSession session);
-
-    int VIPIdLogin(UserLoginInfo userLoginInfo,HttpSession session);
-
-    int VIPEmailLogin(UserLoginInfo userLoginInfo,HttpSession session);*/
 }

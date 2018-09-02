@@ -2,7 +2,7 @@ package com.mis.user.backstagemanagement.service.iml;
 
 import com.mis.user.backstagemanagement.dao.UserShowMapper;
 import com.mis.user.backstagemanagement.service.UserPermissionService;
-import com.mis.user.canstants.Canstants;
+import com.mis.user.commom.canstants.Canstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

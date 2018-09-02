@@ -1,7 +1,7 @@
 //账号注册实现类，实现用户名，邮箱，学号的验证，以及注册新用户
 package com.mis.user.regist.service.impl;
 
-import com.mis.user.canstants.Canstants;
+import com.mis.user.commom.canstants.Canstants;
 import com.mis.user.regist.dao.UserRegistMapper;
 import com.mis.user.regist.model.UserRegistInfo;
 import com.mis.user.regist.service.UserRegistService;

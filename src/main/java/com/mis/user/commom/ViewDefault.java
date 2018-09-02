@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.thymeleaf.util.StringUtils;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 @Controller
 public class ViewDefault {
@@ -83,13 +84,11 @@ public class ViewDefault {
     }
 
     @GetMapping("/showValue.html")
-    private String showValue(String redirectUrl , HttpSession session , Model model) {
+    private String showValue(HttpSession session) {
         //判断是否存在全局会话
-        redirectUrl = "/showValue.html";
         String user = (String) session.getAttribute("user");
         if (StringUtils.isEmpty(user)) {
             //表示不存在全局会话，跳转至登陆界面
-            model.addAttribute("redirectUrl", redirectUrl);
             return "login";
         } else {
             //存在全局会话
@@ -104,17 +103,15 @@ public class ViewDefault {
     }
 
     @GetMapping("/personAge.html")
-    private String personAge(String redirectUrl , HttpSession session , Model model) {
+    private String personAge(HttpSession session) {
         //判断是否存在全局会话
-        redirectUrl = "/personAge.html";
         String user = (String) session.getAttribute("user");
         if (StringUtils.isEmpty(user)) {
             //表示不存在全局会话，跳转至登陆界面
-            model.addAttribute("redirectUrl", redirectUrl);
             return "login";
         } else {
             //存在全局会话
-            return "/personAge";
+            return "personAge";
         }
     }
 }

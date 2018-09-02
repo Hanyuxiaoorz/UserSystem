@@ -1,26 +1,17 @@
 package com.mis.user.login.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.mis.user.canstants.Canstants;
-import com.mis.user.login.dao.UserLoginMapper;
+import com.mis.user.commom.canstants.Canstants;
 import com.mis.user.login.model.UserLoginInfo;
 import com.mis.user.login.service.iml.UserLoginServiceIml;
-import com.mis.user.util.CookieUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.thymeleaf.util.StringUtils;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.net.HttpCookie;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -57,13 +48,8 @@ public class UserLogin {
             //判断登录凭证是否有效
             else {
                 userLoginInfo.setPassword(password);
-                //用户名
-                if (userLoginServiceIml.judgeUserName(input) != null) {
-                    userLoginInfo.setUserName(input);
-                    map.put("login", userLoginServiceIml.userLogin(userLoginInfo, request, response));
-                }
                 //id
-                else if (userLoginServiceIml.judgeId(input) != null) {
+                if (userLoginServiceIml.judgeId(input) != null) {
                     userLoginInfo.setId(input);
                     map.put("login", userLoginServiceIml.userLogin(userLoginInfo, request, response));
                 }

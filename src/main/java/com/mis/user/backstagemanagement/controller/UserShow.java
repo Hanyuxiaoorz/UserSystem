@@ -2,7 +2,7 @@ package com.mis.user.backstagemanagement.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.mis.user.backstagemanagement.service.iml.UserShowServiceIml;
-import com.mis.user.canstants.Canstants;
+import com.mis.user.commom.canstants.Canstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

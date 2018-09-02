@@ -1,7 +1,7 @@
 package com.mis.user.backstagemanagement.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.mis.user.canstants.Canstants;
+import com.mis.user.commom.canstants.Canstants;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -4,7 +4,7 @@ import com.mis.user.backstagemanagement.dao.UserShowMapper;
 import com.mis.user.backstagemanagement.model.PageBean;
 import com.mis.user.backstagemanagement.model.UserShowInfo;
 import com.mis.user.backstagemanagement.service.UserShowService;
-import com.mis.user.canstants.Canstants;
+import com.mis.user.commom.canstants.Canstants;
 import com.mis.user.regist.dao.UserRegistMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
