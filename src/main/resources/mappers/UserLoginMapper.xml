@@ -10,13 +10,6 @@
         <result column="state" property="state" jdbcType="VARCHAR" />
     </resultMap>
     <!-- 对用户输入信息的查询 -->
-    <!-- 判断是否为用户名 -->
-    <select id="judgeUserName" parameterType="com.mis.user.login.model.UserLoginInfo" resultMap="BaseResultMap">
-        SELECT *
-        FROM user_mess
-        WHERE username = #{userName,jdbcType=VARCHAR}
-    </select>
-
     <select id="judgeId" parameterType="com.mis.user.login.model.UserLoginInfo" resultMap="BaseResultMap">
         SELECT *
         FROM user_mess
@@ -43,14 +36,13 @@
         WHERE e_mail = #{e_mail}
     </select>
 
-    <!-- 登陆验证 -->
-    <!-- 通过用户名登陆的验证 -->
-    <select id="loginUserByUserName" parameterType="com.mis.user.login.model.UserLoginInfo" resultMap="BaseResultMap">
-      SELECT *
-      FROM user_mess
-      WHERE userName = #{userName} AND password = #{password}
+    <select id="userIdByEmail" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT id
+        FROM user_mess
+        WHERE e_mail = #{e_mail}
     </select>
 
+    <!-- 登陆验证 -->
         <!-- 通过用户学号登陆的验证 -->
     <select id="loginUserById" parameterType="com.mis.user.login.model.UserLoginInfo" resultMap="BaseResultMap">
       SELECT *

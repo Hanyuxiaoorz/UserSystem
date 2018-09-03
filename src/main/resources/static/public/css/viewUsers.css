@@ -110,3 +110,63 @@
 	position: fixed;
 	top: 400px;
 }
+#userImg{
+	cursor: pointer;
+}
+footer{
+	position: relative;
+	top: 200px;
+	width: 100%;
+	height: 130px;
+	background: gray;
+	text-align: center;
+}
+.MisLinks{
+	position: relative;
+	margin-top: 30px;
+}
+.MisLinks a{
+	font-size: 12px;
+    line-height: 21px;
+    text-align: center;
+    color: #fff;
+    text-shadow: 0 1px 2px #999;
+}
+.MisLinks a::after{
+	content: "  \B7  ";
+    white-space: pre;
+    display: inline-block;
+}
+.MisLinks :last-child::after{
+	display: none;
+}
+.MisRights a{
+	font-size: 12px;
+    line-height: 21px;
+    text-align: center;
+    color: #fff;
+    text-shadow: 0 1px 2px #999;
+}
+.MisRights a::after{
+	content: "  \B7  ";
+    white-space: pre;
+    display: inline-block;
+}
+.MisRights :last-child::after{
+	display: none;
+}
+.MisRepos a{
+	font-size: 12px;
+    line-height: 21px;
+    text-align: center;
+    color: #fff;
+    text-shadow: 0 1px 2px #999;
+}
+.MisRepos a::after{
+	content: "  \B7  ";
+    white-space: pre;
+    display: inline-block;
+}
+.MisRepos :last-child::after{
+	display: none;
+}

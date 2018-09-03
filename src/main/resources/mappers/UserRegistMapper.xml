@@ -3,21 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mis.user.regist.dao.UserRegistMapper">
-    <resultMap id="BaseResultMap" type="com.mis.user.regist.model.UserRegistInfo">
-        <id column="id" property="id" />
-        <result column="userName" property="userName"/>
-        <result column="password" property="password"/>
-        <result column="e_mail" property="e_mail" />
-        <result column="sex" property="sex" />
-        <result column="phone_number" property="phone_number" />
-        <result column="major" property="major" />
-        <result column="class_number" property="class_number" />
-        <result column="study_direction" property="study_direction" />
-        <result column="age" property="age" />
-        <result column="birth" property="birth" />
-        <result column="habit" property="habit" />
-        <result column="status" property="status" />
-    </resultMap>
+
     <!-- 注册验证及注册 -->
     <insert id="insertUser" parameterType="com.mis.user.regist.model.UserRegistInfo">
         INSERT
@@ -25,25 +11,19 @@
         values (#{userName}, #{password},#{id},#{e_mail},#{study_direction})
     </insert>
 
-    <!-- 验证用户名是否已经被注册 -->
-    <select id="registUserByUserName" parameterType="String"  resultType="com.mis.user.regist.model.UserRegistInfo">
-        SELECT *
-        FROM user_mess
-        WHERE userName = #{userName};
-    </select>
-
     <!-- 验证用户学号是否已经被注册 -->
-    <select id="registUserByUserId" parameterType="String" resultType="com.mis.user.regist.model.UserRegistInfo">
+    <select id="registUserByUserId" parameterType="java.lang.String" resultType="com.mis.user.regist.model.UserRegistInfo">
         SELECT *
         FROM user_mess
         WHERE id = #{id};
     </select>
 
     <!-- 验证用户邮箱是否已经被注册 -->
-    <select id="registUserByUserEmail" parameterType="String" resultType="com.mis.user.regist.model.UserRegistInfo">
+    <select id="registUserByUserEmail" parameterType="java.lang.String" resultType="com.mis.user.regist.model.UserRegistInfo">
         SELECT *
         FROM user_mess
         WHERE e_mail = #{e_mail};
     </select>
     <!-- 注册验证结束 -->
+
 </mapper>

@@ -25,8 +25,8 @@ public class UserPersonalMessIml implements UserPersonalMessService {
     @Override
     public Object searchUserPersonMess(String id) {
         try {
-            if(userPersonalMessMapper.searchUserPersonMess(id) != null){
-                return userPersonalMessMapper.searchUserPersonMess(id);
+            if(userPersonalMessMapper.searchUserPersonalMess(id) != null){
+                return userPersonalMessMapper.searchUserPersonalMess(id);
             }
             else {
                 return Canstants.BACK_NULL;
@@ -44,7 +44,7 @@ public class UserPersonalMessIml implements UserPersonalMessService {
     @Override
     public boolean updateUserPersonMess(UserPersonalMess userPersonalMess) {
         try {
-            if(userPersonalMessMapper.updateUserPersonMess(userPersonalMess)){
+            if(userPersonalMessMapper.updateUserPersonalMess(userPersonalMess)){
                 return true;
             }else {
                 return false;

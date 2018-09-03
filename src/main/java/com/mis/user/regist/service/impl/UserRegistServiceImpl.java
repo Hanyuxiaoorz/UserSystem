@@ -1,4 +1,3 @@
-//账号注册实现类，实现用户名，邮箱，学号的验证，以及注册新用户
 package com.mis.user.regist.service.impl;
 
 import com.mis.user.commom.canstants.Canstants;
@@ -10,6 +9,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * 注册时用户id和e-mail的唯一性验证
+ *
+ * 注册信息的上传
+ *
+ * */
 
 @Service
 public class UserRegistServiceImpl implements UserRegistService {
@@ -18,18 +23,6 @@ public class UserRegistServiceImpl implements UserRegistService {
 
     @Autowired
     private UserRegistMapper userRegistMapper;
-    //验证账号是否已经存在
-    @Override
-    public int userNameVerify(String userName) {
-        try {
-            if (userRegistMapper.registUserByUserName(userName) != null) {
-                return Canstants.REGIST_EXIST;
-            } else
-                return Canstants.SUCCESS;
-        }catch (Exception e){
-            return Canstants.FAIL;
-        }
-    }
 
     //验证邮箱是否已经注册
     @Override
@@ -68,8 +61,8 @@ public class UserRegistServiceImpl implements UserRegistService {
                     || userRegistInfo.getStudy_direction() == null || userRegistInfo.getId() == null) {
                 return Canstants.REGIST_NULL;//3,存在空值
                 //验证用户唯一性信息是否已经存在
-            } else if(userRegistMapper.registUserByUserName(userRegistInfo.getUserName()) != null || userRegistMapper.registUserByUserId(userRegistInfo.getId()) != null
-                        || userRegistMapper.registUserByUserEmail(userRegistInfo.getE_mail()) != null) {
+            } else if(userRegistMapper.registUserByUserId(userRegistInfo.getId()) != null
+                    || userRegistMapper.registUserByUserEmail(userRegistInfo.getE_mail()) != null) {
                 return Canstants.REGIST_EXIST;
             } else if (!userRegistInfo.getE_mail().matches(regex)){
                 return Canstants.REGIST_STYLE_FAIL;//4,邮箱格式错误

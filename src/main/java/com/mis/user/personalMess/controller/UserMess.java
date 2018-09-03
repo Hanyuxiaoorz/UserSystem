@@ -21,17 +21,16 @@ public class UserMess {
     Map map = new HashMap<String,String>();
 
     /**
-     * @param id
      * @param session
      *
      * 个人页面信息展示
      * */
     @RequestMapping(value = "/userPersonalMessShow",method = POST)
-    public Object userPersonalMessShow(String id,HttpSession session){
+    public Object userPersonalMessShow(HttpSession session){
         try{
             if(session.getAttribute("user") != null){
                 map.clear();
-                map.put("userPersonalMessShow",userPersonalMessService.searchUserPersonMess(id));
+                map.put("userPersonalMessShow",userPersonalMessService.searchUserPersonMess((String) session.getAttribute("userId")));
             }
             else {
                 map.clear();
@@ -41,6 +40,6 @@ public class UserMess {
             map.clear();
             map.put("userPersonalMessShow", Canstants.FAIL);//0,bug
         }
-        return JSON.toJSON(map);
+        return map;
     }
 }

@@ -1,5 +1,15 @@
 $(document).ready(function(){
     getImg();
+    $('#userImg').click(function () {
+        toPersonPage($('#userName').text());
+    });
+    $('#userName').click(function () {
+        toPersonPage($('#userName').text());
+    })
+    //联系我们
+    $('#contactUs').click(function(){
+        contactUs();
+    });
 });
 
 //获取用户头像
@@ -70,4 +80,49 @@ function logOut(){
             console.log(thrownError);
         }
     });
+}
+
+//点击用户名和头像跳转
+function  toPersonPage(username){
+    window.location.href="personage.html?username" + username;
+}
+//联系我们
+function contactUs(){
+    $('#contactUsModal')
+    .modal({
+        onApprove : function() {
+            uploadContactContent();
+          }
+    })
+    .modal('show');
+}
+//上传联系内容
+function uploadContactContent(){
+    $('#contactUsModal')
+    .modal('hide');
+    $.ajax({
+        type:"POST",
+        url:"http://localhost:8080/contactUs",
+        data:{
+            "contactTitle": $('#contactTitle').val(),
+            "contactContent": $('#contactContent').val()
+        },
+        dataType:"json",
+        contentType:"application/json",
+        success:function(){
+            $('#contactTitle').val('');
+            $('#contactContent').val('');
+            setTimeout(function(){
+                $('#successModal')
+                .modal('show')
+            },2000)
+            setTimeout(function(){
+                $('#successModal')
+                .modal('hide'); 
+            },3000);
+        },
+        error:function(err){
+            console.error(err);
+        }
+    })
 }

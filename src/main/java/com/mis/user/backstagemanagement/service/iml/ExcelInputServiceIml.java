@@ -134,8 +134,6 @@ public class ExcelInputServiceIml implements ExcelInputService {
                         userName = cell.getStringCellValue();
                         if(StringUtils.isEmpty(userName)){
                             rowMessage += "用户名不能为空；";
-                        }else if(userRegistMapper.registUserByUserName(userName) != null){
-                            rowMessage += "用户名为"+userName+"的用户已存在";
                         }else if(userName.length()>50){
                             rowMessage += "用户名的字数不能超过50；";
                         }else {

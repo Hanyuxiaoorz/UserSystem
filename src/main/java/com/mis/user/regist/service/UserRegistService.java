@@ -9,12 +9,6 @@ import org.springframework.stereotype.Service;
 public interface UserRegistService {
 
     /*
-    * 用户名是否已经被注册的验证
-    *
-    * */
-    int userNameVerify(String userName);
-
-    /*
     * 用户邮箱是否已经被注册的验证
     *
     * */

@@ -6,8 +6,8 @@ import org.springframework.stereotype.Repository;
 @Repository(value = "userPersonMessMapper")
 public interface UserPersonalMessMapper {
 
-    UserPersonalMess searchUserPersonMess(String id);
+    UserPersonalMess searchUserPersonalMess(String id);
 
-    boolean updateUserPersonMess(UserPersonalMess userPersonalMess);
+    boolean updateUserPersonalMess(UserPersonalMess userPersonalMess);
 
 }

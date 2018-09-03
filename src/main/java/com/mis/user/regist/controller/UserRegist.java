@@ -13,12 +13,12 @@ import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
-/*
-* 控制层
-* @author:Genius
-* 2018.4.15
-*
-* */
+/**
+ * 控制层
+ * @author:Genius
+ * 2018.4.15
+ *
+ * */
 
 @RestController
 public class UserRegist {
@@ -27,7 +27,14 @@ public class UserRegist {
     UserRegistServiceImpl userRegistServiceimpl;
     Map map = new HashMap<String,Object>();
 
-    //使用POST方法获取前端请求
+    /**
+     * @param userRegistInfo
+     * @param mailVerifyCode
+     * @param session
+     *
+     * 用户注册信息的上传
+     *
+     * */
     @PostMapping(value = "/regist{userRegistInfo}")
     private Object regist(UserRegistInfo userRegistInfo,String mailVerifyCode,HttpSession session){
         try {
@@ -37,7 +44,7 @@ public class UserRegist {
                 map.put("regist",userRegistServiceimpl.regist(userRegistInfo));
             }else {
                 map.clear();
-                map.put("regist",Canstants.REGIST_VCODE_FAIL);
+                map.put("regist",Canstants.REGIST_VCODE_FAIL);//5,邮箱验证码错误
             }
             //以JSON形式返回给前端
             return JSON.toJSON(map);

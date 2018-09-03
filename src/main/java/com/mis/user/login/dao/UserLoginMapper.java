@@ -15,4 +15,6 @@ public interface UserLoginMapper {
     String userNameById(String id);
     String userNameByEmail(String e_mail);
 
+    String userIdByEmail(String e_mail);
+
 }

@@ -16,12 +16,6 @@ public class registDaoTest {
     UserRegistMapper userRegistMapper;
 
     @Test
-    public void registUserByUserName(){
-        UserRegistInfo result = userRegistMapper.registUserByUserName("dsy");
-        Assert.assertTrue("dsy".equals(result.getUserName()));
-    }
-
-    @Test
     public void registUserByUserId(){
         UserRegistInfo result = userRegistMapper.registUserByUserId("2017211005");
         Assert.assertTrue("2017211005".equals(result.getId()));

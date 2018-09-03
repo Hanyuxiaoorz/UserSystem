@@ -22,8 +22,14 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 public class ExcelInput {
 
     Map map = new HashMap();
+
     @Autowired
     ExcelInputServiceIml excelInputServiceIml;
+
+    /**
+     * @param file
+     * @param session
+     * */
     @RequestMapping(value = "/excelUserInfo",method = POST)
     public Object upload(@RequestParam(value="file", required = false)MultipartFile file, HttpSession session) throws Exception {
         try {

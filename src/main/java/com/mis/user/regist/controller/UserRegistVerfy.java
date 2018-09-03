@@ -12,7 +12,7 @@ import java.util.Map;
 
 /*
 * 控制层
-* 用户唯一性信息是否已经被注册
+* 用户唯一性验证以及注册
 * @author:Genius
 * Data:2018.4.15
 *
@@ -21,24 +21,15 @@ import java.util.Map;
 public class UserRegistVerfy {
 
     Map map = new HashMap<String,Object>();
-    //用户名是否已经被注册的验证
+
     @Autowired
     UserRegistServiceImpl userRegistServiceIml;
-    @GetMapping(value = "/regist/userNameVerify{userName}")
-    private Object userNameVerify(String userName){
-        try {
-            map.clear();
-            map.put("userNameVerify",this.userRegistServiceIml.userNameVerify(userName));
-            //以JSON形式返回给前端
-            return JSON.toJSON(map);
-        }catch (Exception e){
-            map.clear();
-            map.put("userNameVerify", Canstants.FAIL);
-            return JSON.toJSON(map);
-        }
-    }
 
-    //用户Id是否已经被注册的验证
+    /**
+     * @param id
+     *
+     * 用户id唯一性验证
+     *  */
     @GetMapping(value = "/regist/userIdVerify{id}")
     private Object userIdVerify(String id){
         try {
@@ -53,7 +44,12 @@ public class UserRegistVerfy {
         }
     }
 
-    //验证用户邮箱是否已经被注册的方法
+
+    /**
+     * @param eMail
+     *
+     * 用户id唯一性验证
+     *  */
     @GetMapping(value = "/regist/userEmailVerify{eMail}")
     private Object userEmailVerify(String eMail){
         try {

@@ -35,18 +35,19 @@ public class UserLogin {
      * @param vCode
      * @param request
      * @param response
+     *
      * */
     @PostMapping(value = "/login{input,password,vCode}")
     public Object loginVerify(String input, String password, String vCode, HttpServletRequest request, HttpServletResponse response) {
         map.clear();
-        //验证验证码是否正确
-        if(vCode.equalsIgnoreCase((String) request.getSession().getAttribute("imageCode"))){
-            //验证是否已经登陆过，登陆过不进入下一层if，直接放行
-            if (request.getSession().getAttribute("user") != null) {
-                map.put("login", Canstants.SUCCESS);
-            }
-            //判断登录凭证是否有效
-            else {
+        //验证是否已经登陆过，登陆过不进入下一层if，直接放行
+        if (request.getSession().getAttribute("user") != null) {
+            map.put("login", Canstants.SUCCESS);
+        }
+        //判断登录凭证是否有效
+        else {
+            //验证验证码是否正确
+            if(vCode.equalsIgnoreCase((String) request.getSession().getAttribute("imageCode"))){
                 userLoginInfo.setPassword(password);
                 //id
                 if (userLoginServiceIml.judgeId(input) != null) {
@@ -63,13 +64,18 @@ public class UserLogin {
                     map.put("login", Canstants.LOGIN_INFO_NULL);
                 }
             }
-        }
-        //验证码不正确
-        else {
-            map.put("login",Canstants.LOGIN_VCODE_FAIL);
+            //验证码不正确
+            else {
+                map.put("login",Canstants.LOGIN_VCODE_FAIL);
+            }
         }
         return JSON.toJSON(map);
     }
+
+    /**
+     * @param session
+     * 当前登陆用户名的获取
+     * */
     @RequestMapping(value = "/clientUserName" , method = POST)
     public Object userNameSearch(HttpSession session){
         map.clear();
@@ -79,13 +85,13 @@ public class UserLogin {
 
     /**
      * 退出登录
-     * @Param: session
+     * @param request
      * */
     @RequestMapping(value = "/loginOut" , method = POST)
     public Object loginOut(HttpServletRequest request){
         map.clear();
         request.getSession().invalidate();
-        map.put("loginOut",Canstants.SUCCESS);
+        map.put("loginOut", Canstants.SUCCESS);
         return JSON.toJSON(map);
     }
 }
