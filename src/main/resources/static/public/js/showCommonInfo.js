@@ -84,7 +84,7 @@ function logOut(){
 
 //点击用户名和头像跳转
 function  toPersonPage(username){
-    window.location.href="personage.html?username" + username;
+    window.location.href="personAge.html";
 }
 //联系我们
 function contactUs(){
