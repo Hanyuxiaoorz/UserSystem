@@ -141,7 +141,7 @@ function deleteUser(){
 					if(result == 1){
 						alert("已成功删除" + ByUser.userName);
 						//清空原有数据
-						$('#userPic').attr("src","../static/public/img/normalHeadPic.pic");
+						$('#userPic').attr("src","../static/public/img/normalHeadPic.png");
 						$(".list").children('.item').children('.content').empty();
 						$("#userInforShowArea").children(".teal").fadeOut();
 						ByUser = {
@@ -188,6 +188,8 @@ function upLevelUser(Chosenstate){
 			var result = parseInt(json.userState);
 			if(result){
 				alert("已更改改用户权限");
+				//刷新用户信息
+				searchUsers();
 			}
 			else{
 				alert("你没有此权限!");
