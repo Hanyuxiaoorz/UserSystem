@@ -23,12 +23,9 @@ public class UserMailVerifyServiceImpl {
 
     @Autowired
     private JavaMailSender mailSender;
-    private VelocityEngine velocityEngine;
 
     @Value("${spring.mail.username}")
     private String from;
-
-    Map map = new HashMap<String,String>();
 
     public Object sendVerifyMail(String to,String subject,String content){
         MimeMessage message = null;

@@ -99,14 +99,14 @@ function contactUs(){
 //上传联系内容
 function uploadContactContent(){
     $('#contactUsModal')
-    .modal('hide');
+        .modal('hide');
     $.ajax({
         type:"POST",
         url:"http://localhost:8080/contactUs",
-        data:{
+        data: JSON.stringify({
             "contactTitle": $('#contactTitle').val(),
             "contactContent": $('#contactContent').val()
-        },
+        }),
         dataType:"json",
         contentType:"application/json",
         success:function(){
@@ -114,15 +114,16 @@ function uploadContactContent(){
             $('#contactContent').val('');
             setTimeout(function(){
                 $('#successModal')
-                .modal('show')
+                    .modal('show')
             },2000)
             setTimeout(function(){
                 $('#successModal')
-                .modal('hide'); 
+                    .modal('hide');
             },3000);
         },
         error:function(err){
             console.error(err);
         }
-    })
+    });
 }
+
