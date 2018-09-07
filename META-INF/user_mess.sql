@@ -17,7 +17,6 @@ create table `user_mess` (
 	`study_direction` varchar (150),
 	`age` double ,
 	`birth` date ,
-	`habit` varchar (150),
 	`state` double ,
 	`labelinfo` varchar (150)
 ); 
