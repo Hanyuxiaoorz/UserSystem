@@ -32,7 +32,7 @@ public class UserMailVerify {
      *
      **/
 
-    @RequestMapping(value = "/verifyMail",method = RequestMethod.GET)
+    @RequestMapping(value = "/verifyMail",method = RequestMethod.POST)
     public Object verifyMail(String e_mail, HttpSession session) throws Exception {
         try {
             String base = "abcdefghijklmnopqrstuvwxyz0123456789";

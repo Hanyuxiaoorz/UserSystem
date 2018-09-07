@@ -55,5 +55,22 @@ public class UserPersonalMessIml implements UserPersonalMessService {
         }
     }
 
+    /**
+     * 用户邮箱更改绑定
+     * @param mailVCode
+     * @param mail
+     * */
+    public boolean updateUserEmail(String mailVCode,String mail){
+        try {
+            if(userPersonalMessMapper.updateUserEmail(mail)){
+                return true;
+            }else {
+                return false;
+            }
+        }catch (Exception e){
+            logger.error(e.getClass()+"{}",e);
+            return false;
+        }
+    }
 
 }

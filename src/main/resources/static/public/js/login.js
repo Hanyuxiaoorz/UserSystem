@@ -24,11 +24,12 @@ function login(){
         success:function(stateNum){
             var number = parseInt(stateNum.login);
             switch(number){
-                case 0:alert("登录失败!"); break;
+                case 0:alert("该功能出现异常!请联系管理员！！"); break;
                 case 1:window.location.reload();break;
                 case 2:alert("登录信息未填写完整！");break;
                 case 3:alert("无权登陆该系统！");break;
                 case 4:alert("验证码输入不正确！");break;
+                case 5:alert("用户名或密码填写错误！");break;
                 default:alert(stateNum.login);
             }
         },

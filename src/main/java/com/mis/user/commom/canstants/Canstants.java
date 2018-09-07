@@ -16,11 +16,13 @@ public class Canstants {
     public static final int LOGIN_INFO_NULL = 2;//登陆信息未填写完整
     public static final int LOGIN_PERMISSION_FAIL = 3;//无权登陆该系统
     public static final int LOGIN_VCODE_FAIL = 4;//验证码输入不正确
+    public static final int LOGIN_USER_NULL = 5;//该用户不存在
 
     //后台管理系统的其他状态值
     public static final int BACK_PERMISSION_FAIL=2;//无权限操作返回值
     public static final int BACK_PERMISSION_NULL=3;//未查询到权限值返回值
     public static final int BACK_NULL=4;//未查询到任何值
+
 
     //个人信息页面其他状态值
     public static final int INFO_NULL = 2;//必填项目存在空值

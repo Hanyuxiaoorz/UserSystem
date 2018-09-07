@@ -6,7 +6,6 @@ public class UserRegistInfo {
     private String password;
     private String id;
     private String e_mail;
-    private String study_direction;
 
     public void setUserName(String userName) {
         this.userName = userName;
@@ -38,13 +37,6 @@ public class UserRegistInfo {
 
     public String getE_mail() {
         return e_mail;
-    }
-    public void setStudy_direction(String study_direction) {
-        this.study_direction = study_direction;
-    }
-
-    public String getStudy_direction() {
-        return study_direction;
     }
 
 }

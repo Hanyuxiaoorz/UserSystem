@@ -10,4 +10,6 @@ public interface UserPersonalMessService {
 
     boolean updateUserPersonMess(UserPersonalMess userPersonalMess);
 
+    boolean updateUserEmail(String mailVCode,String mail);
+
 }

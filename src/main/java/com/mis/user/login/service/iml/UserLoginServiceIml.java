@@ -86,11 +86,11 @@ public class UserLoginServiceIml implements UserLoginService {
                 return Canstants.SUCCESS;
             }
             else{
-                return Canstants.FAIL;
+                return Canstants.LOGIN_INFO_NULL;//2,登陆信息不正确
             }
         }catch (Exception e){
             logger.error(e.getClass()+"{}",e);
-            return Canstants.FAIL;
+            return Canstants.FAIL;//0,出现bug,联系管理员
         }
     }
 }

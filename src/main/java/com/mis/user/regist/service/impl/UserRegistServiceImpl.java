@@ -58,7 +58,7 @@ public class UserRegistServiceImpl implements UserRegistService {
             //注册合理性验证
             //验证是否输入是否完整
             if (userRegistInfo.getUserName() == null || userRegistInfo.getPassword() == null || userRegistInfo.getE_mail() == null
-                    || userRegistInfo.getStudy_direction() == null || userRegistInfo.getId() == null) {
+                    || userRegistInfo.getId() == null) {
                 return Canstants.REGIST_NULL;//3,存在空值
                 //验证用户唯一性信息是否已经存在
             } else if(userRegistMapper.registUserByUserId(userRegistInfo.getId()) != null
@@ -67,7 +67,7 @@ public class UserRegistServiceImpl implements UserRegistService {
             } else if (!userRegistInfo.getE_mail().matches(regex)){
                 return Canstants.REGIST_STYLE_FAIL;//4,邮箱格式错误
             }else if (this.userRegistMapper.insertUser(userRegistInfo) == -1) {
-                return Canstants.FAIL;//0，注册失败
+                return Canstants.REGIST_EXIST;//2，注册失败
             } else {
                 return Canstants.SUCCESS;//1，注册成功
             }

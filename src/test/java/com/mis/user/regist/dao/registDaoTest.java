@@ -34,7 +34,6 @@ public class registDaoTest {
         userRegistInfo.setPassword("123456");
         userRegistInfo.setId("2016211005");
         userRegistInfo.setE_mail("159753654@qq.com");
-        userRegistInfo.setStudy_direction("前端");
         int result = userRegistMapper.insertUser(userRegistInfo);
         Assert.assertTrue(1 == result);
     }

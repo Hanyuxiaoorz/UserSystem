@@ -10,4 +10,6 @@ public interface UserPersonalMessMapper {
 
     boolean updateUserPersonalMess(UserPersonalMess userPersonalMess);
 
+    boolean updateUserEmail(String Mail);
+
 }

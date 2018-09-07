@@ -101,26 +101,21 @@
     </select>
 
     <!-- 通过用户名更改用户密码 -->
-    <update id="changePasswordByUserName" parameterType="java.lang.String">
+    <update id="changePasswordByUserId" parameterType="java.lang.String">
         UPDATE user_mess
         SET password="111111"
         WHERE
-        userName = #{userName,jdbcType=VARCHAR}
+        id = #{id,jdbcType=VARCHAR}
     </update>
     <!-- 查找该用户密码，判断是否修改成功 -->
     <select id="selectPassword" parameterType="java.lang.String" resultType="java.lang.String">
         SELECT password
         FROM user_mess
-        WHERE userName = #{userName,jdbcType=VARCHAR}
-    </select>
-    <!-- 查询该用户权限值 -->
-    <select id="selectStateByUserName" parameterType="java.lang.String" resultType="int">
-        SELECT state
-        FROM user_mess
-        WHERE userName = #{userName,jdbcType=VARCHAR}
+        WHERE id = #{id,jdbcType=VARCHAR}
     </select>
 
-    <select id="selectStateById" parameterType="java.lang.String" resultType="int">
+    <!-- 查询该用户权限值 -->
+    <select id="selectStateByUserId" parameterType="java.lang.String" resultType="int">
         SELECT state
         FROM user_mess
         WHERE id = #{id,jdbcType=VARCHAR}
@@ -134,17 +129,17 @@
     <!-- 更改密码完成 -->
 
     <!-- 更改用户等级 -->
-    <update id="updateStateByUserName" parameterMap="ParameterMap">
+    <update id="updateStateByUserId" parameterType="java.lang.Integer">
         UPDATE user_mess
         SET state = #{state}
-        WHERE userName = #{userName,jdbcType=VARCHAR}
+        WHERE id = #{id,jdbcType=VARCHAR}
     </update>
 
     <!--用户的删除-->
-    <delete id="deleteUserByUserName" parameterType="java.lang.String" >
+    <delete id="deleteUserByUserId" parameterType="java.lang.String" >
         DELETE
         FROM user_mess
-        WHERE userName = #{userName,jdbcType=VARCHAR}
+        WHERE id = #{id,jdbcType=VARCHAR}
     </delete>
     <!-- 后台管理结束 -->
 </mapper>

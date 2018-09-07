@@ -61,12 +61,12 @@ public class UserLogin {
                 }
                 //无效的登录信息
                 else {
-                    map.put("login", Canstants.LOGIN_INFO_NULL);
+                    map.put("login", Canstants.LOGIN_USER_NULL);//5,该用户不存在
                 }
             }
             //验证码不正确
             else {
-                map.put("login",Canstants.LOGIN_VCODE_FAIL);
+                map.put("login",Canstants.LOGIN_VCODE_FAIL);//4,验证码不正确
             }
         }
         return JSON.toJSON(map);
@@ -91,7 +91,12 @@ public class UserLogin {
     public Object loginOut(HttpServletRequest request){
         map.clear();
         request.getSession().invalidate();
-        map.put("loginOut", Canstants.SUCCESS);
+        if(request.getSession().getAttribute("user") == null){
+            map.put("loginOut", Canstants.SUCCESS);
+        }
+        else {
+           map.put("loginOut",Canstants.FAIL);
+        }
         return JSON.toJSON(map);
     }
 }
