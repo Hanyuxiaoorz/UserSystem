@@ -42,7 +42,7 @@ public interface UserShowMapper {
     * @param userName
     * @return
     * */
-    boolean deleteUserByUserName(@Param("userName") String byUserName);
+    boolean deleteUserByUserId(@Param("userName") String byUserId);
 
     /**
      * 分页操作，调用findByPage limit分页方法
@@ -56,17 +56,15 @@ public interface UserShowMapper {
     * @param userName
     * @return
     * */
-    boolean changePasswordByUserName(@Param("userName") String byUserName);
-    String selectPassword(@Param("userName") String byUserName);
-    int selectStateByUserName(@Param("userName") String userName);
-    int selectStateById(@Param("id") String id);
+    boolean changePasswordByUserId(@Param("userName") String byUserId);
+    int selectStateByUserId(@Param("id") String id);
     int selectStateByE_mail(@Param("e_mail") String e_mail);
 
     /*
     * update user`s level
     * @param userName,state
     * */
-    boolean updateStateByUserName(@Param("userName") String byUserName,@Param("state") int state);
+    boolean updateStateByUserId(@Param("userName") String byUserId,@Param("state") int state);
 
     /*
     * select study_direction

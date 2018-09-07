@@ -164,14 +164,6 @@ public class ExcelInputServiceIml implements ExcelInputService {
                             userRegistInfo.setId(userId);
                         }
                     }
-                    else if(c == 3){
-                        study_direction = cell.getStringCellValue();
-                        if(StringUtils.isEmpty(study_direction)){
-                            rowMessage += "用户学习方向不能为空；";
-                        }else {
-                            userRegistInfo.setStudy_direction(study_direction);
-                        }
-                    }
                 }else{
                     rowMessage += "第"+(c+1)+"列数据有问题，请仔细检查；";
                 }

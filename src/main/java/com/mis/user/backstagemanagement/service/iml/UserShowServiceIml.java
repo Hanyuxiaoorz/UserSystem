@@ -6,6 +6,8 @@ import com.mis.user.backstagemanagement.model.UserShowInfo;
 import com.mis.user.backstagemanagement.service.UserShowService;
 import com.mis.user.commom.canstants.Canstants;
 import com.mis.user.regist.dao.UserRegistMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,9 +21,10 @@ import java.util.List;
 @Service
 public class UserShowServiceIml implements UserShowService {
 
+    Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Autowired
     private UserShowMapper userShowMapper;
-    private UserRegistMapper userRegistMapper;
 
     /*
     *
@@ -34,10 +37,10 @@ public class UserShowServiceIml implements UserShowService {
                 return userShowMapper.selectUserList();
             }
             else{
-                return Canstants.BACK_NULL;
+                return Canstants.BACK_NULL;//4,不存在该用户
             }
         }catch (Exception e){
-            return Canstants.FAIL;
+            return Canstants.FAIL;//0，该功能存在异常
         }
     }
 
@@ -130,6 +133,7 @@ public class UserShowServiceIml implements UserShowService {
                 return null;
             }
         }catch (Exception e){
+            logger.error(e.getClass()+"{}",e);
             return null;
         }
     }

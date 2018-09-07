@@ -37,7 +37,7 @@ public class UserShow {
             map.put("userInfo", this.userShowServiceIml.selectUserList());
             //以JSON形式返回给前端
         }else {
-            map.put("userInfo", Canstants.FAIL);
+            map.put("userInfo", Canstants.BACK_PERMISSION_FAIL);
         }
         return JSON.toJSON(map);
     }
@@ -48,40 +48,49 @@ public class UserShow {
     * */
     @RequestMapping(value = "/selectUserInfo{searchValue}",method = POST)
     public Object selectUser(HttpServletRequest request,String searchValue){
-        map.clear();
-        if (request.getSession().getAttribute("user") != null) {
-            if(userShowServiceIml.selectUserByInput(searchValue) !=null){
-            return JSON.toJSON(userShowServiceIml.selectUserByInput(searchValue));
+        try {
+            map.clear();
+            if (request.getSession().getAttribute("user") != null) {
+                if(userShowServiceIml.selectUserByInput(searchValue) !=null){
+                    return JSON.toJSON(userShowServiceIml.selectUserByInput(searchValue));
+                }
+                else{
+                    map.put("selectUserInfo",Canstants.BACK_NULL);//4,未查询到该用户
+                }
+            }else {
+                map.put("selectUserInfo",Canstants.BACK_PERMISSION_FAIL);//2,未登陆
             }
-            else{
-                map.put("selectUserInfo",Canstants.FAIL);
-            }
-        }else {
-            map.put("selectUserInfo",Canstants.FAIL);
+
+        }catch (Exception e){
+            map.put("selectUserInfo",Canstants.FAIL);//0,此功能出现异常，请联系管理员
         }
         return JSON.toJSON(map);
     }
 
-    /*
-    * the amount of user and admin
-    *
-    * */
+    /**
+     * the amount of user and admin
+     *
+     * */
     @RequestMapping(value = "/mainAmount",method = GET)
     public Object userAmount(HttpServletRequest request){
-        map.clear();
-        if (request.getSession().getAttribute("user") != null) {
-            map.put("userAmount", userShowServiceIml.userAmount());
-            map.put("adminAmount", userShowServiceIml.managerAmount());
-        }else {
-            map.put("error",Canstants.FAIL);
+        try {
+            map.clear();
+            if (request.getSession().getAttribute("user") != null) {
+                map.put("userAmount", userShowServiceIml.userAmount());
+                map.put("adminAmount", userShowServiceIml.managerAmount());
+            }else {
+                map.put("error",Canstants.BACK_PERMISSION_FAIL);//2,未登录
+            }
+        }catch (Exception e){
+            map.put("error",Canstants.FAIL);//0,出现异常，请联系管理员
         }
         return JSON.toJSON(map);
     }
 
-    /*
-    *the amount of every direction
-    *
-    * */
+    /**
+     *the amount of every direction
+     *
+     * */
     @RequestMapping(value = "/study_directionAmount",method = GET)
     public Object study_direction(){
         map.clear();

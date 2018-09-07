@@ -24,22 +24,23 @@ public class UserPermission {
     * update user`s password
     *
     * */
-    @RequestMapping(value = "/updatePassword{byUserName}",method = POST)
-    public Object resetPassword(String byUserName,HttpSession session){
+    @RequestMapping(value = "/updatePassword{byUserId}",method = POST)
+    public Object resetPassword(String byUserId,HttpSession session){
         try {
-            System.out.println(byUserName);
+            System.out.println(byUserId);
             if(session.getAttribute("user") != null){
-                String hostUserName = (String) session.getAttribute("user");
+                String hostUserId = (String) session.getAttribute("user");
                 map.clear();
-                map.put("updatePassword",userPermissionService.changePasswordByUserName(hostUserName,byUserName));
+                map.put("updatePassword",userPermissionService.changePasswordByUserId(hostUserId,byUserId));
             }else {
                 map.clear();
-                map.put("updatePassword",Canstants.FAIL);
+                map.put("updatePassword",Canstants.BACK_PERMISSION_FAIL);//2，未登录
             }
         }catch (Exception e){
             map.clear();
-            e.printStackTrace();
             map.put("updatePassword",Canstants.FAIL);
+            e.printStackTrace();
+
         }
         return JSON.toJSON(map);
     }
@@ -48,12 +49,12 @@ public class UserPermission {
     * delete a user
     *
     * */
-    @RequestMapping(value = "/deleteUser{byUserName}",method = POST)
-    public Object deleteUser(String byUserName, HttpSession session){
+    @RequestMapping(value = "/deleteUser{byUserId}",method = POST)
+    public Object deleteUser(String byUserId, HttpSession session){
         try {
-            String hostUserName = (String) session.getAttribute("user");
+            String hostUserId = (String) session.getAttribute("userId");
             map.clear();
-            map.put("deleteUser",userPermissionService.deleteUserByUserName(hostUserName,byUserName));
+            map.put("deleteUser",userPermissionService.deleteUserByUserId(hostUserId,byUserId));
         }catch (Exception e){
             map.clear();
             map.put("deleteUser",Canstants.FAIL);
@@ -65,12 +66,12 @@ public class UserPermission {
     * update user`s state
     *
     * */
-    @RequestMapping(value = "/userState{byUserName,state}",method = POST)
-    public Object updateUserStage(String byUserName, Integer state,HttpServletRequest request){
+    @RequestMapping(value = "/userState{byUserId,state}",method = POST)
+    public Object updateUserStage(String byUserId, int state,HttpServletRequest request){
         try{
-            String hostUserName = (String) request.getSession().getAttribute("user");
+            String hostUserId = (String) request.getSession().getAttribute("userId");
             map.clear();
-            map.put("userState",userPermissionService.updateUserStageByuserName(hostUserName,byUserName,state));
+            map.put("userState",userPermissionService.updateUserStageByUserId(hostUserId,byUserId,state));
         }catch (Exception e){
             map.clear();
             map.put("userState",Canstants.FAIL);
