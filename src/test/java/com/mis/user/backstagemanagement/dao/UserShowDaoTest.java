@@ -29,9 +29,9 @@ public class UserShowDaoTest {
     @Test
     public void selectByUserName(){
         UserShowInfo userShowInfo;
-        userShowInfo = userShowMapper.selectByUserName("dsy");
+        userShowInfo = userShowMapper.selectByUserName("2017211005");
         String name = userShowInfo.getUserName();
-        Assert.assertTrue(name.equals("dsy"));
+        Assert.assertTrue(name.equals("2017211005"));
         Assert.assertFalse(name.equals("lbw"));
     }
 
@@ -55,20 +55,20 @@ public class UserShowDaoTest {
 
     @Test
     public void deleteUserByUserName(){
-        boolean rows = userShowMapper.deleteUserByUserName("lbw");
+        boolean rows = userShowMapper.deleteUserByUserId("2017211004");
         Assert.assertTrue(true == rows);
     }
 
     @Test
     public void changePasswordByUserName(){
-        boolean result = userShowMapper.changePasswordByUserName("hyx");
+        boolean result = userShowMapper.changePasswordByUserId("2017211004");
         assertTrue(true == result);
     }
 
     @Test
     public void updateStateByUserName(){
-        boolean result = userShowMapper.updateStateByUserName("hyx",1);
-        boolean result1 = userShowMapper.updateStateByUserName("lbw",0);
+        boolean result = userShowMapper.updateStateByUserId("2017211004",1);
+        boolean result1 = userShowMapper.updateStateByUserId("2017211004",0);
         Assert.assertTrue(true == result);
         Assert.assertTrue(true == result1);
     }

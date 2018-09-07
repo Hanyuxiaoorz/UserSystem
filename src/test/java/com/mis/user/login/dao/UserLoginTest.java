@@ -30,7 +30,7 @@ public class UserLoginTest {
         userLoginInfo.setId("2017211005");
         userLoginInfo.setPassword("123456");
         UserLoginInfo result = userLoginMapper.loginUserById(userLoginInfo);
-        Assert.assertTrue("dsy".equals(result.getUserName()));
+        Assert.assertTrue("2017211005".equals(result.getUserName()));
     }
 
     @Test

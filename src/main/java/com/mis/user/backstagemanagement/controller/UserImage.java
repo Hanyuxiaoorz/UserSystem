@@ -26,6 +26,7 @@ public class UserImage {
     Map map = new HashMap<String,String>();
     @Value("${file.path}")
     private String filePath;
+
     @Value("${default.path}")
     private String defaultPath;
 
@@ -38,18 +39,19 @@ public class UserImage {
      * */
     @RequestMapping(value = "/userImg",method = POST)
     public Object userImg(@RequestParam(value="file", required=false)MultipartFile file, HttpSession session) throws Exception {
+        String user = (String) session.getAttribute("userId");
         map.clear();
         try{
-            if(session.getAttribute("userId")!= null) {
+            if(user != null) {
                 String extName = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
-                File file1 = new File(filePath + File.separator + session.getAttribute("user"));
+                File file1 = new File(filePath + File.separator + user);
                 //判断文件夹是否存在，不存在的话增加后缀，添加自己的文件夹，防止无限添加
                 if(!file1.exists()){
                     //创建文件夹，用于存放个人数据
                     file1.mkdirs();
                 }
-                filePath = filePath + session.getAttribute("userId")+File.separator;
-                String fileName = session.getAttribute("userId")+extName;
+                filePath = filePath + user +File.separator;
+                String fileName = user + extName;
                 //判断是否已有头像，若有，进行删除，防止找不到相应的头像
                 File file2 = new File(filePath+fileName);
                 if(file2.exists()){
@@ -84,10 +86,11 @@ public class UserImage {
      * */
     @RequestMapping(value = "/userPhoto",method = POST)
     public Object userPhoto(HttpSession session) {
-        String path = "SSOUser"+ File.separator + session.getAttribute("userId") + File.separator + session.getAttribute("user") +".jpg";
+        String user = (String) session.getAttribute("userId");
+        String path = "SSOUser"+ File.separator + user + File.separator + user +".jpg";
         try {
-            if (session.getAttribute("userId") != null) {
-                File file = new File(filePath + session.getAttribute("userId") + File.separator + session.getAttribute("user") + ".jpg");
+            if ( user != null) {
+                File file = new File(filePath + user + File.separator + user +".jpg");
                 if (!file.exists()) {
                     map.clear();
                     map.put("userPhoto", defaultPath);//默认头像,该用户目前无头像
