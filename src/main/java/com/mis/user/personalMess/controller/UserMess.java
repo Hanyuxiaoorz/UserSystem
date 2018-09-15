@@ -1,4 +1,4 @@
-package com.mis.user.personalmess.controller;
+package com.mis.user.personalMess.controller;
 
 import com.mis.user.commom.canstants.Canstants;
 import com.mis.user.personalmess.service.UserPersonalMessService;
@@ -17,7 +17,6 @@ public class UserMess {
 
     @Autowired
     UserPersonalMessService userPersonalMessService;
-    Map map = new HashMap<String,String>();
 
     /**
      * @param session
@@ -26,6 +25,7 @@ public class UserMess {
      * */
     @RequestMapping(value = "/userPersonalMessShow",method = POST)
     public Object userPersonalMessShow(HttpSession session){
+        Map map = new HashMap<String,String>(16);
         try{
             if(session.getAttribute("user") != null){
                 map.clear();
@@ -33,11 +33,13 @@ public class UserMess {
             }
             else {
                 map.clear();
-                map.put("userPersonalMessShow", Canstants.LOGIN_INFO_NULL);//2，未登录
+                //2，未登录
+                map.put("userPersonalMessShow", Canstants.LOGIN_INFO_NULL);
             }
         }catch (Exception e){
             map.clear();
-            map.put("userPersonalMessShow", Canstants.FAIL);//0,bug
+            //0,bug
+            map.put("userPersonalMessShow", Canstants.FAIL);
         }
         return map;
     }

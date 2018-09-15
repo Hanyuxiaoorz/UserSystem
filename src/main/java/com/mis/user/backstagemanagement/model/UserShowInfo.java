@@ -20,7 +20,6 @@ public class UserShowInfo {
     private String study_direction;
     private int age;
     private String birth;
-    private String habit;
     private Integer state;
 
     public String getUserName() {
@@ -111,19 +110,11 @@ public class UserShowInfo {
         this.e_mail = e_mail;
     }
 
-    public String getHabit() {
-        return habit;
-    }
-
-    public void setHabit(String habit) {
-        this.habit = habit;
-    }
-
-    public Integer getState() {
+    public int getState() {
         return state;
     }
 
-    public void setState(Integer state) {
+    public void setState(int state) {
         this.state = state;
     }
 }

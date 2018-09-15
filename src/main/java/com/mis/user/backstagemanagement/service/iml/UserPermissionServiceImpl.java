@@ -6,7 +6,7 @@ import com.mis.user.commom.canstants.Canstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/*
+/**
 *
 * @author:Dengsiyuan
 * 后台功能的服务层
@@ -17,7 +17,7 @@ public class UserPermissionServiceImpl implements UserPermissionService{
     @Autowired
     UserShowMapper userShowMapper;
 
-    /*
+    /**
     *
     * 修改用户密码
     * */
@@ -30,17 +30,20 @@ public class UserPermissionServiceImpl implements UserPermissionService{
                 if(userShowMapper.changePasswordByUserId(byUserId)){
                   return Canstants.SUCCESS;
                 } else{
-                  return Canstants.BACK_PERMISSION_NULL;//3,若密码更改失败
+                    //3,若密码更改失败
+                  return Canstants.BACK_PERMISSION_NULL;
                 }
             } else{
-                return Canstants.BACK_NULL; //4,若无权限更改用户密码
+                //4,若无权限更改用户密码
+                return Canstants.BACK_NULL;
                 }
         } catch (Exception e){
-            return Canstants.FAIL;//0,此功能出现异常，请联系管理员
+            //0,此功能出现异常，请联系管理员
+            return Canstants.FAIL;
         }
     }
 
-    /*
+    /**
     *
     * 修改用户等级
     * */
@@ -51,21 +54,25 @@ public class UserPermissionServiceImpl implements UserPermissionService{
             if (userShowMapper.selectStateByUserId(hostUserId) > userShowMapper.selectStateByUserId(byUserId)) {
                 //修改成功
                 if (userShowMapper.updateStateByUserId(byUserId, state)) {
-                    return Canstants.SUCCESS;//1
+                    return Canstants.SUCCESS;
                 }
                 else {
-                    return Canstants.BACK_NULL;//4,修改失败
+                    //4,修改失败
+                    return Canstants.BACK_NULL;
                 }
             } else {
-                return Canstants.BACK_PERMISSION_FAIL;//2,权限不允许更改
+                //2,权限不允许更改
+                return Canstants.BACK_PERMISSION_FAIL;
             }
         }
         catch (Exception e){
-            return Canstants.FAIL;//0,未查询到权限值，抛出空指针异常处理
+            //0,未查询到权限值，抛出空指针异常处理
+            e.printStackTrace();
+            return Canstants.FAIL;
         }
     }
 
-    /*
+    /**
     *
     * 删除用户
     * */
@@ -77,7 +84,8 @@ public class UserPermissionServiceImpl implements UserPermissionService{
                 userShowMapper.deleteUserByUserId(byUserId);
                 //删除成功
                 if (userShowMapper.selectByUserId(byUserId) == null) {
-                    return Canstants.SUCCESS;//1,删除成功
+                    //1,删除成功
+                    return Canstants.SUCCESS;
                 }
                 else {
                     return Canstants.BACK_PERMISSION_NULL;//3,删除失败

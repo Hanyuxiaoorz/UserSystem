@@ -4,7 +4,7 @@ import com.mis.user.backstagemanagement.model.PageBean;
 import com.mis.user.backstagemanagement.model.UserShowInfo;
 import org.springframework.stereotype.Service;
 
-/*
+/**
 * UserShow的业务逻辑层接口
 * @author:Dengsiyuan
 * @Date:2018年04月25日

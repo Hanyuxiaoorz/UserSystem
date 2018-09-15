@@ -178,7 +178,7 @@ function upLevelUser(Chosenstate){
 		url:"http://localhost:8080/backstageManagement/userState",
 		contentType:"application/x-www-form-urlencoded",
 		data:{
-			"byUserName":ByUser.id,
+			"byUserId":ByUser.id,
 			"state":Chosenstate
 		},
 		xhrFields: {
@@ -191,7 +191,7 @@ function upLevelUser(Chosenstate){
 			if(result){
 				alert("已更改改用户权限");
 				//刷新用户信息
-				searchUsers();
+				showUser(ByUser.id);
 			}
 			else{
 				alert("你没有此权限!");
@@ -205,6 +205,9 @@ function upLevelUser(Chosenstate){
 }
 //外界跳转时执行的ajax
 function showUser(searchId){
+    //清空原有数据
+    $(".list").children('.item').children('.content').empty();
+    $("#userInforShowArea").children(".teal").hide();
 	$.ajax({
 		type:"POST",
 		url:"http://localhost:8080/backstageManagement/selectUserInfo",
@@ -227,6 +230,7 @@ function showUser(searchId){
 			getHeadPic(person.id);
 			ByUser.userName = person.userName;
 			ByUser.state = person.state;
+            ByUser.id = person.id;
 			//添加标签
 			var tag = "<div class='ui teal huge top right attached label'>";
 			switch(person.state){

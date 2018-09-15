@@ -1,4 +1,4 @@
-package com.mis.user.personalmess.controller;
+package com.mis.user.personalMess.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.mis.user.commom.canstants.Canstants;
@@ -19,7 +19,6 @@ public class UserPersonalMessUpdate {
 
     @Autowired
     UserPersonalMessService userPersonalMessService;
-    Map map = new HashMap<String,String>();
 
     /**
      * @param userPersonalMess
@@ -31,6 +30,7 @@ public class UserPersonalMessUpdate {
 
     @RequestMapping(value = "/userPersonalMessUpdate",method = POST)
     public Object userPersonalMessUpdate(UserPersonalMess userPersonalMess, HttpSession session){
+        Map map = new HashMap<String,String>(16);
         try{
             if(session.getAttribute("user") != null){
                 if(userPersonalMessService.updateUserPersonMess(userPersonalMess)){
@@ -38,16 +38,19 @@ public class UserPersonalMessUpdate {
                     map.put("userPersonalMessUpdate", Canstants.SUCCESS);
                 }else {
                     map.clear();
-                    map.put("userPersonalMessUpdate",Canstants.INFO_NULL);//2,更新未成功
+                    //2,更新未成功
+                    map.put("userPersonalMessUpdate",Canstants.INFO_NULL);
                 }
             }else {
                 map.clear();
-                map.put("userPersonalMessUpdate",Canstants.LOGIN_PERMISSION_FAIL);//3,未登录，无权更改信息
+                //3,未登录，无权更改信息
+                map.put("userPersonalMessUpdate",Canstants.LOGIN_PERMISSION_FAIL);
             }
 
         }catch (Exception e){
            map.clear();
-           map.put("userPersonalMessUpdate",Canstants.FAIL);//0,bug
+           //0,bug
+           map.put("userPersonalMessUpdate",Canstants.FAIL);
         }
         return JSON.toJSON(map);
     }

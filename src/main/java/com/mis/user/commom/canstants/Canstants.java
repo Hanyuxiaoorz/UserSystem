@@ -5,7 +5,8 @@ public class Canstants {
     //此处定义一个成功和失败的返回值全定义
     // 操作失败
     public static final int FAIL = 0;
-    public static final int SUCCESS=1;//操作成功
+    //操作成功
+    public static final int SUCCESS=1;
 
     //注册的其他状态值
     // 该信息已经被注册
@@ -37,6 +38,7 @@ public class Canstants {
 
 
     //个人信息页面其他状态值
-    public static final int INFO_NULL = 2;//必填项目存在空值
+    //必填项目存在空值
+    public static final int INFO_NULL = 2;
 
 }

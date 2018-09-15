@@ -8,7 +8,7 @@
         <result column="userName" property="userName" jdbcType="VARCHAR" />
         <result column="password" property="password" jdbcType="VARCHAR" />
         <result column="e_mail" property="e_mail" jdbcType="VARCHAR" />
-        <result column="sex" property="sex" />
+        <result column="sex" property="sex" jdbcType="CHAR"/>
         <result column="phone_number" property="phone_number" />
         <result column="major" property="major" />
         <result column="class_number" property="class_number" />
@@ -16,7 +16,7 @@
         <result column="age" property="age" />
         <result column="birth" property="birth" />
         <result column="habit" property="habit" />
-        <result column="state" property="state" />
+        <result column="state" property="state" jdbcType="INTEGER"/>
     </resultMap>
 
     <parameterMap id="ParameterMap" type="Map">
@@ -129,7 +129,7 @@
     <!-- 更改密码完成 -->
 
     <!-- 更改用户等级 -->
-    <update id="updateStateByUserId" parameterType="java.lang.Integer">
+    <update id="updateStateByUserId">
         UPDATE user_mess
         SET state = #{state}
         WHERE id = #{id,jdbcType=VARCHAR}

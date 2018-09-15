@@ -3,6 +3,7 @@ package com.mis.user.backstagemanagement.dao;
 import com.mis.user.backstagemanagement.model.UserShowInfo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.HashMap;
 import java.util.List;
@@ -10,13 +11,13 @@ import java.util.List;
 @Repository(value = "userShowMapper")
 public interface UserShowMapper {
 
-    /*
+    /**
     * 查询所有用户所有信息
     * @return
     * */
     List<UserShowInfo> selectUserList();
 
-    /*
+    /**
     * 通过主键查询一条用户数据
     * @param userName,id,e_mail
     * @return
@@ -25,19 +26,19 @@ public interface UserShowMapper {
     UserShowInfo selectByUserId(@Param("id") String id);//用户学号
     UserShowInfo selectByUserEmail(@Param("e_mail") String e_mail);//用户邮箱
 
-    /*
+    /**
     * 查询用户记录总数
     * @return
     * */
     int userAmount();
 
-    /*
+    /**
     * 查询管理员数量
     * @return
     * */
     int managerAmount();
 
-    /*
+    /**
     *根据主键删除一条用户数据
     * @param userName
     * @return
@@ -51,22 +52,24 @@ public interface UserShowMapper {
      */
     List<UserShowInfo> findByPage(HashMap<String, Object> map);
 
-    /*
+    /**
     * 通过用户名更改用户密码
-    * @param userName
+    * @param byUserId
     * @return
     * */
-    boolean changePasswordByUserId(@Param("userName") String byUserId);
-    int selectStateByUserId(@Param("id") String id);
-    int selectStateByE_mail(@Param("e_mail") String e_mail);
+    boolean changePasswordByUserId(String byUserId);
+    int selectStateByUserId(String id);
+    int selectStateByE_mail(String e_mail);
 
-    /*
-    * update user`s level
-    * @param userName,state
-    * */
-    boolean updateStateByUserId(@Param("userName") String byUserId,@Param("state") int state);
+    /**
+     * update user`s level
+     * @param byUserId
+     * @param state
+     * @return boolean
+     * */
+    boolean updateStateByUserId(@Param("id") String byUserId,@Param("state") int state);
 
-    /*
+    /**
     * select study_direction
     *
     * */

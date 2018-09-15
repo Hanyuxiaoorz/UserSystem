@@ -21,8 +21,6 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @RequestMapping(value = "/backstageManagement")
 public class ExcelInput {
 
-    Map map = new HashMap();
-
     @Autowired
     ExcelInputServiceImpl excelInputServiceIml;
 
@@ -32,6 +30,7 @@ public class ExcelInput {
      * */
     @RequestMapping(value = "/excelUserInfo",method = POST)
     public Object upload(@RequestParam(value="file", required = false)MultipartFile file, HttpSession session) throws Exception {
+        Map map = new HashMap<String,String>(16);
         try {
             //判断文件是否为空
             if (file == null) {

@@ -1,4 +1,4 @@
-package com.mis.user.useremailverify.controller;
+package com.mis.user.usereMailVerify.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.mis.user.commom.canstants.Canstants;
@@ -22,7 +22,6 @@ public class UserMailVerify {
 
     @Autowired
     private UserMailVerifyServiceImpl userMailVerifyServiceImpl;
-    Map map = new HashMap<String,Object>();
 
     /**
      * @param e_mail
@@ -34,6 +33,7 @@ public class UserMailVerify {
 
     @RequestMapping(value = "/verifyMail",method = RequestMethod.POST)
     public Object verifyMail(String e_mail, HttpSession session) throws Exception {
+        Map map = new HashMap<String,Object>(16);
         try {
             String base = "abcdefghijklmnopqrstuvwxyz0123456789";
             Random random = new Random();

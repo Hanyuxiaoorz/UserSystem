@@ -24,15 +24,15 @@ public class UserShow {
 
     @Autowired
     UserShowService userShowService;
-    Map map = new HashMap<String,String>();
     /**
-    * select all users` infomation
+    * select all users` information
     *
     */
     @RequestMapping(value="/userInfo",method = POST)
     public Object showUser(HttpServletRequest request){
+        Map map = new HashMap<String,String>(16);
         map.clear();
-        if (request.getSession().getAttribute("user") != null) {
+        if (request.getSession().getAttribute("userId") != null) {
             map.put("userInfo", this.userShowService.selectUserList());
             //以JSON形式返回给前端
         }else {
@@ -47,9 +47,10 @@ public class UserShow {
     * */
     @RequestMapping(value = "/selectUserInfo{searchValue}",method = POST)
     public Object selectUser(HttpServletRequest request,String searchValue){
+        Map map = new HashMap<String,String>(16);
         try {
             map.clear();
-            if (request.getSession().getAttribute("user") != null) {
+            if (request.getSession().getAttribute("userId") != null) {
                 if(userShowService.selectUserByInput(searchValue) !=null){
                     return JSON.toJSON(userShowService.selectUserByInput(searchValue));
                 }
@@ -75,9 +76,9 @@ public class UserShow {
      * */
     @RequestMapping(value = "/mainAmount",method = GET)
     public Object userAmount(HttpServletRequest request){
+        Map map = new HashMap<String,String>(16);
         try {
-            map.clear();
-            if (request.getSession().getAttribute("user") != null) {
+            if (request.getSession().getAttribute("userId") != null) {
                 map.put("userAmount", userShowService.userAmount());
                 map.put("adminAmount", userShowService.managerAmount());
             }else {
@@ -97,7 +98,7 @@ public class UserShow {
      * */
     @RequestMapping(value = "/study_directionAmount",method = GET)
     public Object study_direction(){
-        map.clear();
+        Map map = new HashMap<String,String>(16);
         map.put("androidNum",userShowService.androidNum());
         map.put("bgNum",userShowService.bgNum());
         map.put("frontNum",userShowService.frontNum());

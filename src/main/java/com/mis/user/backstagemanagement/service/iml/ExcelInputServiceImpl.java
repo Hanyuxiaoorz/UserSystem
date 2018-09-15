@@ -43,14 +43,14 @@ public class ExcelInputServiceImpl implements ExcelInputService {
     public String batchImport(String fileName, MultipartFile mfile, HttpSession session) {
         String result = null;
         try {
-            if (session.getAttribute("user") != null) {
-                log1 =(String) session.getAttribute("user") + "使用";
-                File uploadDir = new File(filePath + session.getAttribute("user"));
+            if (session.getAttribute("userId") != null) {
+                log1 =(String) session.getAttribute("userId") + "使用";
+                File uploadDir = new File(filePath + session.getAttribute("userId"));
                 //判断是否存在，不存在即创建
                 if (!uploadDir.exists()) {
                     uploadDir.mkdirs();
                 }
-                File tempFile = new File(filePath + session.getAttribute("user") + File.separator + System.currentTimeMillis() + ".xlsx");
+                File tempFile = new File(filePath + session.getAttribute("userId") + File.separator + System.currentTimeMillis() + ".xlsx");
                 //初始化输入流
                 InputStream is = null;
                 try {

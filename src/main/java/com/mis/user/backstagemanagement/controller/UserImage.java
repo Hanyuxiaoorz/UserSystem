@@ -23,7 +23,6 @@ public class UserImage {
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    Map map = new HashMap<String,String>();
     @Value("${file.path}")
     private String filePath;
 
@@ -39,6 +38,7 @@ public class UserImage {
      * */
     @RequestMapping(value = "/userImg",method = POST)
     public Object userImg(@RequestParam(value="file", required=false)MultipartFile file, HttpSession session) throws Exception {
+        Map map = new HashMap<String,String>(16);
         String user = (String) session.getAttribute("userId");
         map.clear();
         try{
@@ -87,6 +87,7 @@ public class UserImage {
      * */
     @RequestMapping(value = "/userPhoto",method = POST)
     public Object userPhoto(HttpSession session) {
+        Map map = new HashMap<String,String>(16);
         String user = (String) session.getAttribute("userId");
         String path = "SSOUser"+ File.separator + user + File.separator + user +".jpg";
         try {
@@ -121,6 +122,7 @@ public class UserImage {
      * */
     @RequestMapping(value = "/userP",method = POST)
     public Object userP(String userId){
+        Map map = new HashMap<String,String>(16);
         String path = "SSOUser"+ File.separator + userId + File.separator + userId +".jpg";
         try {
             if (userId != null){

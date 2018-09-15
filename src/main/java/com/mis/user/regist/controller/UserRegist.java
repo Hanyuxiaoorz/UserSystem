@@ -25,7 +25,6 @@ public class UserRegist {
 
     @Autowired
     UserRegistServiceImpl userRegistServiceimpl;
-    Map map = new HashMap<String,Object>();
 
     /**
      * @param userRegistInfo
@@ -37,6 +36,7 @@ public class UserRegist {
      * */
     @PostMapping(value = "/regist{userRegistInfo}")
     private Object regist(UserRegistInfo userRegistInfo,String mailVerifyCode,HttpSession session){
+        Map map = new HashMap<String,Object>(16);
         try {
             //判断验证码是否正确
             if(mailVerifyCode.equalsIgnoreCase((String) session.getAttribute("mailVerifyCode"))){
@@ -44,7 +44,8 @@ public class UserRegist {
                 map.put("regist",userRegistServiceimpl.regist(userRegistInfo));
             }else {
                 map.clear();
-                map.put("regist",Canstants.REGIST_VCODE_FAIL);//5,邮箱验证码错误
+                //5,邮箱验证码错误
+                map.put("regist",Canstants.REGIST_VCODE_FAIL);
             }
             //以JSON形式返回给前端
             return JSON.toJSON(map);

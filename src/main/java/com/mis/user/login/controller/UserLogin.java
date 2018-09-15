@@ -26,7 +26,6 @@ public class UserLogin {
     @Autowired
     UserLoginServiceImpl userLoginServiceImpl;
     UserLoginInfo userLoginInfo = new UserLoginInfo();
-    Map map = new HashMap<String,String>();
 
     /**
      *普通成员登陆
@@ -39,9 +38,10 @@ public class UserLogin {
      * */
     @PostMapping(value = "/login{input,password,vCode}")
     public Object loginVerify(String input, String password, String vCode, HttpServletRequest request, HttpServletResponse response) {
+        Map map = new HashMap<String,String>(16);
         map.clear();
         //验证是否已经登陆过，登陆过不进入下一层if，直接放行
-        if (request.getSession().getAttribute("user") != null) {
+        if (request.getSession().getAttribute("userId") != null) {
             map.put("login", Canstants.SUCCESS);
         }
         //判断登录凭证是否有效
@@ -81,6 +81,7 @@ public class UserLogin {
      * */
     @RequestMapping(value = "/clientUserName" , method = POST)
     public Object userNameSearch(HttpSession session){
+        Map map = new HashMap<String,String>(16);
         map.clear();
         map.put("clientUserName",session.getAttribute("user"));
         return JSON.toJSON(map);
@@ -92,9 +93,10 @@ public class UserLogin {
      * */
     @RequestMapping(value = "/loginOut" , method = POST)
     public Object loginOut(HttpServletRequest request){
+        Map map = new HashMap<String,String>(16);
         map.clear();
         request.getSession().invalidate();
-        if(request.getSession().getAttribute("user") == null){
+        if(request.getSession().getAttribute("userId") == null){
             map.put("loginOut", Canstants.SUCCESS);
         }
         else {
