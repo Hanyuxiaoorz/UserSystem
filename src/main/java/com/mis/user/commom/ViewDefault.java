@@ -21,14 +21,14 @@ public class ViewDefault {
 
     @GetMapping("/back-stage_management.html")
     private String backStageManagement(HttpSession session){
-        String user = (String) session.getAttribute("user");
+        String user = (String) session.getAttribute("userId");
         if(StringUtils.isEmpty(user)){
             //表示不存在全局会话，跳转至登陆界面
             return "login";
         }
         else{
             //存在全局会话
-            String hostUserName = (String) session.getAttribute("user");
+            String hostUserName = (String) session.getAttribute("userId");
             if(userPermissionService.selectState(hostUserName) > 0){
                 return "back-stage_management";
             }
@@ -42,14 +42,14 @@ public class ViewDefault {
     @GetMapping("/viewUsers.html")
     private String viewUsers(HttpSession session){
         //判断是否存在全局会话
-        String user = (String) session.getAttribute("user");
+        String user = (String) session.getAttribute("userId");
         if(StringUtils.isEmpty(user)){
             //表示不存在全局会话，跳转至登陆界面
             return "login";
         }
         else {
             //存在全局会话
-            String hostUserName = (String) session.getAttribute("user");
+            String hostUserName = (String) session.getAttribute("userId");
             if(userPermissionService.selectState(hostUserName) > 0){
                 return "viewUsers";
             }
@@ -62,7 +62,7 @@ public class ViewDefault {
     @GetMapping("/login.html")
     private String login(HttpSession session){
         //判断是否存在全局会话
-        String user = (String) session.getAttribute("user");
+        String user = (String) session.getAttribute("userId");
         if(StringUtils.isEmpty(user)){
             //表示不存在全局会话，跳转至登陆界面
             return "login";
@@ -86,13 +86,13 @@ public class ViewDefault {
     @GetMapping("/showValue.html")
     private String showValue(HttpSession session) {
         //判断是否存在全局会话
-        String user = (String) session.getAttribute("user");
+        String user = (String) session.getAttribute("userId");
         if (StringUtils.isEmpty(user)) {
             //表示不存在全局会话，跳转至登陆界面
             return "login";
         } else {
             //存在全局会话
-            String hostUserName = (String) session.getAttribute("user");
+            String hostUserName = (String) session.getAttribute("userId");
             if(userPermissionService.selectState(hostUserName) > 0){
                 return "showValue";
             }
@@ -105,7 +105,7 @@ public class ViewDefault {
     @GetMapping("/personAge.html")
     private String personAge(HttpSession session) {
         //判断是否存在全局会话
-        String user = (String) session.getAttribute("user");
+        String user = (String) session.getAttribute("userId");
         if (StringUtils.isEmpty(user)) {
             //表示不存在全局会话，跳转至登陆界面
             return "login";

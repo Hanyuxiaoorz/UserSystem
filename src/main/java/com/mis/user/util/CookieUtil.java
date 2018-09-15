@@ -19,12 +19,12 @@ public class CookieUtil {
      * @param request
      * @return
      */
-    public Object ReadCookievalue(HttpServletRequest request, HttpSession session){
+    public Object readCookievalue(HttpServletRequest request, HttpSession session){
         String user = null;
         Cookie[] cookies = request.getCookies();
         if(null!=cookies){
             for(Cookie cookie : cookies){
-                if(cookie.getName().equals("user")) {
+                if("user".equals(cookie.getName())) {
                     System.out.println(cookie.getValue());
                     user = (String) session.getAttribute(cookie.getValue());
                 }else {

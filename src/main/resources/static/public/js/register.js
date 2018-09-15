@@ -92,7 +92,7 @@ function checkemail(){
 				}
 	        }
 	}
-			xmlhttp.open("GET","http://localhost:8080/regist/userEmailVerify?eMail="+email,true);
+			xmlhttp.open("GET","http://localhost:8080/regist/useremailverify?eMail="+email,true);
 	 		xmlhttp.send();	 
 }
 

@@ -19,7 +19,7 @@ import java.util.List;
 * 用户展示
 * */
 @Service
-public class UserShowServiceIml implements UserShowService {
+public class UserShowServiceImpl implements UserShowService {
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -112,6 +112,7 @@ public class UserShowServiceIml implements UserShowService {
     }
 
     //算法
+    @Override
     public int algNum(){
         return userShowMapper.algNum();
     }

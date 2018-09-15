@@ -30,8 +30,9 @@ public class UserRegistServiceImpl implements UserRegistService {
         try {
             if ((userRegistMapper.registUserByUserEmail(eMail) != null)) {
                 return Canstants.REGIST_EXIST;
-            } else
+            } else {
                 return Canstants.SUCCESS;
+            }
         }catch (Exception e){
             return Canstants.FAIL;
         }
@@ -43,8 +44,9 @@ public class UserRegistServiceImpl implements UserRegistService {
         try {
             if ((userRegistMapper.registUserByUserId(id) != null)) {
                 return Canstants.REGIST_EXIST;
-            } else
+            } else {
                 return Canstants.SUCCESS;
+            }
         }catch (Exception e){
             return Canstants.FAIL;
         }

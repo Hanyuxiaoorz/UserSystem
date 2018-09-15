@@ -1,6 +1,6 @@
-package com.mis.user.personalMess.dao;
+package com.mis.user.personalmess.dao;
 
-import com.mis.user.personalMess.model.UserPersonalMess;
+import com.mis.user.personalmess.model.UserPersonalMess;
 import org.springframework.stereotype.Repository;
 
 @Repository(value = "userPersonMessMapper")

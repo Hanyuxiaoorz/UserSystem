@@ -15,13 +15,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
 @Service
-public class UserLoginServiceIml implements UserLoginService {
+public class UserLoginServiceImpl implements UserLoginService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     UserLoginMapper userLoginMapper;
-    /*
+    /**
      * 用户输入信息的判断
      * 为了防止有的用户名为其他用户的邮箱，从而致使用户登陆错误
      * */
@@ -86,11 +86,13 @@ public class UserLoginServiceIml implements UserLoginService {
                 return Canstants.SUCCESS;
             }
             else{
-                return Canstants.LOGIN_INFO_NULL;//2,登陆信息不正确
+                //5,登陆信息不正确
+                return Canstants.LOGIN_USER_NULL;
             }
         }catch (Exception e){
             logger.error(e.getClass()+"{}",e);
-            return Canstants.FAIL;//0,出现bug,联系管理员
+            //0,出现bug,联系管理员
+            return Canstants.FAIL;
         }
     }
 }

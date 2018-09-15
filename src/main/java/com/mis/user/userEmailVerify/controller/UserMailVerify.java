@@ -1,8 +1,8 @@
-package com.mis.user.userEmailVerify.controller;
+package com.mis.user.useremailverify.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.mis.user.commom.canstants.Canstants;
-import com.mis.user.userEmailVerify.service.UserMailVerifyServiceImpl;
+import com.mis.user.useremailverify.service.UserMailVerifyServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

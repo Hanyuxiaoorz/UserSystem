@@ -34,7 +34,7 @@
             <div class="item">
               <img class="ui mini rounded image" src="../public/img/normalHeadPic.png"id="userImg" >
             </div>
-              <a class="item" id="userName"></a>
+              <a class="item" id="userName"  ></a>
               <div class="item">
                 <button class="ui tiny red button" onclick="logOut()"><font>注销</font></button>
               </div>
@@ -87,7 +87,7 @@
 			<a href="#">圆桌</a>
 			<a href="#">发现</a>
 			<a href="#">移动应用</a>
-			<a href="#">联系我们</a>
+			<a href="#" id="contactUs">联系我们</a>
 			<a href="#">来Mis工作</a>
 			<a href="#">注册机构号</a>
 		</div>
@@ -102,6 +102,29 @@
 				<a href="">儿童色情信息举报专区</a>
 				<a href="">违法和不良信息举报</a>
 		</div>
-	</footer>
+  </footer>
+  <!--‘联系我们’弹出框-->
+  <div class="ui modal" id="contactUsModal">
+    <i class="close icon"></i>
+    <div class="header">联系我们</div>
+    <div class="content">
+      <div class="ui fluid input">
+        <input type="text" id="contactTitle" placeholder="在此输入主题">
+      </div>
+      <br>
+      <div class="">
+        <textarea name="" id="contactContent" cols="115" rows="5" placeholder="在此输入内容"></textarea>
+      </div>
+    </div>
+    <div class="actions">
+      <div class="ui positive button">发送</div>
+      <div class="ui cancel button">取消</div>
+    </div>
+  </div>
+  <div class="ui mini modal" id="successModal">
+    <div class="content">
+      <p>我们已收到你的联系，请等待通知。</p>
+    </div>
+  </div>
 </body>
 </html>

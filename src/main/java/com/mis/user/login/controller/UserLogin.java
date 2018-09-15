@@ -3,7 +3,7 @@ package com.mis.user.login.controller;
 import com.alibaba.fastjson.JSON;
 import com.mis.user.commom.canstants.Canstants;
 import com.mis.user.login.model.UserLoginInfo;
-import com.mis.user.login.service.iml.UserLoginServiceIml;
+import com.mis.user.login.service.iml.UserLoginServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +24,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 public class UserLogin {
 
     @Autowired
-    UserLoginServiceIml userLoginServiceIml;
+    UserLoginServiceImpl userLoginServiceImpl;
     UserLoginInfo userLoginInfo = new UserLoginInfo();
     Map map = new HashMap<String,String>();
 
@@ -50,23 +50,26 @@ public class UserLogin {
             if(vCode.equalsIgnoreCase((String) request.getSession().getAttribute("imageCode"))){
                 userLoginInfo.setPassword(password);
                 //id
-                if (userLoginServiceIml.judgeId(input) != null) {
+                if (userLoginServiceImpl.judgeId(input) != null) {
                     userLoginInfo.setId(input);
-                    map.put("login", userLoginServiceIml.userLogin(userLoginInfo, request, response));
+                    map.put("login", userLoginServiceImpl.userLogin(userLoginInfo, request, response));
                 }
                 //E-mail
-                else if (userLoginServiceIml.judgeEmail(input) != null) {
+                else if (userLoginServiceImpl.judgeEmail(input) != null) {
                     userLoginInfo.setE_mail(input);
-                    map.put("login", userLoginServiceIml.userLogin(userLoginInfo, request, response));
+                    map.put("login", userLoginServiceImpl.userLogin(userLoginInfo, request, response));
                 }
                 //无效的登录信息
                 else {
-                    map.put("login", Canstants.LOGIN_USER_NULL);//5,该用户不存在
+                    //5,该用户不存在
+                    map.put("login", Canstants.LOGIN_INFO_NULL);
+
                 }
             }
             //验证码不正确
             else {
-                map.put("login",Canstants.LOGIN_VCODE_FAIL);//4,验证码不正确
+                //4,验证码不正确
+                map.put("login",Canstants.LOGIN_VCODE_FAIL);
             }
         }
         return JSON.toJSON(map);

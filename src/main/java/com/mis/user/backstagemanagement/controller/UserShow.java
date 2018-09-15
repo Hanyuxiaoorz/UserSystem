@@ -1,7 +1,7 @@
 package com.mis.user.backstagemanagement.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.mis.user.backstagemanagement.service.iml.UserShowServiceIml;
+import com.mis.user.backstagemanagement.service.UserShowService;
 import com.mis.user.commom.canstants.Canstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,15 +18,14 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
  * @author:Dengsiyuan
  * @date:2018年4月15日
  **/
-//@RestController这条注解集成了@Controller和@RespondBody两条注解,但不会跳转页面，而是返回值
 @RestController
 @RequestMapping(value = "/backstageManagement")
 public class UserShow {
 
     @Autowired
-    UserShowServiceIml userShowServiceIml;
+    UserShowService userShowService;
     Map map = new HashMap<String,String>();
-    /*
+    /**
     * select all users` infomation
     *
     */
@@ -34,7 +33,7 @@ public class UserShow {
     public Object showUser(HttpServletRequest request){
         map.clear();
         if (request.getSession().getAttribute("user") != null) {
-            map.put("userInfo", this.userShowServiceIml.selectUserList());
+            map.put("userInfo", this.userShowService.selectUserList());
             //以JSON形式返回给前端
         }else {
             map.put("userInfo", Canstants.BACK_PERMISSION_FAIL);
@@ -42,7 +41,7 @@ public class UserShow {
         return JSON.toJSON(map);
     }
 
-    /*
+    /**
     * select a user
     *
     * */
@@ -51,18 +50,21 @@ public class UserShow {
         try {
             map.clear();
             if (request.getSession().getAttribute("user") != null) {
-                if(userShowServiceIml.selectUserByInput(searchValue) !=null){
-                    return JSON.toJSON(userShowServiceIml.selectUserByInput(searchValue));
+                if(userShowService.selectUserByInput(searchValue) !=null){
+                    return JSON.toJSON(userShowService.selectUserByInput(searchValue));
                 }
                 else{
-                    map.put("selectUserInfo",Canstants.BACK_NULL);//4,未查询到该用户
+                    //4,未查询到该用户
+                    map.put("selectUserInfo",Canstants.BACK_NULL);
                 }
             }else {
-                map.put("selectUserInfo",Canstants.BACK_PERMISSION_FAIL);//2,未登陆
+                //2,未登陆
+                map.put("selectUserInfo",Canstants.BACK_PERMISSION_FAIL);
             }
 
         }catch (Exception e){
-            map.put("selectUserInfo",Canstants.FAIL);//0,此功能出现异常，请联系管理员
+            //0,此功能出现异常，请联系管理员
+            map.put("selectUserInfo",Canstants.FAIL);
         }
         return JSON.toJSON(map);
     }
@@ -76,13 +78,15 @@ public class UserShow {
         try {
             map.clear();
             if (request.getSession().getAttribute("user") != null) {
-                map.put("userAmount", userShowServiceIml.userAmount());
-                map.put("adminAmount", userShowServiceIml.managerAmount());
+                map.put("userAmount", userShowService.userAmount());
+                map.put("adminAmount", userShowService.managerAmount());
             }else {
-                map.put("error",Canstants.BACK_PERMISSION_FAIL);//2,未登录
+                //2,未登录
+                map.put("error",Canstants.BACK_PERMISSION_FAIL);
             }
         }catch (Exception e){
-            map.put("error",Canstants.FAIL);//0,出现异常，请联系管理员
+            //0,出现异常，请联系管理员
+            map.put("error",Canstants.FAIL);
         }
         return JSON.toJSON(map);
     }
@@ -94,11 +98,11 @@ public class UserShow {
     @RequestMapping(value = "/study_directionAmount",method = GET)
     public Object study_direction(){
         map.clear();
-        map.put("androidNum",userShowServiceIml.androidNum());
-        map.put("bgNum",userShowServiceIml.bgNum());
-        map.put("frontNum",userShowServiceIml.frontNum());
-        map.put("PyNum",userShowServiceIml.PyNum());
-        map.put("algNum",userShowServiceIml.algNum());
+        map.put("androidNum",userShowService.androidNum());
+        map.put("bgNum",userShowService.bgNum());
+        map.put("frontNum",userShowService.frontNum());
+        map.put("PyNum",userShowService.PyNum());
+        map.put("algNum",userShowService.algNum());
         return JSON.toJSON(map);
     }
 }

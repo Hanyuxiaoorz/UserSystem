@@ -44,7 +44,7 @@ public class ControllerInterceptor {
      * @return JsonResult（被拦截方法的执行结果，或需要登录的错误提示。）
      */
     @Around("controllerMethodPointcut()")//制定拦截规则，也可以将@Pointcut中的内容放入其中
-    public Object Interceptor(ProceedingJoinPoint pjp){
+    public Object interceptor(ProceedingJoinPoint pjp){
         long beginTime = System.currentTimeMillis();
         MethodSignature signature = (MethodSignature) pjp.getSignature();
         Method method = signature.getMethod();//获取被拦截的方法

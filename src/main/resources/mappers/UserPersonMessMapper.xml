@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mis.user.personalMess.dao.UserPersonalMessMapper">
-    <resultMap id="BaseResultMap" type="com.mis.user.personalMess.model.UserPersonalMess">
+<mapper namespace="com.mis.user.personalmess.dao.UserPersonalMessMapper">
+    <resultMap id="BaseResultMap" type="com.mis.user.personalmess.model.UserPersonalMess">
         <result column="userName" property="userName" jdbcType="VARCHAR" />
         <result column="id" property="id" jdbcType="VARCHAR"/>
         <result column="sex" property="sex" jdbcType="VARCHAR"/>
@@ -21,7 +21,7 @@
         WHERE id = #{id}
     </select>
 
-    <update id="updateUserPersonalMess" parameterType="com.mis.user.personalMess.model.UserPersonalMess">
+    <update id="updateUserPersonalMess" parameterType="com.mis.user.personalmess.model.UserPersonalMess">
         UPDATE user_mess
         SET userName = #{userName},
             sex = #{sex},

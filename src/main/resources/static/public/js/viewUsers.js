@@ -20,6 +20,7 @@ $(document).ready(function(){
 //定义当前用户
 var ByUser = {
 	"userName":"",
+	"id":"",
 	"state":0
 };
 
@@ -51,9 +52,10 @@ function searchUsers(){
 			//除去遮盖层
 			$('#userInforShowArea').dimmer('hide');
 			//获取头像
-			getHeadPic(person.userName);
+			getHeadPic(person.id);
 			ByUser.userName = person.userName;
 			ByUser.state = person.state;
+			ByUser.id = person.id;
 			//添加标签
 			var tag = "<div class='ui teal huge top right attached label'>";
 			switch(person.state){
@@ -98,7 +100,7 @@ function reSetPassword(){
                 async:false,
 				contentType:"application/x-www-form-urlencoded",
 				data:{
-					"byUserName":ByUser.userName
+					"byUserId":ByUser.id
 				},
 				xhrFields: {
 					withCredentials: true
@@ -129,7 +131,7 @@ function deleteUser(){
 				url:"http://localhost:8080/backstageManagement/deleteUser",
 				contentType:"application/x-www-form-urlencoded",
 				data:{
-					"byUserName":ByUser.userName
+					"byUserId":ByUser.id
 				},
 				xhrFields: {
 					withCredentials: true
@@ -141,7 +143,7 @@ function deleteUser(){
 					if(result == 1){
 						alert("已成功删除" + ByUser.userName);
 						//清空原有数据
-						$('#userPic').attr("src","../static/public/img/normalHeadPic.pic");
+						$('#userPic').attr("src","../static/public/img/normalHeadPic.png");
 						$(".list").children('.item').children('.content').empty();
 						$("#userInforShowArea").children(".teal").fadeOut();
 						ByUser = {
@@ -176,7 +178,7 @@ function upLevelUser(Chosenstate){
 		url:"http://localhost:8080/backstageManagement/userState",
 		contentType:"application/x-www-form-urlencoded",
 		data:{
-			"byUserName":ByUser.userName,
+			"byUserName":ByUser.id,
 			"state":Chosenstate
 		},
 		xhrFields: {
@@ -188,6 +190,8 @@ function upLevelUser(Chosenstate){
 			var result = parseInt(json.userState);
 			if(result){
 				alert("已更改改用户权限");
+				//刷新用户信息
+				searchUsers();
 			}
 			else{
 				alert("你没有此权限!");
@@ -220,7 +224,7 @@ function showUser(searchId){
 			//除去遮盖层
 			$('#userInforShowArea').dimmer('hide');
 			//获取头像
-			getHeadPic(person.userName);
+			getHeadPic(person.id);
 			ByUser.userName = person.userName;
 			ByUser.state = person.state;
 			//添加标签
@@ -267,13 +271,13 @@ function checkIsNull(content){
 	}
 }
 //获取被查询者的头像
-function getHeadPic(searchName){
+function getHeadPic(searchId){
 	$.ajax({
 		type:"POST",
 		url:"http://localhost:8080/userP",
 		contentType:"application/x-www-form-urlencoded",
 		data:{
-			"userName":searchName
+			"userId":searchId
 		},
 		dataType:"json",
 		success:function(json){

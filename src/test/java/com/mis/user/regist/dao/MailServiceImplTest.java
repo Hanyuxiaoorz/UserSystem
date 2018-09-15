@@ -1,7 +1,7 @@
 package com.mis.user.regist.dao;
 
 import com.mis.user.Application;
-import com.mis.user.userEmailVerify.service.UserMailVerifyServiceImpl;
+import com.mis.user.useremailverify.service.UserMailVerifyServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

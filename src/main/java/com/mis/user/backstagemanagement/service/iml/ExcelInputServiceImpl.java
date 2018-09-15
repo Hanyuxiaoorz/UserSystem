@@ -24,10 +24,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@SuppressWarnings("AlibabaLowerCamelCaseVariableNaming")
 @Service
-public class ExcelInputServiceIml implements ExcelInputService {
+public class ExcelInputServiceImpl implements ExcelInputService {
 
-    private static final Logger logger = LoggerFactory.getLogger(ExcelInputServiceIml.class);
+    private static final Logger logger = LoggerFactory.getLogger(ExcelInputServiceImpl.class);
     @Autowired
     UserRegistMapper userRegistMapper;
     @Value("${file.path}")
@@ -49,7 +50,7 @@ public class ExcelInputServiceIml implements ExcelInputService {
                 if (!uploadDir.exists()) {
                     uploadDir.mkdirs();
                 }
-                File tempFile = new File(filePath + session.getAttribute("user") + File.separator + new Date().getTime() + ".xlsx");
+                File tempFile = new File(filePath + session.getAttribute("user") + File.separator + System.currentTimeMillis() + ".xlsx");
                 //初始化输入流
                 InputStream is = null;
                 try {

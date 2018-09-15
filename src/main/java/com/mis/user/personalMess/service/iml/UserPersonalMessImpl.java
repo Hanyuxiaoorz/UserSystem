@@ -1,18 +1,18 @@
-package com.mis.user.personalMess.service.iml;
+package com.mis.user.personalmess.service.iml;
 
 import com.mis.user.commom.canstants.Canstants;
-import com.mis.user.personalMess.dao.UserPersonalMessMapper;
-import com.mis.user.personalMess.model.UserPersonalMess;
-import com.mis.user.personalMess.service.UserPersonalMessService;
+import com.mis.user.personalmess.dao.UserPersonalMessMapper;
+import com.mis.user.personalmess.model.UserPersonalMess;
+import com.mis.user.personalmess.service.UserPersonalMessService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserPersonalMessIml implements UserPersonalMessService {
+public class UserPersonalMessImpl implements UserPersonalMessService {
 
-    private static final Logger logger = LoggerFactory.getLogger(UserPersonalMessIml.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserPersonalMessImpl.class);
 
     @Autowired
     UserPersonalMessMapper userPersonalMessMapper;
@@ -60,7 +60,8 @@ public class UserPersonalMessIml implements UserPersonalMessService {
      * @param mailVCode
      * @param mail
      * */
-    public boolean updateUserEmail(String mailVCode,String mail){
+    @Override
+    public boolean updateUserEmail(String mailVCode, String mail){
         try {
             if(userPersonalMessMapper.updateUserEmail(mail)){
                 return true;

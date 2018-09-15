@@ -1,6 +1,6 @@
-package com.mis.user.personalMess.service;
+package com.mis.user.personalmess.service;
 
-import com.mis.user.personalMess.model.UserPersonalMess;
+import com.mis.user.personalmess.model.UserPersonalMess;
 import org.springframework.stereotype.Service;
 
 @Service

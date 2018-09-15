@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 * 后台功能的服务层
 * */
 @Service
-public class UserPermissionServiceIml implements UserPermissionService{
+public class UserPermissionServiceImpl implements UserPermissionService{
 
     @Autowired
     UserShowMapper userShowMapper;

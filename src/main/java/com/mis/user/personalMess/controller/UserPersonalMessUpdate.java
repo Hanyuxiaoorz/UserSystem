@@ -1,9 +1,9 @@
-package com.mis.user.personalMess.controller;
+package com.mis.user.personalmess.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.mis.user.commom.canstants.Canstants;
-import com.mis.user.personalMess.model.UserPersonalMess;
-import com.mis.user.personalMess.service.UserPersonalMessService;
+import com.mis.user.personalmess.model.UserPersonalMess;
+import com.mis.user.personalmess.service.UserPersonalMessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

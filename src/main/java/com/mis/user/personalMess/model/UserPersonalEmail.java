@@ -1,4 +1,4 @@
-package com.mis.user.personalMess.model;
+package com.mis.user.personalmess.model;
 
 public class UserPersonalEmail {
 

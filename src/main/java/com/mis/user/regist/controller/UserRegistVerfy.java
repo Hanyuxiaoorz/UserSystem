@@ -50,7 +50,7 @@ public class UserRegistVerfy {
      *
      * 用户id唯一性验证
      *  */
-    @GetMapping(value = "/regist/userEmailVerify{eMail}")
+    @GetMapping(value = "/regist/useremailverify{eMail}")
     private Object userEmailVerify(String eMail){
         try {
             map.clear();

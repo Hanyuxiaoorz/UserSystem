@@ -66,7 +66,8 @@ public class UserImage {
             }
             else{
                 map.clear();
-                map.put("userImg",Canstants.INFO_NULL);//2，上传失败
+                //2，上传失败
+                map.put("userImg",Canstants.INFO_NULL);
             }
             filePath = filePath.replace((CharSequence) session.getAttribute("user"),"");
         }catch ( Exception e){
@@ -93,7 +94,8 @@ public class UserImage {
                 File file = new File(filePath + user + File.separator + user +".jpg");
                 if (!file.exists()) {
                     map.clear();
-                    map.put("userPhoto", defaultPath);//默认头像,该用户目前无头像
+                    //默认头像,该用户目前无头像
+                    map.put("userPhoto", defaultPath);
                 } else {
                     map.clear();
                     map.put("userPhoto", path);
@@ -102,7 +104,6 @@ public class UserImage {
                 map.clear();
                 map.put("userPhoto", defaultPath);
             }
-
         } catch (Exception e) {
             logger.error(e.getClass()+"{}",e);
             map.clear();
@@ -126,7 +127,8 @@ public class UserImage {
                 File file = new File( filePath + userId + File.separator + userId + ".jpg");
                 if(!file.exists()){
                     map.clear();
-                    map.put("userP",defaultPath);//默认头像,该用户目前无头像
+                    //默认头像,该用户目前无头像
+                    map.put("userP",defaultPath);
                 }
                 else{
                     map.clear();
