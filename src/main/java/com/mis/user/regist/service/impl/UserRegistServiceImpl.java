@@ -34,6 +34,7 @@ public class UserRegistServiceImpl implements UserRegistService {
                 return Canstants.SUCCESS;
             }
         }catch (Exception e){
+            logger.error(e.getClass() + "{}", e);
             return Canstants.FAIL;
         }
     }
